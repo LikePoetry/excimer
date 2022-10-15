@@ -4,7 +4,7 @@
 #include "excimer/core/os/os.h"
 #include "excimer/core/os/FileSystem.h"
 #include "excimer/core/StringUtilities.h"
-
+#include "excimer/core/os/Input.h"
 #include "excimer/scene/Entity.h"
 #include "excimer/scene/component/ModelComponent.h"
 
@@ -304,5 +304,27 @@ namespace Excimer
 		{
 			panel->OnNewScene(scene);
 		}
+	}
+
+	void Editor::OnUpdate(const TimeStep& ts)
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		if (m_SceneViewActive)
+		{
+			auto& registry = Application::Get().GetSceneManager()->GetCurrentScene()->GetRegistry();
+
+			{
+				const glm::vec2 mousePos = Input::Get().GetMousePosition();
+				m_EditorCameraController.SetCamera(*m_EditorCamera.get());
+				m_EditorCameraController.HandleMouse(m_EditorCameraTransform, (float)ts.GetSeconds(), mousePos.x, mousePos.y);
+				m_EditorCameraController.HandleKeyboard(m_EditorCameraTransform, (float)ts.GetSeconds());
+			}
+		}
+		else 
+		{
+			m_EditorCameraController.StopMovement();
+		}
+
+		Application::OnUpdate(ts);
 	}
 }

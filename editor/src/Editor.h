@@ -26,6 +26,7 @@ namespace Excimer
         void EndDockSpace();
 
         void OnNewScene(Scene* scene) override;
+        void OnUpdate(const TimeStep& ts) override;
 
         void SaveEditorSettings();
 
@@ -61,6 +62,9 @@ namespace Excimer
 
         EditorSettings& GetSettings() { return m_Settings; }
 
+        // 是否在视图区域，视图相机是否接受鼠标事件
+        void SetSceneViewActive(bool active) { m_SceneViewActive = active; }
+
         Camera* GetCamera() const
         {
             return m_EditorCamera.get();
@@ -87,5 +91,7 @@ namespace Excimer
         EditorCameraController m_EditorCameraController;
         Maths::Transform m_EditorCameraTransform;
         SharedPtr<Camera> m_EditorCamera = nullptr;
+
+        bool m_SceneViewActive = false;
 	};
 }

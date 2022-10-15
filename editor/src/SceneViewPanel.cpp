@@ -86,6 +86,14 @@ namespace Excimer
 		ImGuiUtilities::Image(m_GameViewTexture.get(), glm::vec2(sceneViewSize.x, sceneViewSize.y));
 
 
+		auto windowSize = ImGui::GetWindowSize();
+		ImVec2 minBound = sceneViewPosition;
+
+		ImVec2 maxBound = { minBound.x + windowSize.x, minBound.y + windowSize.y };
+		bool updateCamera = ImGui::IsMouseHoveringRect(minBound, maxBound); // || Input::Get().GetMouseMode() == MouseMode::Captured;
+
+		m_Editor->SetSceneViewActive(updateCamera);
+
 		ImGui::End();
 	}
 
