@@ -53,6 +53,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\editor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\excimer\excimer.vcxproj">
       <Project>{D28B9F81-3E6B-1E1D-4783-A9F3B3E1847E}</Project>
     </ProjectReference>

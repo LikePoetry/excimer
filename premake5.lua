@@ -22,7 +22,7 @@ project "excimer"
 	targetdir("bin/" ..outputdir.. "/%{prj.name}")
 	objdir("bin-int/" ..outputdir.. "/%{prj.name}")
 
-	pchheader "hzpch.h"
+	pchheader "excimer/src/hzpch.h"
 	pchsource "excimer/src/hzpch.cpp"
 
 	files
@@ -47,6 +47,7 @@ project "excimer"
 		"vulkan-1.lib"
 	}
 
+	flags { "NoPCH" }
 	filter "system:windows"
 		systemversion "latest"
 

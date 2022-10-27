@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="excimer">
+      <UniqueIdentifier>{D28B9F81-3E6B-1E1D-4783-A9F3B3E1847E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="excimer\core">
+      <UniqueIdentifier>{8A6F7487-76D2-032C-1F58-3CE20B9ACFAE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\excimer\core\Application.h">
+      <Filter>excimer\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\core\Core.h">
+      <Filter>excimer\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\core\EntryPoint.h">
+      <Filter>excimer\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimerengine.h" />
+    <ClInclude Include="src\hzpch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\excimer\core\Application.cpp">
+      <Filter>excimer\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hzpch.cpp" />
+  </ItemGroup>
+</Project>
