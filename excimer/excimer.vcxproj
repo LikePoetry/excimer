@@ -56,12 +56,14 @@
   <ItemGroup>
     <ClInclude Include="src\excimer\core\Application.h" />
     <ClInclude Include="src\excimer\core\Core.h" />
+    <ClInclude Include="src\excimer\core\CoreSystem.h" />
     <ClInclude Include="src\excimer\core\EntryPoint.h" />
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp" />
+    <ClCompile Include="src\excimer\core\CoreSystem.cpp" />
     <ClCompile Include="src\hzpch.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
