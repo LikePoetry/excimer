@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "editor", "editor\editor.vcxproj", "{AC2EC5FA-98D0-EFD0-818B-03256DCC7621}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "excimer", "excimer\excimer.vcxproj", "{D28B9F81-3E6B-1E1D-4783-A9F3B3E1847E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC2EC5FA-98D0-EFD0-818B-03256DCC7621}.Debug|x64.ActiveCfg = Debug|x64
+		{AC2EC5FA-98D0-EFD0-818B-03256DCC7621}.Debug|x64.Build.0 = Debug|x64
+		{D28B9F81-3E6B-1E1D-4783-A9F3B3E1847E}.Debug|x64.ActiveCfg = Debug|x64
+		{D28B9F81-3E6B-1E1D-4783-A9F3B3E1847E}.Debug|x64.Build.0 = Debug|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
