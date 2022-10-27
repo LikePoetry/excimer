@@ -1,3 +1,12 @@
+function SetRecommendedSettings()
+	filter ()
+	editandcontinue "Off"
+	warnings "Off"
+end
+
+IncludeDir = {}
+IncludeDir["spdlog"] = "excimer/external/spdlog/include"
+
 workspace "excimer"
     architecture "x64"
     startproject "editor"
@@ -7,6 +16,11 @@ workspace "excimer"
     }
 
     outputdir="%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
+group "external"
+	require("excimer/external/spdlog/premake5")
+		SetRecommendedSettings()
+	filter {}
 
 group ""
 
@@ -34,11 +48,13 @@ project "excimer"
 	includedirs
 	{
 		"%{prj.name}/src",
+		"%{IncludeDir.spdlog}",
 		"%VULKAN_SDK%/include"
 	}
 
 	libdirs 
 	{ 
+		"spdlog",
 		"%VULKAN_SDK%/lib" 
 	}
 

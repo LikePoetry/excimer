@@ -38,7 +38,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;%VULKAN_SDK%\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;external\spdlog\include;%VULKAN_SDK%\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -50,7 +50,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%VULKAN_SDK%\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\spdlog;%VULKAN_SDK%\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -58,12 +58,15 @@
     <ClInclude Include="src\excimer\core\Core.h" />
     <ClInclude Include="src\excimer\core\CoreSystem.h" />
     <ClInclude Include="src\excimer\core\EntryPoint.h" />
+    <ClInclude Include="src\excimer\core\ExLog.h" />
     <ClInclude Include="src\excimerengine.h" />
+    <ClInclude Include="src\excimer\core\Version.h" />
     <ClInclude Include="src\hzpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp" />
     <ClCompile Include="src\excimer\core\CoreSystem.cpp" />
+    <ClCompile Include="src\excimer\core\ExLog.cpp" />
     <ClCompile Include="src\hzpch.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

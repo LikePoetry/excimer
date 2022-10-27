@@ -5,6 +5,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "editor", "editor\editor.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "excimer", "excimer\excimer.vcxproj", "{D28B9F81-3E6B-1E1D-4783-A9F3B3E1847E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "external", "external", "{8FC084F2-7B8E-78F8-6422-E91E508F545D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "spdlog", "excimer\external\spdlog\spdlog.vcxproj", "{8EAD431C-7A4F-6EF2-630A-82464F4BF542}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -14,8 +18,13 @@ Global
 		{AC2EC5FA-98D0-EFD0-818B-03256DCC7621}.Debug|x64.Build.0 = Debug|x64
 		{D28B9F81-3E6B-1E1D-4783-A9F3B3E1847E}.Debug|x64.ActiveCfg = Debug|x64
 		{D28B9F81-3E6B-1E1D-4783-A9F3B3E1847E}.Debug|x64.Build.0 = Debug|x64
+		{8EAD431C-7A4F-6EF2-630A-82464F4BF542}.Debug|x64.ActiveCfg = Debug|x64
+		{8EAD431C-7A4F-6EF2-630A-82464F4BF542}.Debug|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8EAD431C-7A4F-6EF2-630A-82464F4BF542} = {8FC084F2-7B8E-78F8-6422-E91E508F545D}
 	EndGlobalSection
 EndGlobal
