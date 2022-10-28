@@ -60,6 +60,7 @@
     <ClInclude Include="src\excimer\core\EntryPoint.h" />
     <ClInclude Include="src\excimer\core\ExLog.h" />
     <ClInclude Include="src\excimerengine.h" />
+    <ClInclude Include="src\excimer\core\JobSystem.h" />
     <ClInclude Include="src\excimer\core\Version.h" />
     <ClInclude Include="src\hzpch.h" />
   </ItemGroup>
@@ -67,6 +68,7 @@
     <ClCompile Include="src\excimer\core\Application.cpp" />
     <ClCompile Include="src\excimer\core\CoreSystem.cpp" />
     <ClCompile Include="src\excimer\core\ExLog.cpp" />
+    <ClCompile Include="src\excimer\core\JobSystem.cpp" />
     <ClCompile Include="src\hzpch.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

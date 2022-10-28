@@ -27,6 +27,7 @@
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
     <ClInclude Include="src\excimer\core\Version.h" />
+    <ClInclude Include="src\excimer\core\JobSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -39,5 +40,6 @@
       <Filter>excimer\core</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
+    <ClCompile Include="src\excimer\core\JobSystem.cpp" />
   </ItemGroup>
 </Project>
