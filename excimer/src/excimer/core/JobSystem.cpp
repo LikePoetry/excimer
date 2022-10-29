@@ -1,6 +1,6 @@
 #include "hzpch.h"
 #include "JobSystem.h"
-
+#include <excimer/core/Profiler.h>
 #include "ExLog.h"
 
 #include <thread>
@@ -10,6 +10,7 @@
 #define NOMINMAX
 #include <Windows.h>
 #include <comdef.h>
+
 
 namespace Excimer
 {
@@ -143,6 +144,7 @@ namespace Excimer
 
             void OnInit(uint32_t maxThreadCount)
             {
+                EXCIMER_PROFILE_FUNCTION();
                 // Retrieve the number of hardware threads in this System:
                 internal_state.numCores = std::thread::hardware_concurrency();
 
@@ -151,7 +153,7 @@ namespace Excimer
                 maxThreadCount = std::max(1u, maxThreadCount);
 
                 // Calculate the actual number of worker threads we want:
-                internal_state.numThreads = Slight::Maths::Min(maxThreadCount, Slight::Maths::Max(1u, internal_state.numCores - 1));
+               // internal_state.numThreads = Slight::Maths::Min(maxThreadCount, Slight::Maths::Max(1u, internal_state.numCores - 1));
                 internal_state.jobQueuePerThread.reset(new JobQueue[internal_state.numThreads]);
 
                 for (uint32_t threadID = 0; threadID < internal_state.numThreads; ++threadID)
@@ -160,7 +162,7 @@ namespace Excimer
                         {
                             std::stringstream ss;
                             ss << "JobSystem_" << threadID;
-                            SLIGHT_PROFILE_SETTHREADNAME(ss.str().c_str());
+                           // SLIGHT_PROFILE_SETTHREADNAME(ss.str().c_str());
 
                             std::shared_ptr<WorkerState> worker_state = internal_state.worker_state; // this is a copy of shared_ptr<WorkerState>, so it will remain alive for the thread's lifetime
 
@@ -179,7 +181,7 @@ namespace Excimer
                     // Put each thread on to dedicated core
                     DWORD_PTR affinityMask = 1ull << threadID;
                     DWORD_PTR affinity_result = SetThreadAffinityMask(handle, affinityMask);
-                    SLIGHT_ASSERT(affinity_result > 0, "");
+                   // SLIGHT_ASSERT(affinity_result > 0, "");
 
                     // Increase thread priority:
                     // BOOL priority_result = SetThreadPriority(handle, THREAD_PRIORITY_HIGHEST);
@@ -190,7 +192,7 @@ namespace Excimer
                     wss << "JobSystem_" << threadID;
                     HRESULT hr = SetThreadDescription(handle, wss.str().c_str());
 
-                    SLIGHT_ASSERT(SUCCEEDED(hr), "");
+                  //  SLIGHT_ASSERT(SUCCEEDED(hr), "");
 
                     worker.detach();
                 }
@@ -281,6 +283,7 @@ namespace Excimer
                         std::this_thread::yield();
                     }
                 }
+            }
 		}
 	}
 }

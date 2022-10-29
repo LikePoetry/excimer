@@ -37,6 +37,8 @@ namespace Excimer
 		   //	func		: receives a JobDispatchArgs as parameter
 			void Dispatch(Context& ctx, uint32_t jobCount, uint32_t groupSize, const std::function<void(JobDispatchArgs)>& task, size_t sharedmemory_size = 0);
 
+			uint32_t DispatchGroupCount(uint32_t jobCount, uint32_t groupSize);
+
 			// Check if any threads are working currently or not
 			bool IsBusy(const Context& ctx);
 

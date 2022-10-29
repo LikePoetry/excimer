@@ -17,7 +17,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -35,13 +35,16 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>hzpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;external\spdlog\include;%VULKAN_SDK%\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4307;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <PreprocessorDefinitions>USE_VMA_ALLOCATOR;SLIGHT_PLATFORM_WINDOWS;SLIGHT_RENDER_API_OPENGL;SLIGHT_RENDER_API_VULKAN;VK_USE_PLATFORM_WIN32_KHR;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;_DISABLE_EXTENDED_ALIGNED_STORAGE;_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;SLIGHT_IMGUI;SLIGHT_OPENAL;SLIGHT_VOLK;SLIGHT_USE_GLFW_WINDOWS;TRACY_ENABLE;TRACY_ON_DEMAND;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;external\spdlog\include;external;%VULKAN_SDK%\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/MP /bigobj %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -59,9 +62,10 @@
     <ClInclude Include="src\excimer\core\CoreSystem.h" />
     <ClInclude Include="src\excimer\core\EntryPoint.h" />
     <ClInclude Include="src\excimer\core\ExLog.h" />
-    <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\excimer\core\JobSystem.h" />
+    <ClInclude Include="src\excimer\core\Profiler.h" />
     <ClInclude Include="src\excimer\core\Version.h" />
+    <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -69,7 +73,9 @@
     <ClCompile Include="src\excimer\core\CoreSystem.cpp" />
     <ClCompile Include="src\excimer\core\ExLog.cpp" />
     <ClCompile Include="src\excimer\core\JobSystem.cpp" />
-    <ClCompile Include="src\hzpch.cpp" />
+    <ClCompile Include="src\hzpch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

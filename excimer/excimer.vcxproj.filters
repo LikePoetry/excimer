@@ -24,10 +24,17 @@
     <ClInclude Include="src\excimer\core\ExLog.h">
       <Filter>excimer\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\excimer\core\JobSystem.h">
+      <Filter>excimer\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\core\Profiler.h">
+      <Filter>excimer\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\core\Version.h">
+      <Filter>excimer\core</Filter>
+    </ClInclude>
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
-    <ClInclude Include="src\excimer\core\Version.h" />
-    <ClInclude Include="src\excimer\core\JobSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -39,7 +46,9 @@
     <ClCompile Include="src\excimer\core\ExLog.cpp">
       <Filter>excimer\core</Filter>
     </ClCompile>
+    <ClCompile Include="src\excimer\core\JobSystem.cpp">
+      <Filter>excimer\core</Filter>
+    </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
-    <ClCompile Include="src\excimer\core\JobSystem.cpp" />
   </ItemGroup>
 </Project>

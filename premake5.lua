@@ -6,6 +6,7 @@ end
 
 IncludeDir = {}
 IncludeDir["spdlog"] = "excimer/external/spdlog/include"
+IncludeDir["external"] = "excimer/external"
 
 workspace "excimer"
     architecture "x64"
@@ -30,14 +31,10 @@ project "excimer"
 	kind "StaticLib"
 	language "C++"
 	cppdialect "C++17"
-	staticruntime "on"
-	characterset ("MBCS")
+	editandcontinue "Off"
 
 	targetdir("bin/" ..outputdir.. "/%{prj.name}")
 	objdir("bin-int/" ..outputdir.. "/%{prj.name}")
-
-	pchheader "excimer/src/hzpch.h"
-	pchsource "excimer/src/hzpch.cpp"
 
 	files
 	{
@@ -49,6 +46,7 @@ project "excimer"
 	{
 		"%{prj.name}/src",
 		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.external}",
 		"%VULKAN_SDK%/include"
 	}
 
@@ -63,20 +61,57 @@ project "excimer"
 		"vulkan-1.lib"
 	}
 
-	flags { "NoPCH" }
+	filter 'architecture:x86_64'
+	defines { "USE_VMA_ALLOCATOR"}
+
+	filter { "files:excimer/external/**"}
+		warnings "Off"
+
 	filter "system:windows"
+		cppdialect "C++17"
+		staticruntime "on"
 		systemversion "latest"
+		disablewarnings { 4307 }
+		characterset ("Unicode")
+		pchheader "hzpch.h"
+		pchsource "excimer/src/hzpch.cpp"
+	
 
 		defines
 		{
-			GLFW_INCLUDE_NONE
+			"SLIGHT_PLATFORM_WINDOWS",
+			"SLIGHT_RENDER_API_OPENGL",
+			"SLIGHT_RENDER_API_VULKAN",
+			"VK_USE_PLATFORM_WIN32_KHR",
+			"WIN32_LEAN_AND_MEAN",
+			"_CRT_SECURE_NO_WARNINGS",
+			"_DISABLE_EXTENDED_ALIGNED_STORAGE",
+			"_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING",
+			"_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING",
+			"SLIGHT_IMGUI",
+			"SLIGHT_OPENAL",
+			"SLIGHT_VOLK",
+			"SLIGHT_USE_GLFW_WINDOWS"
 		}
 
+		buildoptions
+		{
+		"/MP", "/bigobj"
+		}
+
+		filter 'files:excimer/external/**.cpp'
+			flags  { 'NoPCH' }
+		filter 'files:excimer/external/**.c'
+			flags  { 'NoPCH' }
+
+
+	disablewarnings { 4307 }
 
 	filter "configurations:Debug"
-		defines ""
+		defines {"TRACY_ENABLE","TRACY_ON_DEMAND"}
 		runtime "Debug"
 		symbols "on"
+		optimize "Off"
 
 -- 测试工具项目
 project "editor"
@@ -100,6 +135,7 @@ project "editor"
     includedirs
 	{
         "excimer/src",
+		"%{IncludeDir.external}",
         "%VULKAN_SDK%/include",
     }
 
@@ -118,6 +154,10 @@ project "editor"
 		systemversion "latest"
 
     filter "configurations:Debug"
-		defines ""
+		defines {"TRACY_ENABLE","TRACY_ON_DEMAND"}
 		runtime "Debug"
 		symbols "on"    
+		defines
+		{
+			"WIN32_LEAN_AND_MEAN",
+		}
