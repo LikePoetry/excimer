@@ -2,6 +2,9 @@
 #include "JobSystem.h"
 #include <excimer/core/Profiler.h>
 #include "ExLog.h"
+#include "Core.h"
+#include "excimer/maths/Maths.h"
+
 
 #include <thread>
 #include <condition_variable>
@@ -153,7 +156,7 @@ namespace Excimer
                 maxThreadCount = std::max(1u, maxThreadCount);
 
                 // Calculate the actual number of worker threads we want:
-               // internal_state.numThreads = Slight::Maths::Min(maxThreadCount, Slight::Maths::Max(1u, internal_state.numCores - 1));
+                internal_state.numThreads = Excimer::Maths::Min(maxThreadCount, Excimer::Maths::Max(1u, internal_state.numCores - 1));
                 internal_state.jobQueuePerThread.reset(new JobQueue[internal_state.numThreads]);
 
                 for (uint32_t threadID = 0; threadID < internal_state.numThreads; ++threadID)
@@ -162,7 +165,7 @@ namespace Excimer
                         {
                             std::stringstream ss;
                             ss << "JobSystem_" << threadID;
-                           // SLIGHT_PROFILE_SETTHREADNAME(ss.str().c_str());
+                            EXCIMER_PROFILE_SETTHREADNAME(ss.str().c_str());
 
                             std::shared_ptr<WorkerState> worker_state = internal_state.worker_state; // this is a copy of shared_ptr<WorkerState>, so it will remain alive for the thread's lifetime
 
@@ -181,18 +184,18 @@ namespace Excimer
                     // Put each thread on to dedicated core
                     DWORD_PTR affinityMask = 1ull << threadID;
                     DWORD_PTR affinity_result = SetThreadAffinityMask(handle, affinityMask);
-                   // SLIGHT_ASSERT(affinity_result > 0, "");
+                    EXCIMER_ASSERT(affinity_result > 0, "");
 
                     // Increase thread priority:
-                    // BOOL priority_result = SetThreadPriority(handle, THREAD_PRIORITY_HIGHEST);
-                    // SLIGHT_ASSERT(priority_result != 0, "");
+                    BOOL priority_result = SetThreadPriority(handle, THREAD_PRIORITY_HIGHEST);
+                    EXCIMER_ASSERT(priority_result != 0, "");
 
                     // Name the thread:
                     std::wstringstream wss;
                     wss << "JobSystem_" << threadID;
                     HRESULT hr = SetThreadDescription(handle, wss.str().c_str());
 
-                  //  SLIGHT_ASSERT(SUCCEEDED(hr), "");
+                    EXCIMER_ASSERT(SUCCEEDED(hr), "");
 
                     worker.detach();
                 }

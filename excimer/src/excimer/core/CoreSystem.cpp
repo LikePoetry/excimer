@@ -2,11 +2,16 @@
 #include "CoreSystem.h"
 #include "ExLog.h"
 #include "Version.h"
+#include "JobSystem.h"
 
 bool Excimer::Internal::CoreSystem::Init(int argc, char** argv)
 {
 	Excimer::Debug::Log::OnInit();
 	EXCIMER_LOG_INFO("Excimer - Version {0}.{1}.{2}", Excimer::ExcimerVersion.major, Excimer::ExcimerVersion.minor, Excimer::ExcimerVersion.patch);
+
+	System::JobSystem::OnInit();
+	EXCIMER_LOG_INFO("Initialising System");
+
 
 
 	return false;

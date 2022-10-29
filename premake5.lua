@@ -61,6 +61,10 @@ project "excimer"
 		"vulkan-1.lib"
 	}
 
+	defines
+	{
+	}
+
 	filter 'architecture:x86_64'
 	defines { "USE_VMA_ALLOCATOR"}
 
@@ -73,25 +77,19 @@ project "excimer"
 		systemversion "latest"
 		disablewarnings { 4307 }
 		characterset ("Unicode")
+
 		pchheader "hzpch.h"
 		pchsource "excimer/src/hzpch.cpp"
 	
 
 		defines
 		{
-			"SLIGHT_PLATFORM_WINDOWS",
-			"SLIGHT_RENDER_API_OPENGL",
-			"SLIGHT_RENDER_API_VULKAN",
-			"VK_USE_PLATFORM_WIN32_KHR",
-			"WIN32_LEAN_AND_MEAN",
 			"_CRT_SECURE_NO_WARNINGS",
 			"_DISABLE_EXTENDED_ALIGNED_STORAGE",
-			"_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING",
-			"_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING",
-			"SLIGHT_IMGUI",
-			"SLIGHT_OPENAL",
-			"SLIGHT_VOLK",
-			"SLIGHT_USE_GLFW_WINDOWS"
+		}
+		
+		links
+		{
 		}
 
 		buildoptions
@@ -118,9 +116,7 @@ project "editor"
     location "editor"
 	kind "ConsoleApp"
 	language "C++"
-	cppdialect "C++17"
-	staticruntime "on"
-	characterset ("MBCS")
+	editandcontinue "Off"
 
 	targetdir("bin/" ..outputdir.. "/%{prj.name}")
 	objdir("bin-int/" ..outputdir.. "/%{prj.name}")
@@ -129,7 +125,8 @@ project "editor"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"excimer/external/Tracy/TracyClient.cpp"
     }
 
     includedirs
@@ -150,14 +147,31 @@ project "editor"
 		"%VULKAN_SDK%/lib" 
 	}
 
-    filter "system:windows"
-		systemversion "latest"
+	defines
+	{
+	}
 
-    filter "configurations:Debug"
-		defines {"TRACY_ENABLE","TRACY_ON_DEMAND"}
-		runtime "Debug"
-		symbols "on"    
-		defines
+	filter { "files:excimer/external/**"}
+	warnings "Off"
+
+filter 'architecture:x86_64'
+	defines { "USE_VMA_ALLOCATOR"}
+
+filter "system:windows"
+	cppdialect "C++17"
+	staticruntime "On"
+	systemversion "latest"
+	conformancemode "off"
+
+	defines
 		{
 			"WIN32_LEAN_AND_MEAN",
 		}
+
+	disablewarnings { 4307 }
+filter "configurations:Debug"
+		defines {"TRACY_ENABLE","TRACY_ON_DEMAND"}
+		symbols "On"
+		runtime "Debug"
+		optimize "Off"
+		

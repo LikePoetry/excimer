@@ -35,6 +35,8 @@
     </ClInclude>
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
+    <ClInclude Include="src\excimer\maths\Maths.h" />
+    <ClInclude Include="src\excimer\maths\MathsUtilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -50,5 +52,7 @@
       <Filter>excimer\core</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
+    <ClCompile Include="src\excimer\maths\Maths.cpp" />
+    <ClCompile Include="src\excimer\maths\MathsUtilities.cpp" />
   </ItemGroup>
 </Project>

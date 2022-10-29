@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="excimer">
+      <UniqueIdentifier>{D28B9F81-3E6B-1E1D-4783-A9F3B3E1847E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="excimer\external">
+      <UniqueIdentifier>{64A60F96-509F-2EE8-79D1-136D65290EF4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="excimer\external\Tracy">
+      <UniqueIdentifier>{568E466E-4288-6FC0-2BF5-05D1178ED52C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\excimer\external\Tracy\TracyClient.cpp">
+      <Filter>excimer\external\Tracy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\editor.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
