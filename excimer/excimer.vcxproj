@@ -63,11 +63,15 @@
     <ClInclude Include="src\excimer\core\EntryPoint.h" />
     <ClInclude Include="src\excimer\core\ExLog.h" />
     <ClInclude Include="src\excimer\core\JobSystem.h" />
+    <ClInclude Include="src\excimer\core\os\FileSystem.h" />
     <ClInclude Include="src\excimer\core\Profiler.h" />
     <ClInclude Include="src\excimer\core\Version.h" />
     <ClInclude Include="src\excimerengine.h" />
+    <ClInclude Include="src\excimer\core\VFS.h" />
     <ClInclude Include="src\excimer\maths\Maths.h" />
     <ClInclude Include="src\excimer\maths\MathsUtilities.h" />
+    <ClInclude Include="src\excimer\platform\windows\WindowsUtilities.h" />
+    <ClInclude Include="src\excimer\utilities\TSingleton.h" />
     <ClInclude Include="src\hzpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -75,8 +79,12 @@
     <ClCompile Include="src\excimer\core\CoreSystem.cpp" />
     <ClCompile Include="src\excimer\core\ExLog.cpp" />
     <ClCompile Include="src\excimer\core\JobSystem.cpp" />
+    <ClCompile Include="src\excimer\core\os\FileSystem.cpp" />
+    <ClCompile Include="src\excimer\core\VFS.cpp" />
     <ClCompile Include="src\excimer\maths\Maths.cpp" />
     <ClCompile Include="src\excimer\maths\MathsUtilities.cpp" />
+    <ClCompile Include="src\excimer\platform\windows\WindowsFileSystem.cpp" />
+    <ClCompile Include="src\excimer\platform\windows\WindowsUtilities.cpp" />
     <ClCompile Include="src\hzpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

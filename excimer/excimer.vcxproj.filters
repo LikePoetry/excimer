@@ -37,6 +37,10 @@
     <ClInclude Include="src\hzpch.h" />
     <ClInclude Include="src\excimer\maths\Maths.h" />
     <ClInclude Include="src\excimer\maths\MathsUtilities.h" />
+    <ClInclude Include="src\excimer\utilities\TSingleton.h" />
+    <ClInclude Include="src\excimer\core\VFS.h" />
+    <ClInclude Include="src\excimer\core\os\FileSystem.h" />
+    <ClInclude Include="src\excimer\platform\windows\WindowsUtilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -54,5 +58,9 @@
     <ClCompile Include="src\hzpch.cpp" />
     <ClCompile Include="src\excimer\maths\Maths.cpp" />
     <ClCompile Include="src\excimer\maths\MathsUtilities.cpp" />
+    <ClCompile Include="src\excimer\core\VFS.cpp" />
+    <ClCompile Include="src\excimer\core\os\FileSystem.cpp" />
+    <ClCompile Include="src\excimer\platform\windows\WindowsFileSystem.cpp" />
+    <ClCompile Include="src\excimer\platform\windows\WindowsUtilities.cpp" />
   </ItemGroup>
 </Project>
