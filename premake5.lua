@@ -7,6 +7,7 @@ end
 IncludeDir = {}
 IncludeDir["spdlog"] = "excimer/external/spdlog/include"
 IncludeDir["external"] = "excimer/external"
+IncludeDir["GLFW"] = "excimer/external/glfw/include/"
 
 workspace "excimer"
     architecture "x64"
@@ -20,6 +21,8 @@ workspace "excimer"
 
 group "external"
 	require("excimer/external/spdlog/premake5")
+		SetRecommendedSettings()
+	require("excimer/external/GLFWpremake5")
 		SetRecommendedSettings()
 	filter {}
 
@@ -47,6 +50,7 @@ project "excimer"
 		"%{prj.name}/src",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.external}",
+		"%{IncludeDir.GLFW}",
 		"%VULKAN_SDK%/include"
 	}
 
@@ -90,6 +94,7 @@ project "excimer"
 		
 		links
 		{
+			"glfw",
 		}
 
 		buildoptions
@@ -133,12 +138,14 @@ project "editor"
 	{
         "excimer/src",
 		"%{IncludeDir.external}",
+		"%{IncludeDir.GLFW}",
         "%VULKAN_SDK%/include",
     }
 
     links
     {
         "excimer",
+		"glfw",
         "vulkan-1.lib"
     }
 

@@ -7,6 +7,24 @@
     <Filter Include="excimer\core">
       <UniqueIdentifier>{8A6F7487-76D2-032C-1F58-3CE20B9ACFAE}</UniqueIdentifier>
     </Filter>
+    <Filter Include="excimer\core\os">
+      <UniqueIdentifier>{FB911E00-671D-8CC4-702E-0FB9DC38E8C4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="excimer\maths">
+      <UniqueIdentifier>{DEB1AF76-4A72-2BAD-13AD-742A7F2C7089}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="excimer\platform">
+      <UniqueIdentifier>{86D0DFF5-72C9-FE47-9BFB-E3CC8753DE53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="excimer\platform\glfw">
+      <UniqueIdentifier>{05E861E6-7154-1DE1-3A48-B53EA6733F49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="excimer\platform\windows">
+      <UniqueIdentifier>{E038289F-CC5D-771F-F5A8-5CAFE12C763D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="excimer\utilities">
+      <UniqueIdentifier>{DD3EB8AF-4955-B645-92CC-4167FE2187CD}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\excimer\core\Application.h">
@@ -30,17 +48,41 @@
     <ClInclude Include="src\excimer\core\Profiler.h">
       <Filter>excimer\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\excimer\core\VFS.h">
+      <Filter>excimer\core</Filter>
+    </ClInclude>
     <ClInclude Include="src\excimer\core\Version.h">
       <Filter>excimer\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\excimer\core\os\FileSystem.h">
+      <Filter>excimer\core\os</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\core\os\Window.h">
+      <Filter>excimer\core\os</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\core\os\os.h">
+      <Filter>excimer\core\os</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\maths\Maths.h">
+      <Filter>excimer\maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\maths\MathsUtilities.h">
+      <Filter>excimer\maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\platform\glfw\GLFWWindow.h">
+      <Filter>excimer\platform\glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\platform\windows\WindowsOS.h">
+      <Filter>excimer\platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\platform\windows\WindowsUtilities.h">
+      <Filter>excimer\platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\utilities\TSingleton.h">
+      <Filter>excimer\utilities</Filter>
+    </ClInclude>
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
-    <ClInclude Include="src\excimer\maths\Maths.h" />
-    <ClInclude Include="src\excimer\maths\MathsUtilities.h" />
-    <ClInclude Include="src\excimer\utilities\TSingleton.h" />
-    <ClInclude Include="src\excimer\core\VFS.h" />
-    <ClInclude Include="src\excimer\core\os\FileSystem.h" />
-    <ClInclude Include="src\excimer\platform\windows\WindowsUtilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -55,12 +97,36 @@
     <ClCompile Include="src\excimer\core\JobSystem.cpp">
       <Filter>excimer\core</Filter>
     </ClCompile>
+    <ClCompile Include="src\excimer\core\VFS.cpp">
+      <Filter>excimer\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\core\os\FileSystem.cpp">
+      <Filter>excimer\core\os</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\core\os\Window.cpp">
+      <Filter>excimer\core\os</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\core\os\os.cpp">
+      <Filter>excimer\core\os</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\maths\Maths.cpp">
+      <Filter>excimer\maths</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\maths\MathsUtilities.cpp">
+      <Filter>excimer\maths</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\platform\glfw\GLFWWindow.cpp">
+      <Filter>excimer\platform\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\platform\windows\WindowsFileSystem.cpp">
+      <Filter>excimer\platform\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\platform\windows\WindowsOS.cpp">
+      <Filter>excimer\platform\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\platform\windows\WindowsUtilities.cpp">
+      <Filter>excimer\platform\windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
-    <ClCompile Include="src\excimer\maths\Maths.cpp" />
-    <ClCompile Include="src\excimer\maths\MathsUtilities.cpp" />
-    <ClCompile Include="src\excimer\core\VFS.cpp" />
-    <ClCompile Include="src\excimer\core\os\FileSystem.cpp" />
-    <ClCompile Include="src\excimer\platform\windows\WindowsFileSystem.cpp" />
-    <ClCompile Include="src\excimer\platform\windows\WindowsUtilities.cpp" />
   </ItemGroup>
 </Project>
