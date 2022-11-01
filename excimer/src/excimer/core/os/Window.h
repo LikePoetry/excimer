@@ -32,7 +32,17 @@ namespace Excimer
     class EXCIMER_EXPORT Window
     {
     public:
+
+        virtual void SetBorderlessWindow(bool borderless) = 0;
+
+        virtual void SetIcon(const std::string& filePath, const std::string& smallIconFilePath = "") = 0;
     protected:
         static Window* (*CreateFunc)(const WindowDesc&);
+        Window() = default;
+
+        bool m_Init = false;
+        bool m_VSync = false;
+        bool m_HasResized = false;
+        bool m_WindowFocus = true;
     };
 }
