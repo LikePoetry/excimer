@@ -15,7 +15,7 @@ namespace Excimer
 {
 	namespace Debug
 	{
-		class EXCIMER_EXPORT Log
+		class Log
 		{
 		public:
 			static void OnInit();

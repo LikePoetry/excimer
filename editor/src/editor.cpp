@@ -13,6 +13,6 @@ namespace Excimer
 
 	void Editor::Init()
 	{
-
+		Application::Init();
 	}
 }

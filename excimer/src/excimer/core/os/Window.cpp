@@ -9,4 +9,10 @@ namespace Excimer
 	{
 
 	}
+
+	Window* Window::Create(const WindowDesc& windowDesc)
+	{
+		EXCIMER_ASSERT(CreateFunc, "No Windows Create Function");
+		return CreateFunc(windowDesc);
+	}
 }

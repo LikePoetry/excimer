@@ -10,7 +10,14 @@ namespace Excimer
 {
 	void WindowsOS::Run()
 	{
+		EXCIMER_LOG_INFO("--------------------");
+		EXCIMER_LOG_INFO(" System Information ");
+		EXCIMER_LOG_INFO("--------------------");
+		
+		auto& app = Excimer::Application::Get();
+		app.Init();
 
+		app.Release();
 	}
 
 	void WindowsOS::Init()

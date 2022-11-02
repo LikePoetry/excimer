@@ -1,5 +1,7 @@
 #pragma once
+#include "excimer/core/ExLog.h"
 #include "excimer/core/Core.h"
+
 #include <string>
 
 
@@ -32,6 +34,7 @@ namespace Excimer
     class EXCIMER_EXPORT Window
     {
     public:
+        static Window* Create(const WindowDesc& windowDesc);
 
         virtual ~Window();
 
