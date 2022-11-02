@@ -31,7 +31,17 @@ namespace Excimer {
 		windowDesc.Title = m_ProjectSettings.Title;
 		windowDesc.VSync = m_ProjectSettings.VSync;
 
-		Window::Create(windowDesc);
+		// Initialise the Window
+		m_Window = UniquePtr<Window>(Window::Create(windowDesc));
+		if (!m_Window->HasInitialised())
+			OnQuit();
+
+
+	}
+
+	void Application::OnQuit()
+	{
+
 	}
 
 	bool Application::OnFrame()

@@ -1,6 +1,7 @@
 #pragma once
 #include "excimer/core/ExLog.h"
 #include "excimer/core/Core.h"
+#include "excimer/core/Reference.h"
 
 namespace Excimer 
 {
@@ -14,6 +15,7 @@ namespace Excimer
 		void Run();
 		bool OnFrame();
 
+		virtual void OnQuit();
 		virtual void Init();
 
 
@@ -59,7 +61,7 @@ namespace Excimer
 		uint32_t m_SceneViewWidth = 0;
 		uint32_t m_SceneViewHeight = 0;
 
-		/*UniquePtr<Window> m_Window;*/
+		UniquePtr<Window> m_Window;
 
 		static Application* s_Instance;
 

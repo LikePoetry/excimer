@@ -36,6 +36,13 @@ namespace Excimer
     public:
         static Window* Create(const WindowDesc& windowDesc);
 
+        bool Initialise(const WindowDesc& windowDesc);
+
+        bool HasInitialised() const
+        {
+            return m_Init;
+        };
+
         virtual ~Window();
 
         virtual void SetBorderlessWindow(bool borderless) = 0;

@@ -15,4 +15,9 @@ namespace Excimer
 		EXCIMER_ASSERT(CreateFunc, "No Windows Create Function");
 		return CreateFunc(windowDesc);
 	}
+
+	bool Window::Initialise(const WindowDesc& windowDesc)
+	{
+		return HasInitialised();
+	}
 }
