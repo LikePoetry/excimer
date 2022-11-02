@@ -3,6 +3,7 @@
 #include "GLFWWindow.h"
 
 #include "excimer/graphics/rhi/GraphicsContext.h"
+#include "excimer/utilities/LoadImage.h"
 
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
@@ -114,7 +115,15 @@ namespace Excimer
 		if (glfwRawMouseMotionSupported())
 			glfwSetInputMode(m_Handle, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
 
-		SetIcon("//Textures/icon.png", "//Textures/icon32.png");
+		//SetIcon("//Textures/icon.png", "//Textures/icon32.png");
+
+		// glfwSetWindowPos(m_Handle, mode->width / 2 - m_Data.Width / 2, mode->height / 2 - m_Data.Height / 2);
+		glfwSetInputMode(m_Handle, GLFW_STICKY_KEYS, true);
+
+		// Set GLFW callbacks
+
+		EXCIMER_LOG_INFO("Initialised GLFW version : {0}", glfwGetVersionString());
+		return true;
 	}
 
 	void GLFWWindow::MakeDefault()
@@ -143,5 +152,40 @@ namespace Excimer
 	void GLFWWindow::SetIcon(const std::string& file, const std::string& smallIconFilePath)
 	{
 		uint32_t width, height;
+		uint8_t* pixels = Excimer::LoadImageFromFile(file, &width, &height, nullptr, nullptr, true);
+
+		if (!pixels)
+		{
+			EXCIMER_LOG_WARN("Failed to load app icon {0}", file);
+			return;
+		}
+
+		std::vector<GLFWimage> images;
+		GLFWimage image;
+		image.height = height;
+		image.width = width;
+		image.pixels = static_cast<unsigned char*>(pixels);
+		images.push_back(image);
+
+		if (smallIconFilePath != "")
+		{
+			pixels = Excimer::LoadImageFromFile(smallIconFilePath, &width, &height, nullptr, nullptr, true);
+
+			if (!pixels)
+			{
+				EXCIMER_LOG_WARN("Failed to load app icon {0}", smallIconFilePath);
+				return;
+			}
+
+			image.height = height;
+			image.width = width;
+			image.pixels = static_cast<unsigned char*>(pixels);
+			images.push_back(image);
+		}
+
+		glfwSetWindowIcon(m_Handle, int(images.size()), images.data());
+
+		delete[] pixels;
+
 	}
 }

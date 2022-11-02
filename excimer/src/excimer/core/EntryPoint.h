@@ -16,5 +16,9 @@ int main()
 
 	windowsOS->Init();
 
+	windowsOS->Run();
+	delete windowsOS;
+
+	Excimer::Internal::CoreSystem::Shutdown();
 	return 0;
 }

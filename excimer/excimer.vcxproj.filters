@@ -10,6 +10,12 @@
     <Filter Include="excimer\core\os">
       <UniqueIdentifier>{FB911E00-671D-8CC4-702E-0FB9DC38E8C4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="excimer\graphics">
+      <UniqueIdentifier>{725C2575-5E55-44C7-8787-294C73DF23D3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="excimer\graphics\rhi">
+      <UniqueIdentifier>{04FE9D08-F08C-27D2-99AB-3BCD85193878}</UniqueIdentifier>
+    </Filter>
     <Filter Include="excimer\maths">
       <UniqueIdentifier>{DEB1AF76-4A72-2BAD-13AD-742A7F2C7089}</UniqueIdentifier>
     </Filter>
@@ -63,6 +69,9 @@
     <ClInclude Include="src\excimer\core\os\os.h">
       <Filter>excimer\core\os</Filter>
     </ClInclude>
+    <ClInclude Include="src\excimer\graphics\rhi\GraphicsContext.h">
+      <Filter>excimer\graphics\rhi</Filter>
+    </ClInclude>
     <ClInclude Include="src\excimer\maths\Maths.h">
       <Filter>excimer\maths</Filter>
     </ClInclude>
@@ -77,6 +86,9 @@
     </ClInclude>
     <ClInclude Include="src\excimer\platform\windows\WindowsUtilities.h">
       <Filter>excimer\platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\utilities\LoadImage.h">
+      <Filter>excimer\utilities</Filter>
     </ClInclude>
     <ClInclude Include="src\excimer\utilities\TSingleton.h">
       <Filter>excimer\utilities</Filter>
@@ -109,6 +121,9 @@
     <ClCompile Include="src\excimer\core\os\os.cpp">
       <Filter>excimer\core\os</Filter>
     </ClCompile>
+    <ClCompile Include="src\excimer\graphics\rhi\GraphicsContext.cpp">
+      <Filter>excimer\graphics\rhi</Filter>
+    </ClCompile>
     <ClCompile Include="src\excimer\maths\Maths.cpp">
       <Filter>excimer\maths</Filter>
     </ClCompile>
@@ -126,6 +141,9 @@
     </ClCompile>
     <ClCompile Include="src\excimer\platform\windows\WindowsUtilities.cpp">
       <Filter>excimer\platform\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\utilities\LoadImage.cpp">
+      <Filter>excimer\utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
   </ItemGroup>

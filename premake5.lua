@@ -8,6 +8,8 @@ IncludeDir = {}
 IncludeDir["spdlog"] = "excimer/external/spdlog/include"
 IncludeDir["external"] = "excimer/external"
 IncludeDir["GLFW"] = "excimer/external/glfw/include/"
+IncludeDir["stb"] = "excimer/external/stb"
+IncludeDir["glm"] = "excimer/external/glm"
 
 workspace "excimer"
     architecture "x64"
@@ -51,6 +53,7 @@ project "excimer"
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.external}",
 		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.stb}",
 		"%VULKAN_SDK%/include"
 	}
 
@@ -67,6 +70,8 @@ project "excimer"
 
 	defines
 	{
+		"GLM_FORCE_INTRINSICS",
+		"GLM_FORCE_DEPTH_ZERO_TO_ONE"
 	}
 
 	filter 'architecture:x86_64'
@@ -132,6 +137,7 @@ project "editor"
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
 		"excimer/external/Tracy/TracyClient.cpp"
+
     }
 
     includedirs
@@ -139,6 +145,7 @@ project "editor"
         "excimer/src",
 		"%{IncludeDir.external}",
 		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.stb}",
         "%VULKAN_SDK%/include",
     }
 
@@ -156,6 +163,8 @@ project "editor"
 
 	defines
 	{
+		"GLM_FORCE_INTRINSICS",
+		"GLM_FORCE_DEPTH_ZERO_TO_ONE"
 	}
 
 	filter { "files:excimer/external/**"}
