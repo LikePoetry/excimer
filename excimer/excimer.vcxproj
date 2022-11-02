@@ -63,8 +63,8 @@
     <ClInclude Include="src\excimer\core\EntryPoint.h" />
     <ClInclude Include="src\excimer\core\ExLog.h" />
     <ClInclude Include="src\excimer\core\JobSystem.h" />
-    <ClInclude Include="src\excimer\core\os\Reference.h" />
-    <ClInclude Include="src\excimer\core\os\ReferenceCounter.h" />
+    <ClInclude Include="src\excimer\core\Reference.h" />
+    <ClInclude Include="src\excimer\core\ReferenceCounter.h" />
     <ClInclude Include="src\excimer\core\Profiler.h" />
     <ClInclude Include="src\excimer\core\VFS.h" />
     <ClInclude Include="src\excimer\core\Version.h" />
@@ -87,7 +87,7 @@
     <ClCompile Include="src\excimer\core\CoreSystem.cpp" />
     <ClCompile Include="src\excimer\core\ExLog.cpp" />
     <ClCompile Include="src\excimer\core\JobSystem.cpp" />
-    <ClCompile Include="src\excimer\core\os\Reference.cpp" />
+    <ClCompile Include="src\excimer\core\Reference.cpp" />
     <ClCompile Include="src\excimer\core\VFS.cpp" />
     <ClCompile Include="src\excimer\core\os\FileSystem.cpp" />
     <ClCompile Include="src\excimer\core\os\Window.cpp" />
