@@ -143,6 +143,7 @@ project "editor"
     includedirs
 	{
         "excimer/src",
+		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.external}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.stb}",

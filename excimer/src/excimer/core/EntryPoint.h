@@ -16,6 +16,8 @@ int main()
 
 	windowsOS->Init();
 
+	Excimer::CreateApplication();
+
 	windowsOS->Run();
 	delete windowsOS;
 

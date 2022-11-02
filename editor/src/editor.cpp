@@ -1,9 +1,18 @@
-#include "excimerengine.h"
-#include "excimer/core/EntryPoint.h"
-#include "excimer/core/Profiler.h"
+#include "Editor.h"
 
-Excimer::Application* Excimer::CreateApplication()
+namespace Excimer
 {
-    EXCIMER_PROFILE_FUNCTION();
-    return nullptr;
+	Editor::Editor() :Application()
+	{
+
+	}
+
+	Editor::~Editor()
+	{
+	}
+
+	void Editor::Init()
+	{
+
+	}
 }

@@ -1,7 +1,16 @@
 #include "hzpch.h"
 #include "Application.h"
 
-Excimer::Application::Application()
-{
+namespace Excimer {
+
+	Application::Application()
+	{
+
+	}
+
+	void Application::Init()
+	{
+
+	}
 
 }

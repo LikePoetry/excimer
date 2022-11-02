@@ -15,10 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Editor.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="..\excimer\external\Tracy\TracyClient.cpp">
       <Filter>excimer\external\Tracy</Filter>
     </ClCompile>
-    <ClCompile Include="src\editor.cpp">
+    <ClCompile Include="src\Editor.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimereditor.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
