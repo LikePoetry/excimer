@@ -23,6 +23,11 @@ namespace Excimer
 
 		bool Init(const WindowDesc& properties);
 
+		inline void SetEventCallback(const EventCallbackFn& callback) override
+		{
+			m_Data.EventCallback = callback;
+		}
+
 		void SetIcon(const std::string& file, const std::string& smallIconFilePath = "") override;
 		static void MakeDefault();
 
@@ -40,7 +45,7 @@ namespace Excimer
 			Graphics::RenderAPI m_RenderAPI;
 			float DPIScale;
 
-			//EventCallbackFn EventCallback;
+			EventCallbackFn EventCallback;
 		};
 
 		WindowData m_Data;

@@ -2,10 +2,23 @@
 #include "excimer/core/ExLog.h"
 #include "excimer/core/Core.h"
 #include "excimer/core/Reference.h"
+#include "excimer/events/ApplicationEvent.h"
 
 namespace Excimer 
 {
 	class Window;
+	struct WindowDesc;
+	class Editor;
+	class Event;
+	class WindowCloseEvent;
+	class WindowResizeEvent;
+
+	enum class AppState
+	{
+		Running,
+		Loading,
+		Closing
+	};
 
 	class EXCIMER_EXPORT Application
 	{
@@ -19,7 +32,12 @@ namespace Excimer
 
 		virtual void OnQuit();
 		virtual void Init();
+		virtual void OnEvent(Event& e);
 
+		Window* GetWindow() const
+		{
+			return m_Window.get();
+		}
 
 		static Application& Get()
 		{
@@ -32,6 +50,8 @@ namespace Excimer
 				delete s_Instance;
 			s_Instance = nullptr;
 		}
+
+		bool OnWindowResize(WindowResizeEvent& e);
 
 		struct ProjectSettings
 		{
@@ -56,7 +76,7 @@ namespace Excimer
 		bool m_ProjectLoaded = false;
 
 	private:
-
+		bool OnWindowClose(WindowCloseEvent& e);
 		uint32_t m_Frames = 0;
 		uint32_t m_Updates = 0;
 
@@ -64,6 +84,8 @@ namespace Excimer
 		uint32_t m_SceneViewHeight = 0;
 
 		UniquePtr<Window> m_Window;
+
+		AppState m_CurrentState = AppState::Loading;
 
 		static Application* s_Instance;
 

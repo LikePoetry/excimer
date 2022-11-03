@@ -1,6 +1,7 @@
 #pragma once
 #include "excimer/core/ExLog.h"
 #include "excimer/core/Core.h"
+#include "excimer/events/Event.h"
 
 #include <string>
 
@@ -34,6 +35,8 @@ namespace Excimer
     class EXCIMER_EXPORT Window
     {
     public:
+        using EventCallbackFn = std::function<void(Event&)>;
+
         static Window* Create(const WindowDesc& windowDesc);
 
         bool Initialise(const WindowDesc& windowDesc);
@@ -49,6 +52,12 @@ namespace Excimer
         virtual void SetBorderlessWindow(bool borderless) = 0;
 
         virtual void SetIcon(const std::string& filePath, const std::string& smallIconFilePath = "") = 0;
+    
+        virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
+
+        void SetWindowFocus(bool focus) { m_WindowFocus = focus; }
+        bool GetWindowFocus() const { return m_WindowFocus; }
+
     protected:
         static Window* (*CreateFunc)(const WindowDesc&);
         Window() = default;

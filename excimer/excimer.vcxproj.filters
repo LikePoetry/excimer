@@ -97,6 +97,12 @@
     <ClInclude Include="src\hzpch.h" />
     <ClInclude Include="src\excimer\core\Reference.h" />
     <ClInclude Include="src\excimer\core\ReferenceCounter.h" />
+    <ClInclude Include="src\excimer\events\Event.h" />
+    <ClInclude Include="src\excimer\events\MouseEvent.h" />
+    <ClInclude Include="src\excimer\events\KeyEvent.h" />
+    <ClInclude Include="src\excimer\core\os\KeyCodes.h" />
+    <ClInclude Include="src\excimer\events\ApplicationEvent.h" />
+    <ClInclude Include="src\excimer\platform\glfw\GLFWKeyCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">

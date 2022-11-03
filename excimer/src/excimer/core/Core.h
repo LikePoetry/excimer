@@ -3,6 +3,8 @@
 
 #define EXCIMER_EXPORT
 
+#define BIT(x) (1 << x)
+
 #define EXCIMER_BREAK() __debugbreak();
 
 #define EXCIMER_ASSERT_MESSAGE(condition, ...)      \

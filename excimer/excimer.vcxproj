@@ -63,6 +63,7 @@
     <ClInclude Include="src\excimer\core\EntryPoint.h" />
     <ClInclude Include="src\excimer\core\ExLog.h" />
     <ClInclude Include="src\excimer\core\JobSystem.h" />
+    <ClInclude Include="src\excimer\core\os\KeyCodes.h" />
     <ClInclude Include="src\excimer\core\Reference.h" />
     <ClInclude Include="src\excimer\core\ReferenceCounter.h" />
     <ClInclude Include="src\excimer\core\Profiler.h" />
@@ -71,9 +72,14 @@
     <ClInclude Include="src\excimer\core\os\FileSystem.h" />
     <ClInclude Include="src\excimer\core\os\Window.h" />
     <ClInclude Include="src\excimer\core\os\os.h" />
+    <ClInclude Include="src\excimer\events\ApplicationEvent.h" />
+    <ClInclude Include="src\excimer\events\Event.h" />
+    <ClInclude Include="src\excimer\events\KeyEvent.h" />
+    <ClInclude Include="src\excimer\events\MouseEvent.h" />
     <ClInclude Include="src\excimer\graphics\rhi\GraphicsContext.h" />
     <ClInclude Include="src\excimer\maths\Maths.h" />
     <ClInclude Include="src\excimer\maths\MathsUtilities.h" />
+    <ClInclude Include="src\excimer\platform\glfw\GLFWKeyCodes.h" />
     <ClInclude Include="src\excimer\platform\glfw\GLFWWindow.h" />
     <ClInclude Include="src\excimer\platform\windows\WindowsOS.h" />
     <ClInclude Include="src\excimer\platform\windows\WindowsUtilities.h" />

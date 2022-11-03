@@ -3,6 +3,8 @@
 #include "Profiler.h"
 #include "excimer/core/os/Window.h"
 
+
+
 namespace Excimer {
 
 	Application* Application::s_Instance = nullptr;
@@ -36,6 +38,18 @@ namespace Excimer {
 		if (!m_Window->HasInitialised())
 			OnQuit();
 
+		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+	}
+
+	void Application::OnEvent(Event& e)
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
+
+
 
 	}
 
@@ -47,6 +61,9 @@ namespace Excimer {
 	bool Application::OnFrame()
 	{
 		m_Window->ProcessInput();
+
+		if (m_CurrentState == AppState::Closing)
+			return false;
 		return true;
 	}
 
@@ -57,6 +74,17 @@ namespace Excimer {
 		}
 
 		//OnQuit();
+	}
+
+	bool Application::OnWindowClose(WindowCloseEvent& e)
+	{
+		m_CurrentState = AppState::Closing;
+		return true;
+	}
+
+	bool Application::OnWindowResize(WindowResizeEvent& e)
+	{
+		return true;
 	}
 
 
