@@ -149,6 +149,13 @@ namespace Excimer
 		}
 	}
 
+	void GLFWWindow::ProcessInput()
+	{
+		EXCIMER_PROFILE_SCOPE("GLFW PollEvents");
+		glfwPollEvents();
+
+	}
+
 	void GLFWWindow::SetIcon(const std::string& file, const std::string& smallIconFilePath)
 	{
 		uint32_t width, height;

@@ -5,6 +5,8 @@
 
 namespace Excimer 
 {
+	class Window;
+
 	class EXCIMER_EXPORT Application
 	{
 		friend class Editor;

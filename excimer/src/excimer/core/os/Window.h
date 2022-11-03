@@ -45,6 +45,7 @@ namespace Excimer
 
         virtual ~Window();
 
+        virtual void ProcessInput() {};
         virtual void SetBorderlessWindow(bool borderless) = 0;
 
         virtual void SetIcon(const std::string& filePath, const std::string& smallIconFilePath = "") = 0;

@@ -46,6 +46,7 @@ namespace Excimer {
 
 	bool Application::OnFrame()
 	{
+		m_Window->ProcessInput();
 		return true;
 	}
 

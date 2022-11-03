@@ -16,7 +16,7 @@ namespace Excimer
 		
 		auto& app = Excimer::Application::Get();
 		app.Init();
-
+		app.Run();
 		app.Release();
 	}
 

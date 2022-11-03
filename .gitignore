@@ -33,3 +33,5 @@
 /.vs
 /bin
 /bin-int
+/excimer/external/bin
+/excimer/external/obj

@@ -19,6 +19,7 @@ namespace Excimer
 		~GLFWWindow();
 
 		void SetBorderlessWindow(bool borderless) override;
+		virtual void ProcessInput() override;
 
 		bool Init(const WindowDesc& properties);
 
