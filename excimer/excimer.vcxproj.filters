@@ -103,6 +103,7 @@
     <ClInclude Include="src\excimer\core\os\KeyCodes.h" />
     <ClInclude Include="src\excimer\events\ApplicationEvent.h" />
     <ClInclude Include="src\excimer\platform\glfw\GLFWKeyCodes.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKFunctions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -155,5 +156,6 @@
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
     <ClCompile Include="src\excimer\core\Reference.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKFunctions.cpp" />
   </ItemGroup>
 </Project>
