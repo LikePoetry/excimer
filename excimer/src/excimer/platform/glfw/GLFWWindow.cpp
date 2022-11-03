@@ -37,6 +37,11 @@ namespace Excimer
 		m_Data.VSync = m_VSync;
 		m_Init = Init(properties);
 
+		// Setting fullscreen overrides width and heigh in Init
+		auto propCopy = properties;
+		propCopy.Width = m_Data.Width;
+		propCopy.Height = m_Data.Height;
+
 
 	}
 

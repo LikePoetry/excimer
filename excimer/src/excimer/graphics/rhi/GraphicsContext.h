@@ -13,5 +13,18 @@ namespace Excimer
 			METAL,		// Unsupported
 			NONE,		// Unsupported
 		};
+
+		class EXCIMER_EXPORT GraphicsContext
+		{
+		public:
+			virtual ~GraphicsContext();
+
+			static void SetRenderAPI(RenderAPI api);
+
+		protected:
+			static GraphicsContext* (*CreateFunc)();
+
+			static RenderAPI s_RenderAPI;
+		};
 	}
 }

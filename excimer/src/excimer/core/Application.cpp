@@ -22,6 +22,7 @@ namespace Excimer {
 
 	void Application::Init()
 	{
+		Graphics::GraphicsContext::SetRenderAPI(static_cast<Graphics::RenderAPI>(m_ProjectSettings.RenderAPI));
 
 		WindowDesc windowDesc;
 		windowDesc.Width = m_ProjectSettings.Width;
@@ -39,6 +40,8 @@ namespace Excimer {
 			OnQuit();
 
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+		m_EditorState = EditorState::Play;
 
 	}
 

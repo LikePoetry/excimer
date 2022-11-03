@@ -11,6 +11,8 @@ namespace Excimer
 		Editor();
 		virtual ~Editor();
 
+		void OnEvent(Event& e) override;
+
 		void Init() override;
 	};
 }

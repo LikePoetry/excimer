@@ -20,6 +20,20 @@ namespace Excimer
 		Closing
 	};
 
+	enum class EditorState
+	{
+		Paused,
+		Play,
+		Next,
+		Preview
+	};
+
+	enum class AppType
+	{
+		Game,
+		Editor
+	};
+
 	class EXCIMER_EXPORT Application
 	{
 		friend class Editor;
@@ -86,6 +100,8 @@ namespace Excimer
 		UniquePtr<Window> m_Window;
 
 		AppState m_CurrentState = AppState::Loading;
+		EditorState m_EditorState = EditorState::Preview;
+		AppType m_AppType = AppType::Editor;
 
 		static Application* s_Instance;
 
