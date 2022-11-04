@@ -35,6 +35,10 @@ namespace Excimer
 
 		private:
 			static VkInstance s_VkInstance;
+			VkDebugReportCallbackEXT m_DebugCallback = VK_NULL_HANDLE;
+
+			std::vector<VkLayerProperties> m_InstanceLayers;
+			std::vector<VkExtensionProperties> m_InstanceExtensions;
 
 			std::vector<const char*> m_InstanceLayerNames;
 			std::vector<const char*> m_InstanceExtensionNames;
