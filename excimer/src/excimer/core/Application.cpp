@@ -22,7 +22,9 @@ namespace Excimer {
 
 	void Application::Init()
 	{
-		Graphics::GraphicsContext::SetRenderAPI(static_cast<Graphics::RenderAPI>(m_ProjectSettings.RenderAPI));
+		//TODO 目前仅支持Vulkan API; 
+		//m_ProjectSettings.RenderAPI 
+		Graphics::GraphicsContext::SetRenderAPI(static_cast<Graphics::RenderAPI>(Excimer::Graphics::RenderAPI::VULKAN));
 
 		WindowDesc windowDesc;
 		windowDesc.Width = m_ProjectSettings.Width;

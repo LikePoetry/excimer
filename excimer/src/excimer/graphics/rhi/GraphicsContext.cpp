@@ -1,5 +1,7 @@
 #include "hzpch.h"
 #include "GraphicsContext.h"
+#include "excimer/platform/vulkan/VKFunctions.h"
+
 
 namespace Excimer
 {
@@ -8,6 +10,12 @@ namespace Excimer
 		GraphicsContext* (*GraphicsContext::CreateFunc)() = nullptr;
 
 		RenderAPI GraphicsContext::s_RenderAPI;
+
+		GraphicsContext* GraphicsContext::Create()
+		{
+			EXCIMER_ASSERT(CreateFunc, "No GraphicsContext Create Function");
+			return CreateFunc();
+		}
 
 		GraphicsContext::~GraphicsContext()
 		{

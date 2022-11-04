@@ -10,6 +10,12 @@
     <Filter Include="excimer\external\Tracy">
       <UniqueIdentifier>{568E466E-4288-6FC0-2BF5-05D1178ED52C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="excimer\external\vulkan">
+      <UniqueIdentifier>{842FA486-F066-EC1D-F970-504165271317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="excimer\external\vulkan\volk">
+      <UniqueIdentifier>{EF9C1727-DB57-07D3-840F-801D70A95163}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
@@ -23,7 +29,10 @@
     <ClCompile Include="..\excimer\external\Tracy\TracyClient.cpp">
       <Filter>excimer\external\Tracy</Filter>
     </ClCompile>
-    <ClCompile Include="src\Editor.cpp">
+    <ClCompile Include="..\excimer\external\vulkan\volk\volk.c">
+      <Filter>excimer\external\vulkan\volk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\editor.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\excimereditor.cpp">

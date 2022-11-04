@@ -42,7 +42,8 @@ namespace Excimer
 		propCopy.Width = m_Data.Width;
 		propCopy.Height = m_Data.Height;
 
-
+		m_GraphicsContext = SharedPtr<Graphics::GraphicsContext>(Graphics::GraphicsContext::Create());
+		m_GraphicsContext->Init();
 	}
 
 	GLFWWindow::~GLFWWindow()

@@ -40,7 +40,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DisableSpecificWarnings>4307;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>GLM_FORCE_INTRINSICS;GLM_FORCE_DEPTH_ZERO_TO_ONE;USE_VMA_ALLOCATOR;WIN32_LEAN_AND_MEAN;TRACY_ENABLE;TRACY_ON_DEMAND;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\excimer\src;..\excimer\external\spdlog\include;..\excimer\external;..\excimer\external\glfw\include;..\excimer\external\stb;%VULKAN_SDK%\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\excimer\src;..\excimer\external\spdlog\include;..\excimer\external;..\excimer\external\glfw\include;..\excimer\external\stb;..\excimer\external\vulkan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -50,8 +50,6 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%VULKAN_SDK%\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -61,7 +59,10 @@
     <ClCompile Include="..\excimer\external\Tracy\TracyClient.cpp">
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
     </ClCompile>
-    <ClCompile Include="src\Editor.cpp" />
+    <ClCompile Include="..\excimer\external\vulkan\volk\volk.c">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="src\editor.cpp" />
     <ClCompile Include="src\excimereditor.cpp" />
   </ItemGroup>
   <ItemGroup>

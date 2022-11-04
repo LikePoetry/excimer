@@ -10,6 +10,7 @@ IncludeDir["external"] = "excimer/external"
 IncludeDir["GLFW"] = "excimer/external/glfw/include/"
 IncludeDir["stb"] = "excimer/external/stb"
 IncludeDir["glm"] = "excimer/external/glm"
+IncludeDir["vulkan"] = "excimer/external/vulkan/"
 
 workspace "excimer"
     architecture "x64"
@@ -54,18 +55,17 @@ project "excimer"
 		"%{IncludeDir.external}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.stb}",
-		"%VULKAN_SDK%/include"
+		"%{IncludeDir.vulkan}"
 	}
 
 	libdirs 
 	{ 
 		"spdlog",
-		"%VULKAN_SDK%/lib" 
 	}
 
 	links
 	{
-		"vulkan-1.lib"
+
 	}
 
 	defines
@@ -136,7 +136,9 @@ project "editor"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
-		"excimer/external/Tracy/TracyClient.cpp"
+		"excimer/external/Tracy/TracyClient.cpp",
+		"excimer/external/vulkan/volk/volk.c"
+
 
     }
 
@@ -147,19 +149,17 @@ project "editor"
 		"%{IncludeDir.external}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.stb}",
-        "%VULKAN_SDK%/include",
+		"%{IncludeDir.vulkan}"
     }
 
     links
     {
         "excimer",
-		"glfw",
-        "vulkan-1.lib"
+		"glfw"
     }
 
     libdirs 
 	{ 
-		"%VULKAN_SDK%/lib" 
 	}
 
 	defines

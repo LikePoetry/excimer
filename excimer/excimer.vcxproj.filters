@@ -10,6 +10,9 @@
     <Filter Include="excimer\core\os">
       <UniqueIdentifier>{FB911E00-671D-8CC4-702E-0FB9DC38E8C4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="excimer\events">
+      <UniqueIdentifier>{968B703B-8259-6441-6BED-D467575A40A6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="excimer\graphics">
       <UniqueIdentifier>{725C2575-5E55-44C7-8787-294C73DF23D3}</UniqueIdentifier>
     </Filter>
@@ -24,6 +27,9 @@
     </Filter>
     <Filter Include="excimer\platform\glfw">
       <UniqueIdentifier>{05E861E6-7154-1DE1-3A48-B53EA6733F49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="excimer\platform\vulkan">
+      <UniqueIdentifier>{665F1F2A-D296-67C1-DBA0-CBE447578EBA}</UniqueIdentifier>
     </Filter>
     <Filter Include="excimer\platform\windows">
       <UniqueIdentifier>{E038289F-CC5D-771F-F5A8-5CAFE12C763D}</UniqueIdentifier>
@@ -54,6 +60,12 @@
     <ClInclude Include="src\excimer\core\Profiler.h">
       <Filter>excimer\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\excimer\core\Reference.h">
+      <Filter>excimer\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\core\ReferenceCounter.h">
+      <Filter>excimer\core</Filter>
+    </ClInclude>
     <ClInclude Include="src\excimer\core\VFS.h">
       <Filter>excimer\core</Filter>
     </ClInclude>
@@ -63,11 +75,26 @@
     <ClInclude Include="src\excimer\core\os\FileSystem.h">
       <Filter>excimer\core\os</Filter>
     </ClInclude>
+    <ClInclude Include="src\excimer\core\os\KeyCodes.h">
+      <Filter>excimer\core\os</Filter>
+    </ClInclude>
     <ClInclude Include="src\excimer\core\os\Window.h">
       <Filter>excimer\core\os</Filter>
     </ClInclude>
     <ClInclude Include="src\excimer\core\os\os.h">
       <Filter>excimer\core\os</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\events\ApplicationEvent.h">
+      <Filter>excimer\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\events\Event.h">
+      <Filter>excimer\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\events\KeyEvent.h">
+      <Filter>excimer\events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\events\MouseEvent.h">
+      <Filter>excimer\events</Filter>
     </ClInclude>
     <ClInclude Include="src\excimer\graphics\rhi\GraphicsContext.h">
       <Filter>excimer\graphics\rhi</Filter>
@@ -78,8 +105,20 @@
     <ClInclude Include="src\excimer\maths\MathsUtilities.h">
       <Filter>excimer\maths</Filter>
     </ClInclude>
+    <ClInclude Include="src\excimer\platform\glfw\GLFWKeyCodes.h">
+      <Filter>excimer\platform\glfw</Filter>
+    </ClInclude>
     <ClInclude Include="src\excimer\platform\glfw\GLFWWindow.h">
       <Filter>excimer\platform\glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\platform\vulkan\VK.h">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\platform\vulkan\VKContext.h">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\platform\vulkan\VKFunctions.h">
+      <Filter>excimer\platform\vulkan</Filter>
     </ClInclude>
     <ClInclude Include="src\excimer\platform\windows\WindowsOS.h">
       <Filter>excimer\platform\windows</Filter>
@@ -95,15 +134,6 @@
     </ClInclude>
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
-    <ClInclude Include="src\excimer\core\Reference.h" />
-    <ClInclude Include="src\excimer\core\ReferenceCounter.h" />
-    <ClInclude Include="src\excimer\events\Event.h" />
-    <ClInclude Include="src\excimer\events\MouseEvent.h" />
-    <ClInclude Include="src\excimer\events\KeyEvent.h" />
-    <ClInclude Include="src\excimer\core\os\KeyCodes.h" />
-    <ClInclude Include="src\excimer\events\ApplicationEvent.h" />
-    <ClInclude Include="src\excimer\platform\glfw\GLFWKeyCodes.h" />
-    <ClInclude Include="src\excimer\platform\vulkan\VKFunctions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -116,6 +146,9 @@
       <Filter>excimer\core</Filter>
     </ClCompile>
     <ClCompile Include="src\excimer\core\JobSystem.cpp">
+      <Filter>excimer\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\core\Reference.cpp">
       <Filter>excimer\core</Filter>
     </ClCompile>
     <ClCompile Include="src\excimer\core\VFS.cpp">
@@ -142,6 +175,15 @@
     <ClCompile Include="src\excimer\platform\glfw\GLFWWindow.cpp">
       <Filter>excimer\platform\glfw</Filter>
     </ClCompile>
+    <ClCompile Include="src\excimer\platform\vulkan\VK.cpp">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\platform\vulkan\VKContext.cpp">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\platform\vulkan\VKFunctions.cpp">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClCompile>
     <ClCompile Include="src\excimer\platform\windows\WindowsFileSystem.cpp">
       <Filter>excimer\platform\windows</Filter>
     </ClCompile>
@@ -155,7 +197,5 @@
       <Filter>excimer\utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
-    <ClCompile Include="src\excimer\core\Reference.cpp" />
-    <ClCompile Include="src\excimer\platform\vulkan\VKFunctions.cpp" />
   </ItemGroup>
 </Project>

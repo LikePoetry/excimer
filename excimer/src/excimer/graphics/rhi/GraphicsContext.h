@@ -1,5 +1,6 @@
 #pragma once
 #include "excimer/core/Core.h"
+#include "excimer/core/ExLog.h"
 
 namespace Excimer
 {
@@ -19,8 +20,13 @@ namespace Excimer
 		public:
 			virtual ~GraphicsContext();
 
+			static RenderAPI GetRenderAPI() { return s_RenderAPI; }
 			static void SetRenderAPI(RenderAPI api);
 
+			virtual void Init() = 0;
+
+
+			static GraphicsContext* Create();
 		protected:
 			static GraphicsContext* (*CreateFunc)();
 
