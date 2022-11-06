@@ -135,6 +135,11 @@
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
     <ClInclude Include="src\excimer\core\StringUtilities.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKDevice.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\Defintions.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\Renderer.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKRenderer.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKCommandPool.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -199,5 +204,9 @@
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
     <ClCompile Include="src\excimer\core\StringUtilities.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKDevice.cpp" />
+    <ClCompile Include="src\excimer\graphics\rhi\Renderer.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKRenderer.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKCommandPool.cpp" />
   </ItemGroup>
 </Project>

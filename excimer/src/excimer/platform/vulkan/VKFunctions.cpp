@@ -1,6 +1,7 @@
 #include "hzpch.h"
 #include "VKFunctions.h"
 #include "VKContext.h"
+#include "VKRenderer.h"
 
 /// <summary>
 /// 初始化渲染SDK组件
@@ -8,4 +9,5 @@
 void Excimer::Graphics::Vulkan::MakeDefault()
 {
 	VKContext::MakeDefault();
+	VKRenderer::MakeDefault();
 }

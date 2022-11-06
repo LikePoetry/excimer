@@ -42,8 +42,13 @@ namespace Excimer
 		propCopy.Width = m_Data.Width;
 		propCopy.Height = m_Data.Height;
 
+		// VkInstance VkPhysicalDevice VkDevice
 		m_GraphicsContext = SharedPtr<Graphics::GraphicsContext>(Graphics::GraphicsContext::Create());
 		m_GraphicsContext->Init();
+
+		//VkSwapchain
+
+
 	}
 
 	GLFWWindow::~GLFWWindow()

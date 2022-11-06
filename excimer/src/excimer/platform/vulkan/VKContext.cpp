@@ -1,6 +1,8 @@
 #include "hzpch.h"
 #include "VKContext.h"
 
+#include "VKDevice.h"
+
 #include "excimer/maths/MathsUtilities.h"
 #include "excimer/core/Profiler.h"
 #include "excimer/core/StringUtilities.h"
@@ -60,6 +62,11 @@ namespace Excimer
 
 		}
 
+		VKContext::~VKContext()
+		{
+
+		}
+
 		void VKContext::MakeDefault()
 		{
 			CreateFunc = CreateFuncVulkan;
@@ -76,8 +83,50 @@ namespace Excimer
 		{
 			EXCIMER_PROFILE_FUNCTION();
 			CreateInstance();
+			VKDevice::Get().Init();
 
+			SetupDebugCallback();
+		}
 
+		VkBool32 VKContext::DebugCallback(VkDebugReportFlagsEXT flags,
+			VkDebugReportObjectTypeEXT objType,
+			uint64_t sourceObj,
+			size_t location,
+			int32_t msgCode,
+			const char* pLayerPrefix,
+			const char* pMsg,
+			void* userData) 
+		{
+			if (!flags)
+				return VK_FALSE;
+
+			if (flags & VK_DEBUG_REPORT_ERROR_BIT_EXT)
+			{
+				EXCIMER_LOG_WARN("[VULKAN] - ERROR : [{0}] Code {1}  : {2}", pLayerPrefix, msgCode, pMsg);
+			};
+			// Warnings may hint at unexpected / non-spec API usage
+			if (flags & VK_DEBUG_REPORT_WARNING_BIT_EXT)
+			{
+				EXCIMER_LOG_WARN("[VULKAN] - WARNING : [{0}] Code {1}  : {2}", pLayerPrefix, msgCode, pMsg);
+			};
+			// May indicate sub-optimal usage of the API
+			if (flags & VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT)
+			{
+				EXCIMER_LOG_WARN("[VULKAN] - PERFORMANCE : [{0}] Code {1}  : {2}", pLayerPrefix, msgCode, pMsg);
+			};
+			// Informal messages that may become handy during debugging
+			if (flags & VK_DEBUG_REPORT_INFORMATION_BIT_EXT)
+			{
+				EXCIMER_LOG_WARN("[VULKAN] - INFO : [{0}] Code {1}  : {2}", pLayerPrefix, msgCode, pMsg);
+			}
+			// Diagnostic info from the Vulkan loader and layers
+			// Usually not helpful in terms of API usage, but may help to debug layer and loader problems
+			if (flags & VK_DEBUG_REPORT_DEBUG_BIT_EXT)
+			{
+				EXCIMER_LOG_WARN("[VULKAN] - DEBUG : [{0}] Code {1}  : {2}", pLayerPrefix, msgCode, pMsg);
+			}
+
+			return VK_FALSE;
 		}
 
 		bool VKContext::CheckValidationLayerSupport(std::vector<const char*>& validationLayers)
@@ -235,6 +284,40 @@ namespace Excimer
 			if (createResult != VK_SUCCESS)
 			{
 				EXCIMER_LOG_CRITICAL("[VULKAN] Failed to create instance!");
+			}
+
+			volkLoadInstance(s_VkInstance);
+		}
+
+		VkResult CreateDebugReportCallbackEXT(VkInstance instance, const VkDebugReportCallbackCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugReportCallbackEXT* pCallback)
+		{
+			auto func = reinterpret_cast<PFN_vkCreateDebugReportCallbackEXT>(vkGetInstanceProcAddr(instance, "vkCreateDebugReportCallbackEXT"));
+
+			if (func != nullptr)
+			{
+				return func(instance, pCreateInfo, pAllocator, pCallback);
+			}
+			else
+			{
+				return VK_ERROR_EXTENSION_NOT_PRESENT;
+			}
+		}
+
+		void VKContext::SetupDebugCallback()
+		{
+			EXCIMER_PROFILE_FUNCTION();
+			if (!EnableValidationLayers)
+				return;
+
+			VkDebugReportCallbackCreateInfoEXT createInfo = {};
+			createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT;
+			createInfo.flags = VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT | VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT;
+			createInfo.pfnCallback = reinterpret_cast<PFN_vkDebugReportCallbackEXT>(DebugCallback);
+
+			VkResult result = CreateDebugReportCallbackEXT(s_VkInstance, &createInfo, nullptr, &m_DebugCallback);
+			if (result != VK_SUCCESS)
+			{
+				EXCIMER_LOG_CRITICAL("[VULKAN] Failed to set up debug callback!");
 			}
 		}
 	}

@@ -17,16 +17,27 @@ namespace Excimer
 		{
 		public:
 			VKContext();
+			~VKContext();
 
 			void Init() override;
 
+			static VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(VkDebugReportFlagsEXT flags,
+				VkDebugReportObjectTypeEXT objType,
+				uint64_t sourceObj,
+				size_t location,
+				int32_t msgCode,
+				const char* pLayerPrefix,
+				const char* pMsg,
+				void* userData);
+
+			static VkInstance GetVKInstance() { return s_VkInstance; }
 			static void MakeDefault();
 
 		protected:
 			static GraphicsContext* CreateFuncVulkan();
 
 			void CreateInstance();
-
+			void SetupDebugCallback();
 			bool CheckValidationLayerSupport(std::vector<const char*>& validationLayers);
 			bool CheckExtensionSupport(std::vector<const char*>& extensions);
 

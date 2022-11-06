@@ -9,5 +9,7 @@ namespace Excimer
         {
             return std::to_string(input);
         }
+
+        bool StringContains(const std::string& string, const std::string& chars);
     }
 }
