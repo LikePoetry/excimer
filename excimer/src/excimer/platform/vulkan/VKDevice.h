@@ -177,6 +177,16 @@ namespace Excimer
 				return m_Device;
 			}
 
+			VkPhysicalDevice GetGPU() const
+			{
+				return m_PhysicalDevice->GetHandle();
+			}
+
+			const SharedPtr<VKPhysicalDevice>& GetPhysicalDevice() const
+			{
+				return m_PhysicalDevice;
+			}
+
 		private:
 			VkDevice m_Device;
 

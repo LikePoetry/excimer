@@ -320,5 +320,10 @@ namespace Excimer
 				EXCIMER_LOG_CRITICAL("[VULKAN] Failed to set up debug callback!");
 			}
 		}
+
+		void VKContext::WaitIdle() const
+		{
+			vkDeviceWaitIdle(VKDevice::Get().GetDevice());
+		}
 	}
 }

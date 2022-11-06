@@ -31,6 +31,9 @@ namespace Excimer
 				void* userData);
 
 			static VkInstance GetVKInstance() { return s_VkInstance; }
+
+			void WaitIdle() const override;
+
 			static void MakeDefault();
 
 		protected:

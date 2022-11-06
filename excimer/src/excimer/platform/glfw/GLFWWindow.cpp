@@ -47,7 +47,8 @@ namespace Excimer
 		m_GraphicsContext->Init();
 
 		//VkSwapchain
-
+		m_SwapChain = SharedPtr<Graphics::SwapChain>(Graphics::SwapChain::Create(m_Data.Width, m_Data.Height));
+		m_SwapChain->Init(m_VSync, (Window*)this);
 
 	}
 

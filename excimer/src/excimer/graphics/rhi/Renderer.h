@@ -32,6 +32,8 @@ namespace Excimer
 				return capabilities;
 			}
 
+			static GraphicsContext* GetGraphicsContext() { return Application::Get().GetWindow()->GetGraphicsContext(); }
+
 		protected:
 			static Renderer* (*CreateFunc)();
 

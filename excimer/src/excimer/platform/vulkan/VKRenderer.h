@@ -15,6 +15,11 @@ namespace Excimer
 			VKRenderer() = default;
 			~VKRenderer();
 
+			static VKContext* GetGraphicsContext()
+			{
+				return static_cast<VKContext*>(s_Instance->GetGraphicsContext());
+			}
+
 			static void MakeDefault();
 
 		protected:

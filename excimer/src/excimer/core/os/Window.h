@@ -4,6 +4,7 @@
 #include "excimer/events/Event.h"
 #include "excimer/core/Reference.h"
 #include "excimer/graphics/rhi/GraphicsContext.h"
+#include "excimer/graphics/rhi/SwapChain.h"
 
 #include <string>
 
@@ -53,12 +54,20 @@ namespace Excimer
 		virtual void ProcessInput() {};
 		virtual void SetBorderlessWindow(bool borderless) = 0;
 
+		virtual void* GetHandle()
+		{
+			return nullptr;
+		};
+
 		virtual void SetIcon(const std::string& filePath, const std::string& smallIconFilePath = "") = 0;
 
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
 
 		void SetWindowFocus(bool focus) { m_WindowFocus = focus; }
 		bool GetWindowFocus() const { return m_WindowFocus; }
+
+		const SharedPtr<Excimer::Graphics::SwapChain>& GetSwapChain() const { return m_SwapChain; }
+		const SharedPtr<Excimer::Graphics::GraphicsContext>& GetGraphicsContext() const { return m_GraphicsContext; }
 
 	protected:
 		static Window* (*CreateFunc)(const WindowDesc&);
@@ -69,6 +78,7 @@ namespace Excimer
 		bool m_HasResized = false;
 		bool m_WindowFocus = true;
 
+		SharedPtr<Excimer::Graphics::SwapChain> m_SwapChain;
 		SharedPtr<Excimer::Graphics::GraphicsContext> m_GraphicsContext;
 	};
 }

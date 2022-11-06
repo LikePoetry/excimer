@@ -23,6 +23,11 @@ namespace Excimer
 
 		bool Init(const WindowDesc& properties);
 
+		inline void* GetHandle() override
+		{
+			return m_Handle;
+		}
+
 		inline void SetEventCallback(const EventCallbackFn& callback) override
 		{
 			m_Data.EventCallback = callback;

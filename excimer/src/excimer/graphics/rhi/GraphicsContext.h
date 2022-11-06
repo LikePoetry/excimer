@@ -24,7 +24,7 @@ namespace Excimer
 			static void SetRenderAPI(RenderAPI api);
 
 			virtual void Init() = 0;
-
+			virtual void WaitIdle() const = 0;
 
 			static GraphicsContext* Create();
 		protected:
