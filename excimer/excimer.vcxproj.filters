@@ -142,6 +142,7 @@
     <ClInclude Include="src\excimer\platform\vulkan\VKCommandPool.h" />
     <ClInclude Include="src\excimer\graphics\rhi\SwapChain.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKSwapChain.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKUtilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -212,5 +213,7 @@
     <ClCompile Include="src\excimer\platform\vulkan\VKCommandPool.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\SwapChain.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKSwapChain.cpp" />
+    <ClCompile Include="src\excimer\platform\windows\WindowsVulkan.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKUtilities.cpp" />
   </ItemGroup>
 </Project>

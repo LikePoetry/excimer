@@ -91,6 +91,7 @@
     <ClInclude Include="src\excimer\platform\vulkan\VKFunctions.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKRenderer.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKSwapChain.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKUtilities.h" />
     <ClInclude Include="src\excimer\platform\windows\WindowsOS.h" />
     <ClInclude Include="src\excimer\platform\windows\WindowsUtilities.h" />
     <ClInclude Include="src\excimer\utilities\LoadImage.h" />
@@ -122,9 +123,11 @@
     <ClCompile Include="src\excimer\platform\vulkan\VKFunctions.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKRenderer.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKSwapChain.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKUtilities.cpp" />
     <ClCompile Include="src\excimer\platform\windows\WindowsFileSystem.cpp" />
     <ClCompile Include="src\excimer\platform\windows\WindowsOS.cpp" />
     <ClCompile Include="src\excimer\platform\windows\WindowsUtilities.cpp" />
+    <ClCompile Include="src\excimer\platform\windows\WindowsVulkan.cpp" />
     <ClCompile Include="src\excimer\utilities\LoadImage.cpp" />
     <ClCompile Include="src\hzpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
