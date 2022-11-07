@@ -4,7 +4,7 @@
 #include "excimer/core/Reference.h"
 #include "excimer/events/ApplicationEvent.h"
 
-namespace Excimer 
+namespace Excimer
 {
 	class Window;
 	struct WindowDesc;
@@ -78,7 +78,7 @@ namespace Excimer
 			bool Borderless = false;
 			bool ShowConsole = true;
 			std::string Title;
-			int RenderAPI;
+			int RenderAPI = 1;
 			int ProjectVersion;
 			int8_t DesiredGPUIndex = -1;
 		};
