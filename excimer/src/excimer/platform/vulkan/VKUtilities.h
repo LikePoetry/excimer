@@ -20,11 +20,20 @@ namespace Excimer
     {
         namespace VKUtilities
         {
+            VkCommandBuffer BeginSingleTimeCommands();
+            void EndSingleTimeCommands(VkCommandBuffer commandBuffer);
+
+            void TransitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout, uint32_t mipLevels = 1, uint32_t layerCount = 1, VkCommandBuffer commandBuffer = nullptr);
+
             bool IsPresentModeSupported(const std::vector<VkPresentModeKHR>& supportedModes, VkPresentModeKHR presentMode);
             VkPresentModeKHR ChoosePresentMode(const std::vector<VkPresentModeKHR>& supportedModes, bool vsync);
 
             void WaitIdle();
             std::string ErrorString(VkResult errorCode);
+
+            VkFormat FormatToVK(const RHIFormat format, bool srgb = false);
+            VkFilter TextureFilterToVK(const TextureFilter filter);
+            VkSamplerAddressMode TextureWrapToVK(const TextureWrap format);
         }
     }
 }

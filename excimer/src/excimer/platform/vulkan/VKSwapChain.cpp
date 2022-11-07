@@ -6,6 +6,7 @@
 #include "VKDevice.h"
 #include "VKUtilities.h"
 #include "VKRenderer.h"
+#include "VKTexture.h"
 
 namespace Excimer
 {

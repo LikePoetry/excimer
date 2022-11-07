@@ -187,6 +187,37 @@ namespace Excimer
 				return m_PhysicalDevice;
 			}
 
+			VkQueue GetGraphicsQueue() const
+			{
+				return m_GraphicsQueue;
+			}
+
+			VkQueue GetPresentQueue() const
+			{
+				return m_PresentQueue;
+			}
+
+			VkQueue GetComputeQueue() const
+			{
+				return m_ComputeQueue;
+			}
+
+			const SharedPtr<VKCommandPool>& GetCommandPool() const
+			{
+				return m_CommandPool;
+			}
+
+			VmaAllocator GetAllocator() const
+			{
+				return m_Allocator;
+			}
+
+			static VkDevice GetHandle()
+			{
+				return VKDevice::Get().GetDevice();
+			}
+
+
 		private:
 			VkDevice m_Device;
 

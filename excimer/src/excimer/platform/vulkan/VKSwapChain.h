@@ -1,7 +1,12 @@
 #pragma once
 #include "excimer/core/Core.h"
 #include "excimer/graphics/rhi/SwapChain.h"
+
 #include "VK.h"
+#include "VKTexture.h"
+#include "VKCommandPool.h"
+#include "VKCommandBuffer.h"
+
 
 #define MAX_SWAPCHAIN_BUFFERS 3
 namespace Excimer
