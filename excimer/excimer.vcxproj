@@ -80,6 +80,7 @@
     <ClInclude Include="src\excimer\events\MouseEvent.h" />
     <ClInclude Include="src\excimer\graphics\rhi\CommandBuffer.h" />
     <ClInclude Include="src\excimer\graphics\rhi\Defintions.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\DescriptorSet.h" />
     <ClInclude Include="src\excimer\graphics\rhi\Framebuffer.h" />
     <ClInclude Include="src\excimer\graphics\rhi\GraphicsContext.h" />
     <ClInclude Include="src\excimer\graphics\rhi\RenderPass.h" />
@@ -128,6 +129,7 @@
     <ClCompile Include="src\excimer\core\os\Window.cpp" />
     <ClCompile Include="src\excimer\core\os\os.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\CommandBuffer.cpp" />
+    <ClCompile Include="src\excimer\graphics\rhi\DescriptorSet.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\Framebuffer.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\GraphicsContext.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\RenderPass.cpp" />

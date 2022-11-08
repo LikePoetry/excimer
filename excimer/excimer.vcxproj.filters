@@ -205,6 +205,7 @@
     <ClInclude Include="src\hzpch.h" />
     <ClInclude Include="src\excimer\graphics\rhi\Framebuffer.h" />
     <ClInclude Include="src\excimer\utilities\CombineHash.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\DescriptorSet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -332,5 +333,6 @@
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\Framebuffer.cpp" />
+    <ClCompile Include="src\excimer\graphics\rhi\DescriptorSet.cpp" />
   </ItemGroup>
 </Project>

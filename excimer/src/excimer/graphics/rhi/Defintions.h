@@ -5,6 +5,8 @@ namespace Excimer
 	namespace Graphics
 	{
         class CommandBuffer;
+        class Shader;
+        class UniformBuffer;
         class Framebuffer;
         class RenderPass;
         class Texture;
@@ -106,6 +108,46 @@ namespace Excimer
             Texture_MipViews = BIT(6)
         };
 
+        enum class DescriptorType
+        {
+            UNIFORM_BUFFER,
+            UNIFORM_BUFFER_DYNAMIC,
+            IMAGE_SAMPLER,
+            IMAGE_STORAGE
+        };
+
+
+        enum class ShaderDataType
+        {
+            NONE,
+            FLOAT32,
+            VEC2,
+            VEC3,
+            VEC4,
+            IVEC2,
+            IVEC3,
+            IVEC4,
+            MAT3,
+            MAT4,
+            INT32,
+            INT,
+            UINT,
+            BOOL,
+            STRUCT,
+            MAT4ARRAY
+        };
+
+        enum class ShaderType : int
+        {
+            VERTEX,
+            FRAGMENT,
+            GEOMETRY,
+            TESSELLATION_CONTROL,
+            TESSELLATION_EVALUATION,
+            COMPUTE,
+            UNKNOWN
+        };
+
         struct TextureDesc
         {
             RHIFormat format;
@@ -187,6 +229,42 @@ namespace Excimer
             }
         };
 
+        struct BufferMemberInfo
+        {
+            uint32_t size;
+            uint32_t offset;
+            ShaderDataType type;
+            std::string name;
+            std::string fullName;
+        };
+
+        struct DescriptorDesc
+        {
+            uint32_t layoutIndex;
+            Shader* shader;
+            uint32_t count = 1;
+        };
+
+        struct Descriptor
+        {
+            Texture** textures;
+            Texture* texture;
+            UniformBuffer* buffer;
+
+            uint32_t offset;
+            uint32_t size;
+            uint32_t binding;
+            uint32_t textureCount = 1;
+            uint32_t mipLevel = 0;
+            std::string name;
+
+            TextureType textureType;
+            DescriptorType type = DescriptorType::IMAGE_SAMPLER;
+            ShaderType shaderType;
+
+            std::vector<BufferMemberInfo> m_Members;
+        };
+
         struct RenderPassDesc
         {
             Texture** attachments;
@@ -197,5 +275,7 @@ namespace Excimer
             int cubeMapIndex = -1;
             int mipIndex = -1;
         };
+
+
 	}
 }
