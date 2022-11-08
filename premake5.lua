@@ -55,6 +55,7 @@ project "excimer"
 		"%{IncludeDir.external}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.stb}",
+		"%{IncludeDir.glm}",
 		"%{IncludeDir.vulkan}"
 	}
 
@@ -149,6 +150,7 @@ project "editor"
 		"%{IncludeDir.external}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.stb}",
+		"%{IncludeDir.glm}",
 		"%{IncludeDir.vulkan}"
     }
 

@@ -1,8 +1,14 @@
 #pragma once
+
 namespace Excimer
 {
 	namespace Graphics
 	{
+        class CommandBuffer;
+        class Framebuffer;
+        class RenderPass;
+        class Texture;
+
 		enum class PhysicalDeviceType
 		{
 			DISCRETE = 0,
@@ -68,6 +74,21 @@ namespace Excimer
             D24_Unorm_S8_UInt,
             D32_Float_S8_UInt,
             SCREEN
+        };
+
+        enum class TextureType
+        {
+            COLOUR,
+            DEPTH,
+            DEPTHARRAY,
+            CUBE,
+            OTHER
+        };
+
+        enum SubPassContents
+        {
+            INLINE,
+            SECONDARY
         };
 
         enum TextureFlags : uint32_t
@@ -160,6 +181,17 @@ namespace Excimer
                 , flipY(flipY)
             {
             }
+        };
+
+        struct RenderPassDesc
+        {
+            Texture** attachments;
+            TextureType* attachmentTypes;
+            uint32_t attachmentCount;
+            bool clear = true;
+            bool swapchainTarget = false;
+            int cubeMapIndex = -1;
+            int mipIndex = -1;
         };
 	}
 }
