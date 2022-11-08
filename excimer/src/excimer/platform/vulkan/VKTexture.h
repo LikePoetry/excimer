@@ -20,6 +20,11 @@ namespace Excimer
 
 			void DeleteResources();
 
+			virtual void* GetHandle() const override
+			{
+				return (void*)this;
+			}
+
 			void BuildTexture();
 
 			void UpdateDescriptor();

@@ -13,6 +13,9 @@ namespace Excimer
 			{
 
 			}
+			virtual void* GetHandle() const = 0;
+
+			virtual void* GetImageHandle() const { return GetHandle(); };
 
 		protected:
 			uint32_t m_Flags = 0;

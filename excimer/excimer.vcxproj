@@ -109,6 +109,7 @@
     <ClInclude Include="src\excimer\platform\vulkan\VKUtilities.h" />
     <ClInclude Include="src\excimer\platform\windows\WindowsOS.h" />
     <ClInclude Include="src\excimer\platform\windows\WindowsUtilities.h" />
+    <ClInclude Include="src\excimer\utilities\CombineHash.h" />
     <ClInclude Include="src\excimer\utilities\LoadImage.h" />
     <ClInclude Include="src\excimer\utilities\TSingleton.h" />
     <ClInclude Include="src\excimerengine.h" />

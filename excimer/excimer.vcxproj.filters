@@ -204,6 +204,7 @@
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
     <ClInclude Include="src\excimer\graphics\rhi\Framebuffer.h" />
+    <ClInclude Include="src\excimer\utilities\CombineHash.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">

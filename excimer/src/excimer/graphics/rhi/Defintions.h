@@ -8,6 +8,10 @@ namespace Excimer
         class Framebuffer;
         class RenderPass;
         class Texture;
+        class Texture2D;
+        class TextureCube;
+        class TextureDepth;
+        class TextureDepthArray;
 
 		enum class PhysicalDeviceType
 		{
