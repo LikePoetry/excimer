@@ -15,6 +15,7 @@ namespace Excimer
 			virtual bool Init(bool vsync, Window* window) = 0;
 			virtual bool Init(bool vsync) = 0;
 
+			virtual uint32_t GetCurrentBufferIndex() const = 0;
 
 		protected:
 			static SwapChain* (*CreateFunc)(uint32_t, uint32_t);

@@ -33,6 +33,7 @@ namespace Excimer
 			}
 
 			static GraphicsContext* GetGraphicsContext() { return Application::Get().GetWindow()->GetGraphicsContext(); }
+			static SwapChain* GetMainSwapChain() { return Application::Get().GetWindow()->GetSwapChain(); }
 
 		protected:
 			static Renderer* (*CreateFunc)();

@@ -6,6 +6,7 @@ namespace Excimer
 {
 	namespace Graphics
 	{
+		VKContext::DeletionQueue VKRenderer::s_DeletionQueue[3] = {};
 
 		VKRenderer::~VKRenderer()
 		{

@@ -33,6 +33,8 @@ namespace Excimer
 			void AcquireNextImage();
 			void OnResize(uint32_t width, uint32_t height, bool forceResize = false, Window* windowHandle = nullptr);
 
+			uint32_t GetCurrentBufferIndex() const override { return m_CurrentBuffer; }
+
 			VkSurfaceKHR CreatePlatformSurface(VkInstance vkInstance, Window* window);
 
 			static void MakeDefault();

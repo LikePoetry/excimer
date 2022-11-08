@@ -4,6 +4,7 @@
 #include "excimer/core/StringUtilities.h"
 #include "excimer/graphics/rhi/Defintions.h"
 #include "VK.h"
+#include "VKContext.h"
 #include "VKCommandPool.h"
 
 #define VMA_DEBUG_MARGIN 16

@@ -152,6 +152,10 @@
     <ClInclude Include="src\excimer\maths\Random.h" />
     <ClInclude Include="src\excimer\graphics\rhi\Texture.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKTexture.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\Shader.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\UniformBuffer.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKBuffer.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKUniformBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -231,5 +235,9 @@
     <ClCompile Include="src\excimer\maths\Random.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\Texture.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKTexture.cpp" />
+    <ClCompile Include="src\excimer\graphics\rhi\Shader.cpp" />
+    <ClCompile Include="src\excimer\graphics\rhi\UniformBuffer.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKBuffer.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKUniformBuffer.cpp" />
   </ItemGroup>
 </Project>

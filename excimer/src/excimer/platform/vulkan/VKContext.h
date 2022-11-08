@@ -2,7 +2,8 @@
 #include "excimer/graphics/rhi/GraphicsContext.h"
 #include "VK.h"
 #include "excimer/core/Reference.h"
-
+#include "excimer/core/Core.h"
+#include "excimer/core/ExLog.h"
 #include <deque>
 
 #include <vulkan/vk_mem_alloc.h>
@@ -35,6 +36,28 @@ namespace Excimer
 			void WaitIdle() const override;
 
 			static void MakeDefault();
+
+			struct DeletionQueue
+			{
+				std::deque<std::function<void()>> m_Deletors;
+
+				template <typename F>
+				void PushFunction(F&& function)
+				{
+					EXCIMER_ASSERT(sizeof(F) < 200, "Lambda too large");
+					m_Deletors.push_back(function);
+				}
+
+				void Flush()
+				{
+					for (auto it = m_Deletors.rbegin(); it != m_Deletors.rend(); it++)
+					{
+						(*it)();
+					}
+
+					m_Deletors.clear();
+				}
+			};
 
 		protected:
 			static GraphicsContext* CreateFuncVulkan();
