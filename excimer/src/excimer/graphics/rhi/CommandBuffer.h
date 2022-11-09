@@ -6,6 +6,10 @@ namespace Excimer
 {
 	namespace Graphics
 	{
+		class RenderPass;
+		class Framebuffer;
+		class Pipeline;
+
 		class CommandBuffer
 		{
 		public:
@@ -14,8 +18,10 @@ namespace Excimer
 			static CommandBuffer* Create();
 
 			virtual bool Init(bool primary = true) = 0;
-			virtual bool Flush() { return true; }
 			virtual void Unload() = 0;
+			virtual bool Flush() { return true; }
+			virtual void Submit() { }
+
 
 		protected:
 			static CommandBuffer* (*CreateFunc)();

@@ -219,6 +219,8 @@
     <ClInclude Include="src\excimer\core\Engine.h" />
     <ClInclude Include="src\excimer\utilities\Timer.h" />
     <ClInclude Include="src\excimer\utilities\TimeStep.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\IndexBuffer.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -358,5 +360,7 @@
     <ClCompile Include="src\excimer\core\Engine.cpp" />
     <ClCompile Include="src\excimer\utilities\Timer.cpp" />
     <ClCompile Include="src\excimer\utilities\TimeStep.cpp" />
+    <ClCompile Include="src\excimer\graphics\rhi\IndexBuffer.cpp" />
+    <ClCompile Include="src\excimer\graphics\rhi\VertexBuffer.cpp" />
   </ItemGroup>
 </Project>
