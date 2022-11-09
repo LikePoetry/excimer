@@ -294,6 +294,17 @@ namespace Excimer
             }
         }
 
+        void VKTexture2D::Resize(uint32_t width, uint32_t height)
+        {
+            DeleteResources();
+
+            m_Width = width;
+            m_Height = height;
+            m_TextureImage = VkImage();
+
+            BuildTexture();
+        }
+
         VkImageView VKTexture2D::GetMipImageView(uint32_t mip)
         {
             if (m_MipImageViews.find(mip) == m_MipImageViews.end())

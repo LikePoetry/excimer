@@ -320,6 +320,17 @@ namespace Excimer
 			VKRenderer::GetGraphicsContext()->WaitIdle();
 		}
 
+		CommandBuffer* VKSwapChain::GetCurrentCommandBuffer()
+		{
+			return GetCurrentFrameData().MainCommandBuffer.get();
+		}
+
+		FrameData& VKSwapChain::GetCurrentFrameData()
+		{
+			EXCIMER_ASSERT(m_CurrentBuffer < m_SwapChainBufferCount, "Incorrect swapchain buffer index");
+			return m_Frames[m_CurrentBuffer];
+		}
+
 		void VKSwapChain::MakeDefault()
 		{
 			CreateFunc = CreateFuncVulkan;

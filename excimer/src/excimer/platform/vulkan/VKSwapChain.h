@@ -31,11 +31,26 @@ namespace Excimer
 			bool Init(bool vsync, Window* windowHandle) override;
 			void CreateFrameData();
 			void AcquireNextImage();
+			void QueueSubmit();
+			void Present(VkSemaphore semaphore);
+			void Begin();
+			void End();
 			void OnResize(uint32_t width, uint32_t height, bool forceResize = false, Window* windowHandle = nullptr);
 
+			VkSurfaceKHR GetSurface() const { return m_Surface; }
+			VkSwapchainKHR GetSwapChain() const { return m_SwapChain; }
+			uint32_t GetCurrentImageIndex() const override { return m_AcquireImageIndex; };
+
 			uint32_t GetCurrentBufferIndex() const override { return m_CurrentBuffer; }
+			size_t GetSwapChainBufferCount() const override { return m_SwapChainBufferCount; };
+			Texture* GetCurrentImage() override { return (Texture*)m_SwapChainBuffers[m_AcquireImageIndex]; };
+			Texture* GetImage(uint32_t index) override { return (Texture*)m_SwapChainBuffers[index]; };
 
 			VkSurfaceKHR CreatePlatformSurface(VkInstance vkInstance, Window* window);
+			CommandBuffer* GetCurrentCommandBuffer() override;
+
+			FrameData& GetCurrentFrameData();
+			VkFormat GetScreenFormat() const { return m_ColourFormat; }
 
 			static void MakeDefault();
 

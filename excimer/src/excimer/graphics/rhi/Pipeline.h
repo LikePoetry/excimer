@@ -21,7 +21,7 @@ namespace Excimer
 			bool swapchainTarget = false;
 			bool clearTargets = false;
 
-			std::array<Texture*, MAX_RENDER_TARGETS> colourTragets = {};
+			std::array<Texture*, MAX_RENDER_TARGETS> colourTargets = {};
 
 			Texture* cubeMapTarget = nullptr;
 			Texture* depthTarget = nullptr;
