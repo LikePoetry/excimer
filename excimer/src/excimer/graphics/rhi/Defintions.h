@@ -5,10 +5,13 @@ namespace Excimer
 	namespace Graphics
 	{
         class CommandBuffer;
+        class DescriptorSet;
+        class Pipeline;
         class Shader;
         class UniformBuffer;
         class Framebuffer;
         class RenderPass;
+        class GraphicsContext;
         class Texture;
         class Texture2D;
         class TextureCube;
@@ -276,6 +279,32 @@ namespace Excimer
             int mipIndex = -1;
         };
 
+        struct PushConstant
+        {
+            uint32_t size;
+            ShaderType shaderStage;
+            uint8_t* data;
+            uint32_t offset = 0;
+            std::string name;
 
+            std::vector<BufferMemberInfo> m_Members;
+
+            void SetValue(const std::string& name, void* value)
+            {
+                for (auto& member : m_Members)
+                {
+                    if (member.name == name)
+                    {
+                        memcpy(&data[member.offset], value, member.size);
+                        break;
+                    }
+                }
+            }
+
+            void SetData(void* value)
+            {
+                memcpy(data, value, size);
+            }
+        };
 	}
 }

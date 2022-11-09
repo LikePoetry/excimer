@@ -7,10 +7,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9563977C-819A-980D-2A87-7E10169D140F}</ProjectGuid>
+    <ProjectGuid>{434A39C2-2F02-7B0F-9809-546B84E01500}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>glfw</RootNamespace>
+    <RootNamespace>SpirvCross</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -29,20 +29,18 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>bin\Debug\</OutDir>
-    <IntDir>obj\Debug\glfw\</IntDir>
-    <TargetName>glfw</TargetName>
+    <IntDir>obj\Debug\SpirvCross\</IntDir>
+    <TargetName>SpirvCross</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>TurnOffAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>_GLFW_WIN32;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -50,31 +48,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="glfw\include\GLFW\glfw3.h" />
-    <ClInclude Include="glfw\include\GLFW\glfw3native.h" />
-    <ClInclude Include="glfw\src\egl_context.h" />
-    <ClInclude Include="glfw\src\glfw_config.h" />
-    <ClInclude Include="glfw\src\osmesa_context.h" />
-    <ClInclude Include="glfw\src\wgl_context.h" />
-    <ClInclude Include="glfw\src\win32_joystick.h" />
-    <ClInclude Include="glfw\src\win32_platform.h" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv.h" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv.hpp" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv_cfg.hpp" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv_common.hpp" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv_cpp.hpp" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv_cross.hpp" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv_cross_c.h" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv_cross_containers.hpp" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv_cross_error_handling.hpp" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv_cross_parsed_ir.hpp" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv_cross_util.hpp" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv_glsl.hpp" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv_hlsl.hpp" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv_msl.hpp" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv_parser.hpp" />
+    <ClInclude Include="vulkan\SPIRV-Cross\spirv_reflect.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="glfw\src\context.c" />
-    <ClCompile Include="glfw\src\egl_context.c" />
-    <ClCompile Include="glfw\src\init.c" />
-    <ClCompile Include="glfw\src\input.c" />
-    <ClCompile Include="glfw\src\monitor.c" />
-    <ClCompile Include="glfw\src\osmesa_context.c" />
-    <ClCompile Include="glfw\src\vulkan.c" />
-    <ClCompile Include="glfw\src\wgl_context.c" />
-    <ClCompile Include="glfw\src\win32_init.c" />
-    <ClCompile Include="glfw\src\win32_joystick.c" />
-    <ClCompile Include="glfw\src\win32_monitor.c" />
-    <ClCompile Include="glfw\src\win32_thread.c" />
-    <ClCompile Include="glfw\src\win32_time.c" />
-    <ClCompile Include="glfw\src\win32_window.c" />
-    <ClCompile Include="glfw\src\window.c" />
+    <ClCompile Include="vulkan\SPIRV-Cross\spirv_cfg.cpp" />
+    <ClCompile Include="vulkan\SPIRV-Cross\spirv_cpp.cpp" />
+    <ClCompile Include="vulkan\SPIRV-Cross\spirv_cross.cpp" />
+    <ClCompile Include="vulkan\SPIRV-Cross\spirv_cross_c.cpp" />
+    <ClCompile Include="vulkan\SPIRV-Cross\spirv_cross_parsed_ir.cpp" />
+    <ClCompile Include="vulkan\SPIRV-Cross\spirv_cross_util.cpp" />
+    <ClCompile Include="vulkan\SPIRV-Cross\spirv_glsl.cpp" />
+    <ClCompile Include="vulkan\SPIRV-Cross\spirv_hlsl.cpp" />
+    <ClCompile Include="vulkan\SPIRV-Cross\spirv_msl.cpp" />
+    <ClCompile Include="vulkan\SPIRV-Cross\spirv_parser.cpp" />
+    <ClCompile Include="vulkan\SPIRV-Cross\spirv_reflect.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

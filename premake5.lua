@@ -11,6 +11,8 @@ IncludeDir["GLFW"] = "excimer/external/glfw/include/"
 IncludeDir["stb"] = "excimer/external/stb"
 IncludeDir["glm"] = "excimer/external/glm"
 IncludeDir["vulkan"] = "excimer/external/vulkan/"
+IncludeDir["SpirvCross"] = "excimer/external/SPIRV-Cross"
+
 
 workspace "excimer"
     architecture "x64"
@@ -23,6 +25,8 @@ workspace "excimer"
     outputdir="%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group "external"
+	require("excimer/external/SPIRVCrosspremake5")
+		SetRecommendedSettings()
 	require("excimer/external/spdlog/premake5")
 		SetRecommendedSettings()
 	require("excimer/external/GLFWpremake5")
@@ -56,6 +60,7 @@ project "excimer"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.stb}",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.SpirvCross}",
 		"%{IncludeDir.vulkan}"
 	}
 
@@ -66,7 +71,7 @@ project "excimer"
 
 	links
 	{
-
+		"SpirvCross",
 	}
 
 	defines
@@ -151,13 +156,15 @@ project "editor"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.stb}",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.SpirvCross}",
 		"%{IncludeDir.vulkan}"
     }
 
     links
     {
         "excimer",
-		"glfw"
+		"glfw",
+		"SpirvCross",
     }
 
     libdirs 
