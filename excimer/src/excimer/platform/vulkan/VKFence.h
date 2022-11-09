@@ -13,7 +13,7 @@ namespace Excimer
 
 			bool CheckState();
 			bool IsSignaled();
-			VkFence& GetHandled() { return m_Handle; }
+			VkFence& GetHandle() { return m_Handle; }
 
 			void SetSignaled(bool signaled)
 			{

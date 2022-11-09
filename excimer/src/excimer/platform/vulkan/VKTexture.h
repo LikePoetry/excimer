@@ -164,5 +164,385 @@ namespace Excimer
 
 			bool m_DeleteImage = true;
 		};
+
+		class VKTextureCube : public TextureCube
+		{
+		public:
+			VKTextureCube(uint32_t size, void* data, bool hdr);
+			VKTextureCube(const std::string& filepath);
+			VKTextureCube(const std::string* files);
+			VKTextureCube(const std::string* files, uint32_t mips, TextureDesc params, TextureLoadOptions loadOptions);
+			~VKTextureCube();
+
+			virtual void* GetHandle() const override
+			{
+				return (void*)this;
+			}
+
+			void TransitionImage(VkImageLayout newLayout, VKCommandBuffer* commandBuffer);
+
+			void Bind(uint32_t slot = 0) const override {};
+			void Unbind(uint32_t slot = 0) const override {};
+
+			inline uint32_t GetSize() const override
+			{
+				return m_Size;
+			}
+
+			inline const std::string& GetName() const override
+			{
+				return m_Name;
+			}
+
+			inline const std::string& GetFilepath() const override
+			{
+				return m_Files[0];
+			}
+
+			inline uint32_t GetWidth(uint32_t mip) const override
+			{
+				return m_Width >> mip;
+			}
+
+			inline uint32_t GetHeight(uint32_t mip) const override
+			{
+				return m_Height >> mip;
+			}
+
+			uint32_t GetMipMapLevels() const override
+			{
+				return m_NumMips;
+			}
+
+			TextureType GetType() const override
+			{
+				return TextureType::CUBE;
+			}
+
+			RHIFormat GetFormat() const override
+			{
+				return m_Format;
+			}
+
+			const VkDescriptorImageInfo* GetDescriptor() const
+			{
+				return &m_Descriptor;
+			}
+
+			void* GetDescriptorInfo() const override
+			{
+				return (void*)GetDescriptor();
+			}
+
+			void UpdateDescriptor();
+
+			void Load(uint32_t mips);
+
+			VkImage GetImage() const
+			{
+				return m_TextureImage;
+			}
+
+			virtual void* GetImageHandle() const override
+			{
+				return (void*)m_TextureImage;
+			}
+
+			VkDeviceMemory GetDeviceMemory() const
+			{
+				return m_TextureImageMemory;
+			}
+
+			VkImageView GetImageView() const
+			{
+				return m_TextureImageView;
+			}
+
+			VkImageView GetImageView(uint32_t layer) const
+			{
+				return m_IndividualImageViews[layer];
+			}
+
+			VkSampler GetSampler() const
+			{
+				return m_TextureSampler;
+			}
+
+			VkFormat GetVKFormat() const
+			{
+				return m_VKFormat;
+			}
+
+			VkImageLayout GetImageLayout() const { return m_ImageLayout; }
+
+			void GenerateMipMaps() override;
+
+			static void MakeDefault();
+
+		protected:
+			static TextureCube* CreateFuncVulkan(uint32_t, void* data, bool hdr);
+			static TextureCube* CreateFromFileFuncVulkan(const std::string& filepath);
+			static TextureCube* CreateFromFilesFuncVulkan(const std::string* files);
+			static TextureCube* CreateFromVCrossFuncVulkan(const std::string* files, uint32_t mips, TextureDesc params, TextureLoadOptions loadOptions);
+
+		private:
+			std::string m_Name;
+			std::string m_Files[MAX_MIPS];
+			uint32_t m_Handle = 0;
+			uint32_t m_Width = 0;
+			uint32_t m_Height = 0;
+			uint32_t m_Size = 0;
+			uint32_t m_NumMips = 0;
+			uint32_t m_NumLayers = 6;
+			uint8_t* m_Data = nullptr;
+
+			TextureDesc m_Parameters;
+			TextureLoadOptions m_LoadOptions;
+
+			RHIFormat m_Format;
+			VkFormat m_VKFormat;
+
+			VkImage m_TextureImage{};
+			VkImageLayout m_ImageLayout;
+			VkDeviceMemory m_TextureImageMemory{};
+			VkImageView m_TextureImageView{};
+			VkSampler m_TextureSampler{};
+			VkDescriptorImageInfo m_Descriptor{};
+			std::vector<VkImageView> m_IndividualImageViews;
+
+			VmaAllocation m_Allocation{};
+
+			bool m_DeleteImage = true;
+		};
+
+		class VKTextureDepth : public TextureDepth
+		{
+		public:
+			VKTextureDepth(uint32_t width, uint32_t height);
+			~VKTextureDepth();
+
+			void Bind(uint32_t slot = 0) const override {};
+			void Unbind(uint32_t slot = 0) const override {};
+			void Resize(uint32_t width, uint32_t height) override;
+
+			inline uint32_t GetWidth(uint32_t mip) const override
+			{
+				return m_Width >> mip;
+			}
+
+			inline uint32_t GetHeight(uint32_t mip) const override
+			{
+				return m_Height >> mip;
+			}
+
+			virtual void* GetHandle() const override
+			{
+				return (void*)this;
+			}
+
+			virtual void* GetImageHandle() const override
+			{
+				return (void*)m_TextureImage;
+			}
+
+			inline const std::string& GetName() const override
+			{
+				return m_Name;
+			}
+			inline const std::string& GetFilepath() const override
+			{
+				return m_Name;
+			}
+
+			TextureType GetType() const override
+			{
+				return TextureType::DEPTH;
+			}
+
+			RHIFormat GetFormat() const override
+			{
+				return m_Format;
+			}
+
+			VkImage GetImage() const
+			{
+				return m_TextureImage;
+			};
+			VkDeviceMemory GetDeviceMemory() const
+			{
+				return m_TextureImageMemory;
+			}
+			VkImageView GetImageView() const
+			{
+				return m_TextureImageView;
+			}
+			VkSampler GetSampler() const
+			{
+				return m_TextureSampler;
+			}
+			const VkDescriptorImageInfo* GetDescriptor() const
+			{
+				return &m_Descriptor;
+			}
+			void* GetDescriptorInfo() const override
+			{
+				return (void*)GetDescriptor();
+			}
+
+			VkFormat GetVKFormat() const
+			{
+				return m_VKFormat;
+			}
+
+			void UpdateDescriptor();
+			void TransitionImage(VkImageLayout newLayout, VKCommandBuffer* commandBuffer = nullptr);
+
+			VkImageLayout GetImageLayout() const { return m_ImageLayout; }
+
+			static void MakeDefault();
+
+		protected:
+			static TextureDepth* CreateFuncVulkan(uint32_t, uint32_t);
+			void Init();
+
+		private:
+			std::string m_Name;
+			uint32_t m_Handle{};
+			uint32_t m_Width, m_Height;
+			RHIFormat m_Format;
+			VkFormat m_VKFormat;
+			VkImageLayout m_ImageLayout;
+			VkImage m_TextureImage{};
+			VkDeviceMemory m_TextureImageMemory{};
+			VkImageView m_TextureImageView{};
+			VkSampler m_TextureSampler{};
+			VkDescriptorImageInfo m_Descriptor{};
+
+			VmaAllocation m_Allocation{};
+		};
+
+		class VKTextureDepthArray : public TextureDepthArray
+		{
+		public:
+			VKTextureDepthArray(uint32_t width, uint32_t height, uint32_t count);
+			~VKTextureDepthArray();
+
+			void Bind(uint32_t slot = 0) const override {};
+			void Unbind(uint32_t slot = 0) const override {};
+			void Resize(uint32_t width, uint32_t height, uint32_t count) override;
+
+			inline uint32_t GetWidth(uint32_t mip) const override
+			{
+				return m_Width >> mip;
+			}
+
+			inline uint32_t GetHeight(uint32_t mip) const override
+			{
+				return m_Height >> mip;
+			}
+
+			virtual void* GetHandle() const override
+			{
+				return (void*)this;
+			}
+
+			inline const std::string& GetName() const override
+			{
+				return m_Name;
+			}
+
+			inline const std::string& GetFilepath() const override
+			{
+				return m_Name;
+			}
+
+			TextureType GetType() const override
+			{
+				return TextureType::DEPTHARRAY;
+			}
+
+			RHIFormat GetFormat() const override
+			{
+				return m_Format;
+			}
+
+			VkImage GetImage() const
+			{
+				return m_TextureImage;
+			}
+
+			VkDeviceMemory GetDeviceMemory() const
+			{
+				return m_TextureImageMemory;
+			}
+
+			VkImageView GetImageView() const
+			{
+				return m_TextureImageView;
+			}
+
+			VkImageView GetImageView(int index) const
+			{
+				return m_IndividualImageViews[index];
+			}
+
+			VkSampler GetSampler() const
+			{
+				return m_TextureSampler;
+			}
+
+			const VkDescriptorImageInfo* GetDescriptor() const
+			{
+				return &m_Descriptor;
+			}
+
+			VkFormat GetVKFormat() const
+			{
+				return m_VKFormat;
+			}
+
+			void* GetDescriptorInfo() const override
+			{
+				return (void*)GetDescriptor();
+			}
+
+			virtual void* GetImageHandle() const override
+			{
+				return (void*)m_TextureImage;
+			}
+
+			void UpdateDescriptor();
+			void TransitionImage(VkImageLayout newLayout, VKCommandBuffer* commandBuffer = nullptr);
+
+			void* GetHandleArray(uint32_t index) override;
+
+			uint32_t GetCount() const { return m_Count; }
+			VkImageLayout GetImageLayout() const { return m_ImageLayout; }
+
+			static void MakeDefault();
+
+		protected:
+			static TextureDepthArray* CreateFuncVulkan(uint32_t, uint32_t, uint32_t);
+			void Init() override;
+
+		private:
+			std::string m_Name;
+			uint32_t m_Handle{};
+			uint32_t m_Width, m_Height;
+			uint32_t m_Count;
+
+			RHIFormat m_Format;
+
+			VkFormat m_VKFormat;
+			VkImageLayout m_ImageLayout;
+			VkImage m_TextureImage{};
+			VkDeviceMemory m_TextureImageMemory{};
+			VkImageView m_TextureImageView{};
+			VkSampler m_TextureSampler{};
+			VkDescriptorImageInfo m_Descriptor{};
+			std::vector<VkImageView> m_IndividualImageViews;
+
+			VmaAllocation m_Allocation{};
+		};
 	}
 }

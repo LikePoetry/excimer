@@ -208,6 +208,8 @@ namespace Excimer
 				return m_CommandPool;
 			}
 
+			tracy::VkCtx* GetTracyContext();
+
 			VmaAllocator GetAllocator() const
 			{
 				return m_Allocator;

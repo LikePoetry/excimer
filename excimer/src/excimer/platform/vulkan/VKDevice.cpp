@@ -440,5 +440,10 @@ namespace Excimer
 			vkQueueWaitIdle(m_GraphicsQueue);
 			vkFreeCommandBuffers(m_Device, m_CommandPool->GetHandle(), 1, &tracyBuffer);
 		}
+
+		tracy::VkCtx* VKDevice::GetTracyContext()
+		{
+			return m_TracyContext[VKRenderer::GetMainSwapChain()->GetCurrentBufferIndex()];
+		}
 	}
 }

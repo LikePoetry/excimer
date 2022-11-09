@@ -23,11 +23,11 @@ namespace Excimer
 
 			virtual ~Shader() = default;
 
-			virtual const std::vector<ShaderType> GetShaderType() const = 0;
+			virtual const std::vector<ShaderType> GetShaderTypes() const = 0;
 			virtual const std::string& GetName() const = 0;
 			virtual const std::string& GetFilePath() const = 0;
 
-			virtual void GetHandle() const = 0;
+			virtual void* GetHandle() const = 0;
 			virtual bool IsCompiled() const { return true; }
 
 			virtual std::vector<PushConstant>& GetPushConstants() = 0;

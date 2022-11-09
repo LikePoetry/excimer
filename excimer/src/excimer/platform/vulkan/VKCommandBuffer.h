@@ -27,9 +27,22 @@ namespace Excimer
 			bool Init(bool primary) override;
 			bool Init(bool primary, VkCommandPool commandPool);
 			void Unload() override;
+			void BeginRecording() override;
+			void BeginRecordingSecondary(RenderPass* renderPass, Framebuffer* framebuffer) override;
+			void EndRecording() override;
 			void Reset();
 			bool Flush() override;
 			bool Wait();
+
+			void Submit() override;
+
+			void BindPipeline(Pipeline* pipeline) override;
+			void UnBindPipeline() override;
+
+			void Execute(VkPipelineStageFlags flags, VkSemaphore signalSemaphore, bool waitFence);
+
+			void ExecuteSecondary(CommandBuffer* primaryCmdBuffer) override;
+			void UpdateViewport(uint32_t width, uint32_t height, bool flipViewport) override;
 
 			VkCommandBuffer GetHandle() const { return m_CommandBuffer; };
 			CommandBufferState GetState() const { return m_State; }
@@ -47,7 +60,8 @@ namespace Excimer
 			SharedPtr<VKFence> m_Fence;
 			VkSemaphore m_Semaphore;
 
-
+			Pipeline* m_BoundPipeline = nullptr;
+			RenderPass* m_BoundRenderPass = nullptr;
 		};
 	}
 }
