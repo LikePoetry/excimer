@@ -215,6 +215,10 @@
     </ClInclude>
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\Pipeline.h" />
+    <ClInclude Include="src\excimer\core\Engine.h" />
+    <ClInclude Include="src\excimer\utilities\Timer.h" />
+    <ClInclude Include="src\excimer\utilities\TimeStep.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -350,5 +354,9 @@
       <Filter>excimer\utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
+    <ClCompile Include="src\excimer\graphics\rhi\Pipeline.cpp" />
+    <ClCompile Include="src\excimer\core\Engine.cpp" />
+    <ClCompile Include="src\excimer\utilities\Timer.cpp" />
+    <ClCompile Include="src\excimer\utilities\TimeStep.cpp" />
   </ItemGroup>
 </Project>

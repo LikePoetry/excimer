@@ -2,8 +2,10 @@
 
 namespace Excimer
 {
-	namespace Graphics
-	{
+    namespace Graphics
+    {
+        class Shader;
+        class RenderPass;
         class CommandBuffer;
         class DescriptorSet;
         class Pipeline;
@@ -18,14 +20,40 @@ namespace Excimer
         class TextureDepth;
         class TextureDepthArray;
 
-		enum class PhysicalDeviceType
-		{
-			DISCRETE = 0,
-			INTEGRATED = 1,
-			VIRTUAL = 2,
-			CPU = 3,
-			UNKNOWN = 4
-		};
+        static constexpr uint8_t MAX_RENDER_TARGETS = 8;
+        static constexpr uint8_t SHADOWMAP_MAX = 16;
+        static constexpr uint8_t MAX_MIPS = 32;
+
+        // Descriptor set limits
+        static constexpr uint16_t DESCRIPTOR_MAX_STORAGE_TEXTURES = 1024;
+        static constexpr uint16_t DESCRIPTOR_MAX_STORAGE_BUFFERS = 1024;
+        static constexpr uint16_t DESCRIPTOR_MAX_CONSTANT_BUFFERS = 1024;
+        static constexpr uint16_t DESCRIPTOR_MAX_CONSTANT_BUFFERS_DYNAMIC = 1024;
+        static constexpr uint16_t DESCRIPTOR_MAX_SAMPLERS = 1024;
+        static constexpr uint16_t DESCRIPTOR_MAX_TEXTURES = 1024;
+
+        enum class CullMode
+        {
+            FRONT,
+            BACK,
+            FRONTANDBACK,
+            NONE
+        };
+
+        enum class PolygonMode
+        {
+            FILL,
+            LINE,
+            POINT
+        };
+
+        enum class BlendMode
+        {
+            None = 0,
+            OneZero,
+            ZeroSrcColor,
+            SrcAlphaOneMinusSrcAlpha,
+        };
 
         enum class TextureWrap
         {
@@ -85,30 +113,11 @@ namespace Excimer
             SCREEN
         };
 
-        enum class TextureType
+        enum class BufferUsage
         {
-            COLOUR,
-            DEPTH,
-            DEPTHARRAY,
-            CUBE,
-            OTHER
-        };
-
-        enum SubPassContents
-        {
-            INLINE,
-            SECONDARY
-        };
-
-        enum TextureFlags : uint32_t
-        {
-            Texture_Sampled = BIT(0),
-            Texture_Storage = BIT(1),
-            Texture_RenderTarget = BIT(2),
-            Texture_DepthStencil = BIT(3),
-            Texture_DepthStencilReadOnly = BIT(4),
-            Texture_CreateMips = BIT(5),
-            Texture_MipViews = BIT(6)
+            STATIC,
+            DYNAMIC,
+            STREAM
         };
 
         enum class DescriptorType
@@ -118,7 +127,6 @@ namespace Excimer
             IMAGE_SAMPLER,
             IMAGE_STORAGE
         };
-
 
         enum class ShaderDataType
         {
@@ -149,6 +157,178 @@ namespace Excimer
             TESSELLATION_EVALUATION,
             COMPUTE,
             UNKNOWN
+        };
+
+        enum class TextureType
+        {
+            COLOUR,
+            DEPTH,
+            DEPTHARRAY,
+            CUBE,
+            OTHER
+        };
+
+        enum SubPassContents
+        {
+            INLINE,
+            SECONDARY
+        };
+
+        enum TextureFlags : uint32_t
+        {
+            Texture_Sampled = BIT(0),
+            Texture_Storage = BIT(1),
+            Texture_RenderTarget = BIT(2),
+            Texture_DepthStencil = BIT(3),
+            Texture_DepthStencilReadOnly = BIT(4),
+            Texture_CreateMips = BIT(5),
+            Texture_MipViews = BIT(6)
+        };
+
+        enum RendererBufferType
+        {
+            RENDERER_BUFFER_NONE = 0,
+            RENDERER_BUFFER_COLOUR = BIT(0),
+            RENDERER_BUFFER_DEPTH = BIT(1),
+            RENDERER_BUFFER_STENCIL = BIT(2)
+        };
+
+        enum class DrawType
+        {
+            POINT,
+            TRIANGLE,
+            LINES
+        };
+
+        enum class StencilType
+        {
+            EQUAL,
+            NOTEQUAL,
+            KEEP,
+            REPLACE,
+            ZERO,
+            ALWAYS
+        };
+
+        enum class PixelPackType
+        {
+            PACK,
+            UNPACK
+        };
+
+        enum class RendererBlendFunction
+        {
+            NONE,
+            ZERO,
+            ONE,
+            SOURCE_ALPHA,
+            DESTINATION_ALPHA,
+            ONE_MINUS_SOURCE_ALPHA
+        };
+
+        enum class RendererBlendEquation
+        {
+            NONE,
+            ADD,
+            SUBTRACT
+        };
+
+        enum class RenderMode
+        {
+            FILL,
+            WIREFRAME
+        };
+
+        enum class DataType
+        {
+            FLOAT,
+            UNSIGNED_INT,
+            UNSIGNED_BYTE
+        };
+
+        enum class PhysicalDeviceType
+        {
+            DISCRETE = 0,
+            INTEGRATED = 1,
+            VIRTUAL = 2,
+            CPU = 3,
+            UNKNOWN = 4
+        };
+
+        struct BufferMemberInfo
+        {
+            uint32_t size;
+            uint32_t offset;
+            ShaderDataType type;
+            std::string name;
+            std::string fullName;
+        };
+
+        struct VertexInputDescription
+        {
+            uint32_t binding;
+            uint32_t location;
+            RHIFormat format;
+            uint32_t offset;
+        };
+
+        struct DescriptorPoolInfo
+        {
+            DescriptorType type;
+            uint32_t size;
+        };
+
+        struct DescriptorLayoutInfo
+        {
+            DescriptorType type;
+            ShaderType stage;
+            uint32_t binding = 0;
+            uint32_t setID = 0;
+            uint32_t count = 1;
+        };
+
+        struct DescriptorLayout
+        {
+            uint32_t count;
+            DescriptorLayoutInfo* layoutInfo;
+        };
+
+        struct DescriptorDesc
+        {
+            uint32_t layoutIndex;
+            Shader* shader;
+            uint32_t count = 1;
+        };
+
+        struct Descriptor
+        {
+            Texture** textures;
+            Texture* texture;
+            UniformBuffer* buffer;
+
+            uint32_t offset;
+            uint32_t size;
+            uint32_t binding;
+            uint32_t textureCount = 1;
+            uint32_t mipLevel = 0;
+            std::string name;
+
+            TextureType textureType;
+            DescriptorType type = DescriptorType::IMAGE_SAMPLER;
+            ShaderType shaderType;
+
+            std::vector<BufferMemberInfo> m_Members;
+        };
+
+        struct RenderPassDesc
+        {
+            Texture** attachments;
+            TextureType* attachmentTypes;
+            uint32_t attachmentCount;
+            bool clear = true;
+            bool swapchainTarget = false;
+            int cubeMapIndex = -1;
+            int mipIndex = -1;
         };
 
         struct TextureDesc
@@ -210,8 +390,6 @@ namespace Excimer
                 , wrap(TextureWrap::CLAMP)
             {
             }
-
-
         };
 
         struct TextureLoadOptions
@@ -230,53 +408,6 @@ namespace Excimer
                 , flipY(flipY)
             {
             }
-        };
-
-        struct BufferMemberInfo
-        {
-            uint32_t size;
-            uint32_t offset;
-            ShaderDataType type;
-            std::string name;
-            std::string fullName;
-        };
-
-        struct DescriptorDesc
-        {
-            uint32_t layoutIndex;
-            Shader* shader;
-            uint32_t count = 1;
-        };
-
-        struct Descriptor
-        {
-            Texture** textures;
-            Texture* texture;
-            UniformBuffer* buffer;
-
-            uint32_t offset;
-            uint32_t size;
-            uint32_t binding;
-            uint32_t textureCount = 1;
-            uint32_t mipLevel = 0;
-            std::string name;
-
-            TextureType textureType;
-            DescriptorType type = DescriptorType::IMAGE_SAMPLER;
-            ShaderType shaderType;
-
-            std::vector<BufferMemberInfo> m_Members;
-        };
-
-        struct RenderPassDesc
-        {
-            Texture** attachments;
-            TextureType* attachmentTypes;
-            uint32_t attachmentCount;
-            bool clear = true;
-            bool swapchainTarget = false;
-            int cubeMapIndex = -1;
-            int mipIndex = -1;
         };
 
         struct PushConstant
@@ -306,5 +437,5 @@ namespace Excimer
                 memcpy(data, value, size);
             }
         };
-	}
+    }
 }

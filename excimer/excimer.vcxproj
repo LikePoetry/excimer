@@ -60,6 +60,7 @@
     <ClInclude Include="src\excimer\core\Asset.h" />
     <ClInclude Include="src\excimer\core\Core.h" />
     <ClInclude Include="src\excimer\core\CoreSystem.h" />
+    <ClInclude Include="src\excimer\core\Engine.h" />
     <ClInclude Include="src\excimer\core\EntryPoint.h" />
     <ClInclude Include="src\excimer\core\ExLog.h" />
     <ClInclude Include="src\excimer\core\JobSystem.h" />
@@ -84,6 +85,7 @@
     <ClInclude Include="src\excimer\graphics\rhi\DescriptorSet.h" />
     <ClInclude Include="src\excimer\graphics\rhi\Framebuffer.h" />
     <ClInclude Include="src\excimer\graphics\rhi\GraphicsContext.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\Pipeline.h" />
     <ClInclude Include="src\excimer\graphics\rhi\RenderPass.h" />
     <ClInclude Include="src\excimer\graphics\rhi\Renderer.h" />
     <ClInclude Include="src\excimer\graphics\rhi\Shader.h" />
@@ -113,6 +115,8 @@
     <ClInclude Include="src\excimer\platform\windows\WindowsUtilities.h" />
     <ClInclude Include="src\excimer\utilities\CombineHash.h" />
     <ClInclude Include="src\excimer\utilities\LoadImage.h" />
+    <ClInclude Include="src\excimer\utilities\Timer.h" />
+    <ClInclude Include="src\excimer\utilities\TimeStep.h" />
     <ClInclude Include="src\excimer\utilities\TSingleton.h" />
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
@@ -120,6 +124,7 @@
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp" />
     <ClCompile Include="src\excimer\core\CoreSystem.cpp" />
+    <ClCompile Include="src\excimer\core\Engine.cpp" />
     <ClCompile Include="src\excimer\core\ExLog.cpp" />
     <ClCompile Include="src\excimer\core\JobSystem.cpp" />
     <ClCompile Include="src\excimer\core\Reference.cpp" />
@@ -134,6 +139,7 @@
     <ClCompile Include="src\excimer\graphics\rhi\DescriptorSet.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\Framebuffer.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\GraphicsContext.cpp" />
+    <ClCompile Include="src\excimer\graphics\rhi\Pipeline.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\RenderPass.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\Renderer.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\Shader.cpp" />
@@ -162,6 +168,8 @@
     <ClCompile Include="src\excimer\platform\windows\WindowsUtilities.cpp" />
     <ClCompile Include="src\excimer\platform\windows\WindowsVulkan.cpp" />
     <ClCompile Include="src\excimer\utilities\LoadImage.cpp" />
+    <ClCompile Include="src\excimer\utilities\Timer.cpp" />
+    <ClCompile Include="src\excimer\utilities\TimeStep.cpp" />
     <ClCompile Include="src\hzpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
