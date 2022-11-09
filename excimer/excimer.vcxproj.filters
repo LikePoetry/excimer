@@ -226,6 +226,10 @@
     <ClInclude Include="src\excimer\platform\vulkan\VKRenderDevice.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKFramebuffer.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKRenderPass.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKPipeline.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKShader.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKDescriptorSet.h" />
+    <ClInclude Include="src\excimer\core\Buffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -372,5 +376,8 @@
     <ClCompile Include="src\excimer\platform\vulkan\VKRenderDevice.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKFramebuffer.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKRenderPass.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKPipeline.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKShader.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKDescriptorSet.cpp" />
   </ItemGroup>
 </Project>

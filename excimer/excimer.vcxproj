@@ -58,6 +58,7 @@
   <ItemGroup>
     <ClInclude Include="src\excimer\core\Application.h" />
     <ClInclude Include="src\excimer\core\Asset.h" />
+    <ClInclude Include="src\excimer\core\Buffer.h" />
     <ClInclude Include="src\excimer\core\Core.h" />
     <ClInclude Include="src\excimer\core\CoreSystem.h" />
     <ClInclude Include="src\excimer\core\Engine.h" />
@@ -106,14 +107,17 @@
     <ClInclude Include="src\excimer\platform\vulkan\VKCommandBuffer.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKCommandPool.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKContext.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKDescriptorSet.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKDevice.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKFence.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKFramebuffer.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKFunctions.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKInitialisers.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKPipeline.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKRenderDevice.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKRenderer.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKRenderPass.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKShader.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKSwapChain.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKTexture.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKUniformBuffer.h" />
@@ -166,13 +170,16 @@
     <ClCompile Include="src\excimer\platform\vulkan\VKCommandBuffer.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKCommandPool.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKContext.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKDescriptorSet.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKDevice.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKFence.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKFramebuffer.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKFunctions.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKPipeline.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKRenderDevice.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKRenderer.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKRenderPass.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKShader.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKSwapChain.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKTexture.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKUniformBuffer.cpp" />
