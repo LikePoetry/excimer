@@ -230,6 +230,8 @@
     <ClInclude Include="src\excimer\platform\vulkan\VKShader.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKDescriptorSet.h" />
     <ClInclude Include="src\excimer\core\Buffer.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKIndexBuffer.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKVertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -380,5 +382,7 @@
     <ClCompile Include="src\excimer\platform\vulkan\VKShader.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKDescriptorSet.cpp" />
     <ClCompile Include="src\excimer\platform\windows\WindowsTimer.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKIndexBuffer.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKVertexBuffer.cpp" />
   </ItemGroup>
 </Project>

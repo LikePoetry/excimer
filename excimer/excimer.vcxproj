@@ -112,6 +112,7 @@
     <ClInclude Include="src\excimer\platform\vulkan\VKFence.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKFramebuffer.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKFunctions.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKIndexBuffer.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKInitialisers.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKPipeline.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKRenderDevice.h" />
@@ -122,6 +123,7 @@
     <ClInclude Include="src\excimer\platform\vulkan\VKTexture.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKUniformBuffer.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKUtilities.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKVertexBuffer.h" />
     <ClInclude Include="src\excimer\platform\windows\WindowsOS.h" />
     <ClInclude Include="src\excimer\platform\windows\WindowsUtilities.h" />
     <ClInclude Include="src\excimer\utilities\CombineHash.h" />
@@ -175,6 +177,7 @@
     <ClCompile Include="src\excimer\platform\vulkan\VKFence.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKFramebuffer.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKFunctions.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKIndexBuffer.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKPipeline.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKRenderDevice.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKRenderer.cpp" />
@@ -184,6 +187,7 @@
     <ClCompile Include="src\excimer\platform\vulkan\VKTexture.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKUniformBuffer.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKUtilities.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKVertexBuffer.cpp" />
     <ClCompile Include="src\excimer\platform\windows\WindowsFileSystem.cpp" />
     <ClCompile Include="src\excimer\platform\windows\WindowsOS.cpp" />
     <ClCompile Include="src\excimer\platform\windows\WindowsTimer.cpp" />
