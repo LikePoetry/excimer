@@ -294,6 +294,15 @@ namespace Excimer
 			}
 		}
 
+		void VKSwapChain::QueueSubmit()
+		{
+			EXCIMER_PROFILE_FUNCTION();
+			auto& frameData = GetCurrentFrameData();
+			frameData.MainCommandBuffer->Execute(VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT, frameData.PresentSemaphore, true);
+		}
+
+
+
 		void VKSwapChain::OnResize(uint32_t width, uint32_t height, bool forceResize, Window* windowHandle)
 		{
 			EXCIMER_PROFILE_FUNCTION();
@@ -329,6 +338,61 @@ namespace Excimer
 		{
 			EXCIMER_ASSERT(m_CurrentBuffer < m_SwapChainBufferCount, "Incorrect swapchain buffer index");
 			return m_Frames[m_CurrentBuffer];
+		}
+
+		void VKSwapChain::Begin()
+		{
+			EXCIMER_PROFILE_FUNCTION();
+			m_CurrentBuffer = (m_CurrentBuffer + 1) % m_SwapChainBufferCount;
+
+			auto commandBuffer = GetCurrentFrameData().MainCommandBuffer;
+			if (commandBuffer->GetState() == CommandBufferState::Submitted)
+			{
+				if (!commandBuffer->Wait())
+				{
+					return;
+				}
+			}
+			commandBuffer->Reset();
+			VKRenderer::GetDeletionQueue(m_CurrentBuffer).Flush();
+			AcquireNextImage();
+			commandBuffer->BeginRecording();
+		}
+
+		void VKSwapChain::End()
+		{
+			EXCIMER_PROFILE_FUNCTION();
+			GetCurrentCommandBuffer()->EndRecording();
+		}
+
+		void VKSwapChain::Present(VkSemaphore semaphore)
+		{
+			EXCIMER_PROFILE_FUNCTION();
+
+			VkPresentInfoKHR present;
+			present.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
+			present.pNext = VK_NULL_HANDLE;
+			present.swapchainCount = 1;
+			present.pSwapchains = &m_SwapChain;
+			present.pImageIndices = &m_AcquireImageIndex;
+			present.waitSemaphoreCount = 1;
+			present.pWaitSemaphores = &semaphore;
+			present.pResults = VK_NULL_HANDLE;
+
+			auto error = vkQueuePresentKHR(VKDevice::Get().GetPresentQueue(), &present);
+
+			if (error == VK_ERROR_OUT_OF_DATE_KHR)
+			{
+				EXCIMER_LOG_ERROR("[Vulkan] SwapChain out of date");
+			}
+			else if (error == VK_SUBOPTIMAL_KHR)
+			{
+				EXCIMER_LOG_ERROR("[Vulkan] SwapChain suboptimal");
+			}
+			else
+			{
+				VK_CHECK_RESULT(error);
+			}
 		}
 
 		void VKSwapChain::MakeDefault()

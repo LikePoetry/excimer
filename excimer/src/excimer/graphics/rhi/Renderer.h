@@ -1,6 +1,9 @@
 #pragma once
 #include "excimer/core/Application.h"
 #include "excimer/core/os/Window.h"
+#include "Pipeline.h"
+#include "Defintions.h"
+#include <glm/vec4.hpp>
 
 namespace Excimer
 {
@@ -83,7 +86,7 @@ namespace Excimer
 
             static GraphicsContext* GetGraphicsContext() { return Application::Get().GetWindow()->GetGraphicsContext(); }
             static SwapChain* GetMainSwapChain() { return Application::Get().GetWindow()->GetSwapChain(); }
-            static void DrawMesh(CommandBuffer* commandBuffer, Graphics::Pipeline* pipeline, Graphics::Mesh* mesh);
+            //static void DrawMesh(CommandBuffer* commandBuffer, Graphics::Pipeline* pipeline, Graphics::Mesh* mesh);
 
 		protected:
 			static Renderer* (*CreateFunc)();

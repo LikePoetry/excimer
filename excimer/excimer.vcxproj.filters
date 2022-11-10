@@ -379,5 +379,6 @@
     <ClCompile Include="src\excimer\platform\vulkan\VKPipeline.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKShader.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKDescriptorSet.cpp" />
+    <ClCompile Include="src\excimer\platform\windows\WindowsTimer.cpp" />
   </ItemGroup>
 </Project>

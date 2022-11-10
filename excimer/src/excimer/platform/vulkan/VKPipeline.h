@@ -4,6 +4,7 @@
 #include "VKDescriptorSet.h"
 #include "VKFramebuffer.h"
 #include "VKRenderPass.h"
+#include "excimer/core/Reference.h"
 
 namespace Excimer
 {
@@ -12,6 +13,7 @@ namespace Excimer
     namespace Graphics
     {
         class VKCommandBuffer;
+        class VKFramebuffer;
 
         class VKPipeline : public Pipeline
         {

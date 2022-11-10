@@ -96,7 +96,7 @@ namespace Excimer
             }
             else
             {
-                SLIGHT_LOG_ERROR("Failed to cast Reference");
+                EXCIMER_LOG_ERROR("Failed to cast Reference");
             }
         }
 

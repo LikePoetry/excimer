@@ -33,6 +33,20 @@ namespace Excimer
 			m_Data.EventCallback = callback;
 		}
 
+		inline uint32_t GetWidth() const override
+		{
+			return m_Data.Width;
+		}
+		inline uint32_t GetHeight() const override
+		{
+			return m_Data.Height;
+		}
+
+		inline float GetDPIScale() const override
+		{
+			return m_Data.DPIScale;
+		}
+
 		void SetIcon(const std::string& file, const std::string& smallIconFilePath = "") override;
 		static void MakeDefault();
 

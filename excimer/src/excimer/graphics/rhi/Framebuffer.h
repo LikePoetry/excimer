@@ -1,6 +1,7 @@
 #pragma once
 #include <glm/vec4.hpp>
 #include "Defintions.h"
+#include "excimer/core/Reference.h"
 
 namespace Excimer
 {

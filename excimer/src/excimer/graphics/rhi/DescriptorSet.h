@@ -7,7 +7,7 @@ namespace Excimer
 	{
 		struct DescriptorSetInfo
 		{
-			std::vector<Descriptor> descriptor;
+			std::vector<Descriptor> descriptors;
 		};
 
 		class DescriptorSet

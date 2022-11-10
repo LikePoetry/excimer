@@ -2,6 +2,7 @@
 
 #include "VK.h"
 #include "VKFence.h"
+#include "VKPipeline.h"
 #include "excimer/core/Reference.h"
 #include "excimer/graphics/rhi/CommandBuffer.h"
 

@@ -208,6 +208,12 @@ namespace Excimer
 				return m_CommandPool;
 			}
 
+			VkPipelineCache GetPipelineCache() const
+			{
+				return m_PipelineCache;
+			}
+
+
 			tracy::VkCtx* GetTracyContext();
 
 			VmaAllocator GetAllocator() const
@@ -220,6 +226,16 @@ namespace Excimer
 				return VKDevice::Get().GetDevice();
 			}
 
+			uint32_t GetGPUCount() const
+			{
+				return m_PhysicalDevice->GetGPUCount();
+			}
+
+			const VkPhysicalDeviceFeatures& GetEnabledFeatures()
+			{
+				return m_EnabledFeatures;
+			}
+
 
 		private:
 			VkDevice m_Device;
@@ -229,13 +245,15 @@ namespace Excimer
 			VkQueue m_PresentQueue;
 
 			VkPipelineCache m_PipelineCache;
-
+			VkDescriptorPool m_DescriptorPool;
 			VkPhysicalDeviceFeatures m_EnabledFeatures;
 
 			SharedPtr<VKCommandPool> m_CommandPool;
 			SharedPtr<VKPhysicalDevice> m_PhysicalDevice;
 
 			bool m_EnableDebugMarkers = false;
+
+			static uint32_t s_GraphicsQueueFamilyIndex;
 
 			std::vector<tracy::VkCtx*> m_TracyContext;
 

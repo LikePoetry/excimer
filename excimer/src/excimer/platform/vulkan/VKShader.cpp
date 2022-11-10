@@ -15,6 +15,8 @@
 
 #include <SPIRV-Cross/spirv_cross.hpp>
 
+#include <glm/vec3.hpp>
+
 #define SHADER_LOG_ENABLED 0
 
 #if SHADER_LOG_ENABLED
@@ -694,7 +696,7 @@ namespace Excimer
                 descriptor.binding = binding;
                 descriptor.textureCount = 1;
                 descriptor.name = u.name;
-                descriptor.texture = Graphics::Material::GetDefaultTexture().get(); // TODO: Move
+               // descriptor.texture = Graphics::Material::GetDefaultTexture().get(); // TODO: Move
             }
 
             for (auto& u : resources.storage_images)
@@ -719,7 +721,7 @@ namespace Excimer
                 descriptor.binding = binding;
                 descriptor.textureCount = 1;
                 descriptor.name = u.name;
-                descriptor.texture = Graphics::Material::GetDefaultTexture().get(); // TODO: Move
+               // descriptor.texture = Graphics::Material::GetDefaultTexture().get(); // TODO: Move
             }
 
             m_ShaderStages[currentShaderStage].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;

@@ -9,6 +9,8 @@ namespace Excimer
 {
 	namespace Graphics
 	{
+		class VKCommandBuffer;
+
 		class VKTexture2D:public Texture2D
 		{
 		public:

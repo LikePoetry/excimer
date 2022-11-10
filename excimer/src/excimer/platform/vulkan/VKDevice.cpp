@@ -175,6 +175,10 @@ namespace Excimer
 			}
 		}
 
+		VKPhysicalDevice::~VKPhysicalDevice()
+		{
+		}
+
 		bool VKPhysicalDevice::IsExtensionSupported(const std::string& extensionName) const
 		{
 			return m_SupportedExtensions.find(extensionName) != m_SupportedExtensions.end();
@@ -290,10 +294,6 @@ namespace Excimer
 
 			EXCIMER_ASSERT(false, "Could not find a suitable memory type!");
 			return UINT32_MAX;
-		}
-
-		VKPhysicalDevice::~VKPhysicalDevice()
-		{
 		}
 
 		VKDevice::VKDevice()

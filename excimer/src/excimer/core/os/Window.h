@@ -8,6 +8,9 @@
 
 #include <string>
 
+#include <glm/vec2.hpp>
+#include <glm/fwd.hpp>
+
 
 namespace Excimer
 {
@@ -62,6 +65,10 @@ namespace Excimer
 		virtual void SetIcon(const std::string& filePath, const std::string& smallIconFilePath = "") = 0;
 
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
+
+		virtual uint32_t GetWidth() const = 0;
+		virtual uint32_t GetHeight() const = 0;
+		virtual float GetDPIScale() const { return 1.0f; }
 
 		void SetWindowFocus(bool focus) { m_WindowFocus = focus; }
 		bool GetWindowFocus() const { return m_WindowFocus; }

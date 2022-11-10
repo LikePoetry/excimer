@@ -186,6 +186,7 @@
     <ClCompile Include="src\excimer\platform\vulkan\VKUtilities.cpp" />
     <ClCompile Include="src\excimer\platform\windows\WindowsFileSystem.cpp" />
     <ClCompile Include="src\excimer\platform\windows\WindowsOS.cpp" />
+    <ClCompile Include="src\excimer\platform\windows\WindowsTimer.cpp" />
     <ClCompile Include="src\excimer\platform\windows\WindowsUtilities.cpp" />
     <ClCompile Include="src\excimer\platform\windows\WindowsVulkan.cpp" />
     <ClCompile Include="src\excimer\utilities\LoadImage.cpp" />
