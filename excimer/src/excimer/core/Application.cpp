@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Profiler.h"
 #include "excimer/core/os/Window.h"
+#include "excimer/graphics/rhi/Renderer.h"
 
 
 
@@ -44,6 +45,11 @@ namespace Excimer {
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
 		m_EditorState = EditorState::Play;
+
+		//载入内置嵌入式着色器
+		bool loadEmbeddedShaders = true;
+		Graphics::Renderer::Init(loadEmbeddedShaders);
+
 
 	}
 

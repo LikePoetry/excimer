@@ -25,6 +25,10 @@ namespace Excimer
             s_Instance = nullptr;
         }
 
+        /// <summary>
+        /// 载入嵌入式着色器
+        /// </summary>
+        /// <param name="loadEmbeddedShaders"></param>
         void Renderer::LoadEngineShaders(bool loadEmbeddedShaders)
         {
 
