@@ -46,6 +46,8 @@ namespace Excimer {
 
 		m_EditorState = EditorState::Play;
 
+		m_ShaderLibrary = CreateSharedPtr<ShaderLibrary>();
+
 		//载入内置嵌入式着色器
 		bool loadEmbeddedShaders = true;
 		Graphics::Renderer::Init(loadEmbeddedShaders);
@@ -85,6 +87,11 @@ namespace Excimer {
 		}
 
 		//OnQuit();
+	}
+
+	SharedPtr<ShaderLibrary>& Application::GetShaderLibrary()
+	{
+		return m_ShaderLibrary;
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e)

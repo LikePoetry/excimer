@@ -123,6 +123,9 @@
     <ClInclude Include="src\excimer\graphics\MSDFData.h">
       <Filter>excimer\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="src\excimer\graphics\Material.h">
+      <Filter>excimer\graphics</Filter>
+    </ClInclude>
     <ClInclude Include="src\excimer\graphics\rhi\BufferLayout.h">
       <Filter>excimer\graphics\rhi</Filter>
     </ClInclude>
@@ -287,7 +290,6 @@
     </ClInclude>
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
-    <ClInclude Include="src\excimer\graphics\Material.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -327,6 +329,9 @@
       <Filter>excimer\core\os</Filter>
     </ClCompile>
     <ClCompile Include="src\excimer\graphics\Font.cpp">
+      <Filter>excimer\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\graphics\Material.cpp">
       <Filter>excimer\graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\excimer\graphics\rhi\BufferLayout.cpp">
@@ -477,6 +482,5 @@
       <Filter>excimer\utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
-    <ClCompile Include="src\excimer\graphics\Material.cpp" />
   </ItemGroup>
 </Project>

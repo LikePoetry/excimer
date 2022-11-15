@@ -4,6 +4,8 @@
 #include "excimer/core/Reference.h"
 #include "excimer/events/ApplicationEvent.h"
 
+#include "excimer/utilities/AssetManager.h"
+
 namespace Excimer
 {
 	class Window;
@@ -53,6 +55,8 @@ namespace Excimer
 			return m_Window.get();
 		}
 
+		SharedPtr<ShaderLibrary>& GetShaderLibrary();
+
 		static Application& Get()
 		{
 			return *s_Instance;
@@ -98,6 +102,8 @@ namespace Excimer
 		uint32_t m_SceneViewHeight = 0;
 
 		UniquePtr<Window> m_Window;
+
+		SharedPtr<ShaderLibrary> m_ShaderLibrary;
 
 		AppState m_CurrentState = AppState::Loading;
 		EditorState m_EditorState = EditorState::Preview;
