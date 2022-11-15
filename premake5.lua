@@ -12,6 +12,9 @@ IncludeDir["stb"] = "excimer/external/stb"
 IncludeDir["glm"] = "excimer/external/glm"
 IncludeDir["vulkan"] = "excimer/external/vulkan/"
 IncludeDir["SpirvCross"] = "excimer/external/SPIRV-Cross"
+IncludeDir["msdf_atlas_gen"] = "excimer/external/msdf-atlas-gen/msdf-atlas-gen"
+IncludeDir["msdfgen"] = "excimer/external/msdf-atlas-gen/msdfgen"
+IncludeDir["freetype"] = "excimer/external/freetype/include"
 
 
 workspace "excimer"
@@ -25,11 +28,15 @@ workspace "excimer"
     outputdir="%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group "external"
+	require("excimer/external/freetype/premake5")
+		SetRecommendedSettings()
 	require("excimer/external/SPIRVCrosspremake5")
 		SetRecommendedSettings()
 	require("excimer/external/spdlog/premake5")
 		SetRecommendedSettings()
 	require("excimer/external/GLFWpremake5")
+		SetRecommendedSettings()
+	require("excimer/external/msdf-atlas-gen/premake5")
 		SetRecommendedSettings()
 	filter {}
 
@@ -61,6 +68,9 @@ project "excimer"
 		"%{IncludeDir.stb}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.SpirvCross}",
+		"%{IncludeDir.msdfgen}",
+		"%{IncludeDir.msdf_atlas_gen}",
+		"%{IncludeDir.freetype}",
 		"%{IncludeDir.vulkan}"
 	}
 
@@ -72,6 +82,7 @@ project "excimer"
 	links
 	{
 		"SpirvCross",
+		"freetype",
 	}
 
 	defines
@@ -106,6 +117,7 @@ project "excimer"
 		links
 		{
 			"glfw",
+			"msdf-atlas-gen"
 		}
 
 		buildoptions
@@ -157,6 +169,9 @@ project "editor"
 		"%{IncludeDir.stb}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.SpirvCross}",
+		"%{IncludeDir.msdfgen}",
+		"%{IncludeDir.msdf_atlas_gen}",
+		"%{IncludeDir.freetype}",
 		"%{IncludeDir.vulkan}"
     }
 
@@ -165,6 +180,8 @@ project "editor"
         "excimer",
 		"glfw",
 		"SpirvCross",
+		"freetype",
+		"msdf-atlas-gen"
     }
 
     libdirs 

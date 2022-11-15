@@ -45,10 +45,16 @@
     <ClInclude Include="src\excimer\core\Asset.h">
       <Filter>excimer\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\excimer\core\Buffer.h">
+      <Filter>excimer\core</Filter>
+    </ClInclude>
     <ClInclude Include="src\excimer\core\Core.h">
       <Filter>excimer\core</Filter>
     </ClInclude>
     <ClInclude Include="src\excimer\core\CoreSystem.h">
+      <Filter>excimer\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\core\Engine.h">
       <Filter>excimer\core</Filter>
     </ClInclude>
     <ClInclude Include="src\excimer\core\EntryPoint.h">
@@ -123,6 +129,18 @@
     <ClInclude Include="src\excimer\graphics\rhi\GraphicsContext.h">
       <Filter>excimer\graphics\rhi</Filter>
     </ClInclude>
+    <ClInclude Include="src\excimer\graphics\rhi\IndexBuffer.h">
+      <Filter>excimer\graphics\rhi</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\graphics\rhi\Pipeline.h">
+      <Filter>excimer\graphics\rhi</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\graphics\rhi\RenderDevice.h">
+      <Filter>excimer\graphics\rhi</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\graphics\rhi\RenderDoc.h">
+      <Filter>excimer\graphics\rhi</Filter>
+    </ClInclude>
     <ClInclude Include="src\excimer\graphics\rhi\RenderPass.h">
       <Filter>excimer\graphics\rhi</Filter>
     </ClInclude>
@@ -139,6 +157,9 @@
       <Filter>excimer\graphics\rhi</Filter>
     </ClInclude>
     <ClInclude Include="src\excimer\graphics\rhi\UniformBuffer.h">
+      <Filter>excimer\graphics\rhi</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\graphics\rhi\VertexBuffer.h">
       <Filter>excimer\graphics\rhi</Filter>
     </ClInclude>
     <ClInclude Include="src\excimer\maths\Maths.h">
@@ -171,19 +192,40 @@
     <ClInclude Include="src\excimer\platform\vulkan\VKContext.h">
       <Filter>excimer\platform\vulkan</Filter>
     </ClInclude>
+    <ClInclude Include="src\excimer\platform\vulkan\VKDescriptorSet.h">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClInclude>
     <ClInclude Include="src\excimer\platform\vulkan\VKDevice.h">
       <Filter>excimer\platform\vulkan</Filter>
     </ClInclude>
     <ClInclude Include="src\excimer\platform\vulkan\VKFence.h">
       <Filter>excimer\platform\vulkan</Filter>
     </ClInclude>
+    <ClInclude Include="src\excimer\platform\vulkan\VKFramebuffer.h">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClInclude>
     <ClInclude Include="src\excimer\platform\vulkan\VKFunctions.h">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\platform\vulkan\VKIndexBuffer.h">
       <Filter>excimer\platform\vulkan</Filter>
     </ClInclude>
     <ClInclude Include="src\excimer\platform\vulkan\VKInitialisers.h">
       <Filter>excimer\platform\vulkan</Filter>
     </ClInclude>
+    <ClInclude Include="src\excimer\platform\vulkan\VKPipeline.h">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\platform\vulkan\VKRenderDevice.h">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\platform\vulkan\VKRenderPass.h">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClInclude>
     <ClInclude Include="src\excimer\platform\vulkan\VKRenderer.h">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\platform\vulkan\VKShader.h">
       <Filter>excimer\platform\vulkan</Filter>
     </ClInclude>
     <ClInclude Include="src\excimer\platform\vulkan\VKSwapChain.h">
@@ -196,6 +238,9 @@
       <Filter>excimer\platform\vulkan</Filter>
     </ClInclude>
     <ClInclude Include="src\excimer\platform\vulkan\VKUtilities.h">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\platform\vulkan\VKVertexBuffer.h">
       <Filter>excimer\platform\vulkan</Filter>
     </ClInclude>
     <ClInclude Include="src\excimer\platform\windows\WindowsOS.h">
@@ -213,31 +258,23 @@
     <ClInclude Include="src\excimer\utilities\TSingleton.h">
       <Filter>excimer\utilities</Filter>
     </ClInclude>
+    <ClInclude Include="src\excimer\utilities\TimeStep.h">
+      <Filter>excimer\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\utilities\Timer.h">
+      <Filter>excimer\utilities</Filter>
+    </ClInclude>
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
-    <ClInclude Include="src\excimer\graphics\rhi\Pipeline.h" />
-    <ClInclude Include="src\excimer\core\Engine.h" />
-    <ClInclude Include="src\excimer\utilities\Timer.h" />
-    <ClInclude Include="src\excimer\utilities\TimeStep.h" />
-    <ClInclude Include="src\excimer\graphics\rhi\IndexBuffer.h" />
-    <ClInclude Include="src\excimer\graphics\rhi\VertexBuffer.h" />
-    <ClInclude Include="src\excimer\graphics\rhi\RenderDoc.h" />
-    <ClInclude Include="src\excimer\graphics\rhi\RenderDevice.h" />
-    <ClInclude Include="src\excimer\platform\vulkan\VKRenderDevice.h" />
-    <ClInclude Include="src\excimer\platform\vulkan\VKFramebuffer.h" />
-    <ClInclude Include="src\excimer\platform\vulkan\VKRenderPass.h" />
-    <ClInclude Include="src\excimer\platform\vulkan\VKPipeline.h" />
-    <ClInclude Include="src\excimer\platform\vulkan\VKShader.h" />
-    <ClInclude Include="src\excimer\platform\vulkan\VKDescriptorSet.h" />
-    <ClInclude Include="src\excimer\core\Buffer.h" />
-    <ClInclude Include="src\excimer\platform\vulkan\VKIndexBuffer.h" />
-    <ClInclude Include="src\excimer\platform\vulkan\VKVertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
       <Filter>excimer\core</Filter>
     </ClCompile>
     <ClCompile Include="src\excimer\core\CoreSystem.cpp">
+      <Filter>excimer\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\core\Engine.cpp">
       <Filter>excimer\core</Filter>
     </ClCompile>
     <ClCompile Include="src\excimer\core\ExLog.cpp">
@@ -282,6 +319,18 @@
     <ClCompile Include="src\excimer\graphics\rhi\GraphicsContext.cpp">
       <Filter>excimer\graphics\rhi</Filter>
     </ClCompile>
+    <ClCompile Include="src\excimer\graphics\rhi\IndexBuffer.cpp">
+      <Filter>excimer\graphics\rhi</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\graphics\rhi\Pipeline.cpp">
+      <Filter>excimer\graphics\rhi</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\graphics\rhi\RenderDevice.cpp">
+      <Filter>excimer\graphics\rhi</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\graphics\rhi\RenderDoc.cpp">
+      <Filter>excimer\graphics\rhi</Filter>
+    </ClCompile>
     <ClCompile Include="src\excimer\graphics\rhi\RenderPass.cpp">
       <Filter>excimer\graphics\rhi</Filter>
     </ClCompile>
@@ -298,6 +347,9 @@
       <Filter>excimer\graphics\rhi</Filter>
     </ClCompile>
     <ClCompile Include="src\excimer\graphics\rhi\UniformBuffer.cpp">
+      <Filter>excimer\graphics\rhi</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\graphics\rhi\VertexBuffer.cpp">
       <Filter>excimer\graphics\rhi</Filter>
     </ClCompile>
     <ClCompile Include="src\excimer\maths\Maths.cpp">
@@ -327,16 +379,37 @@
     <ClCompile Include="src\excimer\platform\vulkan\VKContext.cpp">
       <Filter>excimer\platform\vulkan</Filter>
     </ClCompile>
+    <ClCompile Include="src\excimer\platform\vulkan\VKDescriptorSet.cpp">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClCompile>
     <ClCompile Include="src\excimer\platform\vulkan\VKDevice.cpp">
       <Filter>excimer\platform\vulkan</Filter>
     </ClCompile>
     <ClCompile Include="src\excimer\platform\vulkan\VKFence.cpp">
       <Filter>excimer\platform\vulkan</Filter>
     </ClCompile>
+    <ClCompile Include="src\excimer\platform\vulkan\VKFramebuffer.cpp">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClCompile>
     <ClCompile Include="src\excimer\platform\vulkan\VKFunctions.cpp">
       <Filter>excimer\platform\vulkan</Filter>
     </ClCompile>
+    <ClCompile Include="src\excimer\platform\vulkan\VKIndexBuffer.cpp">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\platform\vulkan\VKPipeline.cpp">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\platform\vulkan\VKRenderDevice.cpp">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\platform\vulkan\VKRenderPass.cpp">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClCompile>
     <ClCompile Include="src\excimer\platform\vulkan\VKRenderer.cpp">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\platform\vulkan\VKShader.cpp">
       <Filter>excimer\platform\vulkan</Filter>
     </ClCompile>
     <ClCompile Include="src\excimer\platform\vulkan\VKSwapChain.cpp">
@@ -351,10 +424,16 @@
     <ClCompile Include="src\excimer\platform\vulkan\VKUtilities.cpp">
       <Filter>excimer\platform\vulkan</Filter>
     </ClCompile>
+    <ClCompile Include="src\excimer\platform\vulkan\VKVertexBuffer.cpp">
+      <Filter>excimer\platform\vulkan</Filter>
+    </ClCompile>
     <ClCompile Include="src\excimer\platform\windows\WindowsFileSystem.cpp">
       <Filter>excimer\platform\windows</Filter>
     </ClCompile>
     <ClCompile Include="src\excimer\platform\windows\WindowsOS.cpp">
+      <Filter>excimer\platform\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\platform\windows\WindowsTimer.cpp">
       <Filter>excimer\platform\windows</Filter>
     </ClCompile>
     <ClCompile Include="src\excimer\platform\windows\WindowsUtilities.cpp">
@@ -366,23 +445,12 @@
     <ClCompile Include="src\excimer\utilities\LoadImage.cpp">
       <Filter>excimer\utilities</Filter>
     </ClCompile>
+    <ClCompile Include="src\excimer\utilities\TimeStep.cpp">
+      <Filter>excimer\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\excimer\utilities\Timer.cpp">
+      <Filter>excimer\utilities</Filter>
+    </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
-    <ClCompile Include="src\excimer\graphics\rhi\Pipeline.cpp" />
-    <ClCompile Include="src\excimer\core\Engine.cpp" />
-    <ClCompile Include="src\excimer\utilities\Timer.cpp" />
-    <ClCompile Include="src\excimer\utilities\TimeStep.cpp" />
-    <ClCompile Include="src\excimer\graphics\rhi\IndexBuffer.cpp" />
-    <ClCompile Include="src\excimer\graphics\rhi\VertexBuffer.cpp" />
-    <ClCompile Include="src\excimer\graphics\rhi\RenderDoc.cpp" />
-    <ClCompile Include="src\excimer\graphics\rhi\RenderDevice.cpp" />
-    <ClCompile Include="src\excimer\platform\vulkan\VKRenderDevice.cpp" />
-    <ClCompile Include="src\excimer\platform\vulkan\VKFramebuffer.cpp" />
-    <ClCompile Include="src\excimer\platform\vulkan\VKRenderPass.cpp" />
-    <ClCompile Include="src\excimer\platform\vulkan\VKPipeline.cpp" />
-    <ClCompile Include="src\excimer\platform\vulkan\VKShader.cpp" />
-    <ClCompile Include="src\excimer\platform\vulkan\VKDescriptorSet.cpp" />
-    <ClCompile Include="src\excimer\platform\windows\WindowsTimer.cpp" />
-    <ClCompile Include="src\excimer\platform\vulkan\VKIndexBuffer.cpp" />
-    <ClCompile Include="src\excimer\platform\vulkan\VKVertexBuffer.cpp" />
   </ItemGroup>
 </Project>
