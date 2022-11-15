@@ -40,7 +40,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DisableSpecificWarnings>4307;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>IMGUI_USER_CONFIG="../../excimer/src/excimer/imgui/ImConfig.h";GLM_FORCE_INTRINSICS;GLM_FORCE_DEPTH_ZERO_TO_ONE;USE_VMA_ALLOCATOR;WIN32_LEAN_AND_MEAN;TRACY_ENABLE;TRACY_ON_DEMAND;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\excimer\src;..\excimer\external\spdlog\include;..\excimer\external\imgui;..\excimer\external;..\excimer\external\glfw\include;..\excimer\external\stb;..\excimer\external\glm;..\excimer\external\SPIRV-Cross;..\excimer\external\msdf-atlas-gen\msdfgen;..\excimer\external\msdf-atlas-gen\msdf-atlas-gen;..\excimer\external\freetype\include;..\excimer\external\vulkan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\excimer\src;..\excimer\external\spdlog\include;..\excimer\external\imgui;..\excimer\external;..\excimer\external\glfw\include;..\excimer\external\stb;..\excimer\external\glm;..\excimer\external\SPIRV-Cross;..\excimer\external\msdf-atlas-gen\msdfgen;..\excimer\external\msdf-atlas-gen\msdf-atlas-gen;..\excimer\external\freetype\include;..\excimer\external\cereal\include;..\excimer\external\vulkan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>

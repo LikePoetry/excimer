@@ -37,6 +37,9 @@
     <Filter Include="excimer\platform\windows">
       <UniqueIdentifier>{E038289F-CC5D-771F-F5A8-5CAFE12C763D}</UniqueIdentifier>
     </Filter>
+    <Filter Include="excimer\scene">
+      <UniqueIdentifier>{8F1E1D77-FBDE-98AD-C419-E22A3099DD89}</UniqueIdentifier>
+    </Filter>
     <Filter Include="excimer\utilities">
       <UniqueIdentifier>{DD3EB8AF-4955-B645-92CC-4167FE2187CD}</UniqueIdentifier>
     </Filter>
@@ -260,6 +263,12 @@
     </ClInclude>
     <ClInclude Include="src\excimer\platform\windows\WindowsUtilities.h">
       <Filter>excimer\platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\scene\Serialisation.h">
+      <Filter>excimer\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\excimer\utilities\AssetManager.h">
+      <Filter>excimer\utilities</Filter>
     </ClInclude>
     <ClInclude Include="src\excimer\utilities\CombineHash.h">
       <Filter>excimer\utilities</Filter>

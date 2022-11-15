@@ -16,6 +16,7 @@ IncludeDir["msdf_atlas_gen"] = "excimer/external/msdf-atlas-gen/msdf-atlas-gen"
 IncludeDir["msdfgen"] = "excimer/external/msdf-atlas-gen/msdfgen"
 IncludeDir["freetype"] = "excimer/external/freetype/include"
 IncludeDir["ImGui"] = "excimer/external/imgui/"
+IncludeDir["cereal"] = "excimer/external/cereal/include"
 
 
 workspace "excimer"
@@ -75,6 +76,7 @@ project "excimer"
 		"%{IncludeDir.msdfgen}",
 		"%{IncludeDir.msdf_atlas_gen}",
 		"%{IncludeDir.freetype}",
+		"%{IncludeDir.cereal}",
 		"%{IncludeDir.vulkan}"
 	}
 
@@ -179,6 +181,7 @@ project "editor"
 		"%{IncludeDir.msdfgen}",
 		"%{IncludeDir.msdf_atlas_gen}",
 		"%{IncludeDir.freetype}",
+		"%{IncludeDir.cereal}",
 		"%{IncludeDir.vulkan}"
     }
 
