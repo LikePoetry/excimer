@@ -39,8 +39,8 @@
       <PrecompiledHeaderFile>hzpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DisableSpecificWarnings>4307;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>GLM_FORCE_INTRINSICS;GLM_FORCE_DEPTH_ZERO_TO_ONE;USE_VMA_ALLOCATOR;_CRT_SECURE_NO_WARNINGS;_DISABLE_EXTENDED_ALIGNED_STORAGE;TRACY_ENABLE;TRACY_ON_DEMAND;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;external\spdlog\include;external;external\glfw\include;external\stb;external\glm;external\SPIRV-Cross;external\msdf-atlas-gen\msdfgen;external\msdf-atlas-gen\msdf-atlas-gen;external\freetype\include;external\vulkan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLM_FORCE_INTRINSICS;GLM_FORCE_DEPTH_ZERO_TO_ONE;USE_VMA_ALLOCATOR;IMGUI_USER_CONFIG="src/excimer/imgui/ImConfig.h";_CRT_SECURE_NO_WARNINGS;_DISABLE_EXTENDED_ALIGNED_STORAGE;TRACY_ENABLE;TRACY_ON_DEMAND;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;external\spdlog\include;external\imgui;external;external\glfw\include;external\stb;external\glm;external\SPIRV-Cross;external\msdf-atlas-gen\msdfgen;external\msdf-atlas-gen\msdf-atlas-gen;external\freetype\include;external\vulkan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -80,6 +80,8 @@
     <ClInclude Include="src\excimer\events\Event.h" />
     <ClInclude Include="src\excimer\events\KeyEvent.h" />
     <ClInclude Include="src\excimer\events\MouseEvent.h" />
+    <ClInclude Include="src\excimer\graphics\Font.h" />
+    <ClInclude Include="src\excimer\graphics\MSDFData.h" />
     <ClInclude Include="src\excimer\graphics\rhi\BufferLayout.h" />
     <ClInclude Include="src\excimer\graphics\rhi\CommandBuffer.h" />
     <ClInclude Include="src\excimer\graphics\rhi\Defintions.h" />
@@ -97,6 +99,7 @@
     <ClInclude Include="src\excimer\graphics\rhi\Texture.h" />
     <ClInclude Include="src\excimer\graphics\rhi\UniformBuffer.h" />
     <ClInclude Include="src\excimer\graphics\rhi\VertexBuffer.h" />
+    <ClInclude Include="src\excimer\imgui\ImConfig.h" />
     <ClInclude Include="src\excimer\maths\Maths.h" />
     <ClInclude Include="src\excimer\maths\MathsUtilities.h" />
     <ClInclude Include="src\excimer\maths\Random.h" />
@@ -147,6 +150,7 @@
     <ClCompile Include="src\excimer\core\os\FileSystem.cpp" />
     <ClCompile Include="src\excimer\core\os\Window.cpp" />
     <ClCompile Include="src\excimer\core\os\os.cpp" />
+    <ClCompile Include="src\excimer\graphics\Font.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\BufferLayout.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\CommandBuffer.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\DescriptorSet.cpp" />
@@ -206,6 +210,9 @@
     </ProjectReference>
     <ProjectReference Include="external\freetype\freetype.vcxproj">
       <Project>{89895BD8-7556-B6E3-9E6F-A48B8A9BEB71}</Project>
+    </ProjectReference>
+    <ProjectReference Include="external\imgui.vcxproj">
+      <Project>{0098A80F-6CAC-D0C0-352E-7420A101CDF1}</Project>
     </ProjectReference>
     <ProjectReference Include="external\glfw.vcxproj">
       <Project>{9563977C-819A-980D-2A87-7E10169D140F}</Project>

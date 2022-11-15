@@ -7,6 +7,15 @@
 
 #define EXCIMER_BREAK() __debugbreak();
 
+#define EXCIMER_ASSERT_NO_MESSAGE(condition)        \
+    {                                               \
+        if(!(condition))                            \
+        {                                           \
+            EXCIMER_LOG_ERROR("Assertion Failed!"); \
+            EXCIMER_BREAK();                        \
+        }                                           \
+    }
+
 #define EXCIMER_ASSERT_MESSAGE(condition, ...)      \
     {                                               \
         if(!(condition))                            \

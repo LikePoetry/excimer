@@ -15,6 +15,7 @@ IncludeDir["SpirvCross"] = "excimer/external/SPIRV-Cross"
 IncludeDir["msdf_atlas_gen"] = "excimer/external/msdf-atlas-gen/msdf-atlas-gen"
 IncludeDir["msdfgen"] = "excimer/external/msdf-atlas-gen/msdfgen"
 IncludeDir["freetype"] = "excimer/external/freetype/include"
+IncludeDir["ImGui"] = "excimer/external/imgui/"
 
 
 workspace "excimer"
@@ -28,6 +29,8 @@ workspace "excimer"
     outputdir="%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group "external"
+	require("excimer/external/imguipremake5")
+		SetRecommendedSettings()
 	require("excimer/external/freetype/premake5")
 		SetRecommendedSettings()
 	require("excimer/external/SPIRVCrosspremake5")
@@ -63,6 +66,7 @@ project "excimer"
 	{
 		"%{prj.name}/src",
 		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.external}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.stb}",
@@ -83,6 +87,7 @@ project "excimer"
 	{
 		"SpirvCross",
 		"freetype",
+		"imgui",
 	}
 
 	defines
@@ -110,6 +115,7 @@ project "excimer"
 
 		defines
 		{
+		"IMGUI_USER_CONFIG=\"src/excimer/imgui/ImConfig.h\"",
 			"_CRT_SECURE_NO_WARNINGS",
 			"_DISABLE_EXTENDED_ALIGNED_STORAGE",
 		}
@@ -164,6 +170,7 @@ project "editor"
 	{
         "excimer/src",
 		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.external}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.stb}",
@@ -179,6 +186,7 @@ project "editor"
     {
         "excimer",
 		"glfw",
+		"imgui",
 		"SpirvCross",
 		"freetype",
 		"msdf-atlas-gen"
@@ -190,6 +198,7 @@ project "editor"
 
 	defines
 	{
+		"IMGUI_USER_CONFIG=\"../../excimer/src/excimer/imgui/ImConfig.h\"",
 		"GLM_FORCE_INTRINSICS",
 		"GLM_FORCE_DEPTH_ZERO_TO_ONE"
 	}
