@@ -81,6 +81,7 @@
     <ClInclude Include="src\excimer\events\KeyEvent.h" />
     <ClInclude Include="src\excimer\events\MouseEvent.h" />
     <ClInclude Include="src\excimer\graphics\Font.h" />
+    <ClInclude Include="src\excimer\graphics\MeshFactory.h" />
     <ClInclude Include="src\excimer\graphics\MSDFData.h" />
     <ClInclude Include="src\excimer\graphics\Material.h" />
     <ClInclude Include="src\excimer\graphics\Mesh.h" />
@@ -101,6 +102,7 @@
     <ClInclude Include="src\excimer\graphics\rhi\Texture.h" />
     <ClInclude Include="src\excimer\graphics\rhi\UniformBuffer.h" />
     <ClInclude Include="src\excimer\graphics\rhi\VertexBuffer.h" />
+    <ClInclude Include="src\excimer\graphics\Terrain.h" />
     <ClInclude Include="src\excimer\imgui\ImConfig.h" />
     <ClInclude Include="src\excimer\maths\BoundingBox.h" />
     <ClInclude Include="src\excimer\maths\BoundingSphere.h" />
@@ -164,6 +166,7 @@
     <ClCompile Include="src\excimer\graphics\Font.cpp" />
     <ClCompile Include="src\excimer\graphics\Material.cpp" />
     <ClCompile Include="src\excimer\graphics\Mesh.cpp" />
+    <ClCompile Include="src\excimer\graphics\MeshFactory.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\BufferLayout.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\CommandBuffer.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\DescriptorSet.cpp" />
@@ -180,6 +183,7 @@
     <ClCompile Include="src\excimer\graphics\rhi\Texture.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\UniformBuffer.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\VertexBuffer.cpp" />
+    <ClCompile Include="src\excimer\graphics\Terrain.cpp" />
     <ClCompile Include="src\excimer\maths\BoundingBox.cpp" />
     <ClCompile Include="src\excimer\maths\BoundingSphere.cpp" />
     <ClCompile Include="src\excimer\maths\Frustum.cpp" />

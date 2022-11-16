@@ -314,6 +314,8 @@
     </ClInclude>
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
+    <ClInclude Include="src\excimer\graphics\MeshFactory.h" />
+    <ClInclude Include="src\excimer\graphics\Terrain.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -530,5 +532,7 @@
       <Filter>excimer\utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
+    <ClCompile Include="src\excimer\graphics\MeshFactory.cpp" />
+    <ClCompile Include="src\excimer\graphics\Terrain.cpp" />
   </ItemGroup>
 </Project>
