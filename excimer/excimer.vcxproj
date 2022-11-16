@@ -169,6 +169,9 @@
     <ClCompile Include="src\excimer\graphics\Mesh.cpp" />
     <ClCompile Include="src\excimer\graphics\MeshFactory.cpp" />
     <ClCompile Include="src\excimer\graphics\Model.cpp" />
+    <ClCompile Include="src\excimer\graphics\modelloader\FBXLoader.cpp" />
+    <ClCompile Include="src\excimer\graphics\modelloader\GLTFLoader.cpp" />
+    <ClCompile Include="src\excimer\graphics\modelloader\OBJLoader.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\BufferLayout.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\CommandBuffer.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\DescriptorSet.cpp" />

@@ -3,7 +3,7 @@
 #include "excimer/core/Core.h"
 #include "excimer/core/Reference.h"
 #include "excimer/events/ApplicationEvent.h"
-
+#include "excimer/utilities/Timer.h"
 #include "excimer/utilities/AssetManager.h"
 
 namespace Excimer

@@ -536,5 +536,8 @@
     <ClCompile Include="src\excimer\graphics\MeshFactory.cpp" />
     <ClCompile Include="src\excimer\graphics\Terrain.cpp" />
     <ClCompile Include="src\excimer\graphics\Model.cpp" />
+    <ClCompile Include="src\excimer\graphics\modelloader\FBXLoader.cpp" />
+    <ClCompile Include="src\excimer\graphics\modelloader\GLTFLoader.cpp" />
+    <ClCompile Include="src\excimer\graphics\modelloader\OBJLoader.cpp" />
   </ItemGroup>
 </Project>

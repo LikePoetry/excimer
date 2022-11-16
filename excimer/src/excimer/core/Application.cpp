@@ -8,6 +8,8 @@
 
 #include "excimer/graphics/rhi/Renderer.h"
 
+#include "excimer/core/Profiler.h"
+
 #include <imgui/imgui.h>
 
 namespace Excimer {
