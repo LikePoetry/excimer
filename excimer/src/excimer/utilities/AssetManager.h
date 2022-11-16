@@ -7,6 +7,7 @@
 #include "excimer/utilities/TSingleton.h"
 
 #include "excimer/graphics/Font.h"
+#include "excimer/graphics/Model.h"
 
 namespace Excimer
 {
@@ -185,6 +186,25 @@ namespace Excimer
         static bool Load(const std::string& filePath, SharedPtr<Graphics::Shader>& shader)
         {
             shader = SharedPtr<Graphics::Shader>(Graphics::Shader::CreateFromFile(filePath));
+            return true;
+        }
+    };
+
+    class ModelLibrary : public ResourceManager<Graphics::Model>
+    {
+    public:
+        ModelLibrary()
+        {
+            m_LoadFunc = Load;
+        }
+
+        ~ModelLibrary()
+        {
+        }
+
+        static bool Load(const std::string& filePath, SharedPtr<Graphics::Model>& model)
+        {
+            model = CreateSharedPtr<Graphics::Model>(filePath);
             return true;
         }
     };

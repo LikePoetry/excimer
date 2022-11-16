@@ -103,7 +103,11 @@ namespace Excimer
 
 		UniquePtr<Window> m_Window;
 
+		UniquePtr<Timer> m_Timer;
+
 		SharedPtr<ShaderLibrary> m_ShaderLibrary;
+		SharedPtr<ModelLibrary> m_ModelLibrary;
+		SharedPtr<FontLibrary> m_FontLibrary;
 
 		AppState m_CurrentState = AppState::Loading;
 		EditorState m_EditorState = EditorState::Preview;

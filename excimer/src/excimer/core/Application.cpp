@@ -2,9 +2,13 @@
 #include "Application.h"
 #include "Profiler.h"
 #include "excimer/core/os/Window.h"
+#include "excimer/core/os/FileSystem.h"
+#include "excimer/core/Engine.h"
+
+
 #include "excimer/graphics/rhi/Renderer.h"
 
-
+#include <imgui/imgui.h>
 
 namespace Excimer {
 
@@ -23,6 +27,13 @@ namespace Excimer {
 
 	void Application::Init()
 	{
+		EXCIMER_PROFILE_FUNCTION();
+		//场景管理相关，配置初始化
+
+		Engine::Get();
+
+		m_Timer = CreateUniquePtr<Timer>();
+
 		//TODO 目前仅支持Vulkan API; 
 		//m_ProjectSettings.RenderAPI 
 		Graphics::GraphicsContext::SetRenderAPI(static_cast<Graphics::RenderAPI>(Excimer::Graphics::RenderAPI::VULKAN));
@@ -46,10 +57,19 @@ namespace Excimer {
 
 		m_EditorState = EditorState::Play;
 
+		//初始化GUI
+		ImGui::CreateContext();
+		ImGui::StyleColorsDark();
+
 		m_ShaderLibrary = CreateSharedPtr<ShaderLibrary>();
+		m_ModelLibrary = CreateSharedPtr<ModelLibrary>();
+		m_FontLibrary = CreateSharedPtr<FontLibrary>();
 
 		//载入内置嵌入式着色器
 		bool loadEmbeddedShaders = true;
+		if (FileSystem::FolderExists(m_ProjectSettings.m_EngineAssetPath + "Shaders"))
+			loadEmbeddedShaders = false;
+
 		Graphics::Renderer::Init(loadEmbeddedShaders);
 
 
