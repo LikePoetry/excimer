@@ -42,6 +42,8 @@ group "external"
 		SetRecommendedSettings()
 	require("excimer/external/msdf-atlas-gen/premake5")
 		SetRecommendedSettings()
+	require("excimer/external/ModelLoaders/meshoptimizer/premake5")
+		SetRecommendedSettings()
 	filter {}
 
 group ""
@@ -117,7 +119,7 @@ project "excimer"
 
 		defines
 		{
-		"IMGUI_USER_CONFIG=\"src/excimer/imgui/ImConfig.h\"",
+		"IMGUI_USER_CONFIG=\"../src/excimer/imgui/ImConfig.h\"",
 			"_CRT_SECURE_NO_WARNINGS",
 			"_DISABLE_EXTENDED_ALIGNED_STORAGE",
 		}
