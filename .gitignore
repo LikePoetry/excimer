@@ -35,3 +35,10 @@
 /bin-int
 /excimer/external/bin
 /excimer/external/obj
+/excimer/external/freetype/obj
+/excimer/external/freetype/bin
+/excimer/external/msdf-atlas-gen/bin
+/excimer/external/msdf-atlas-gen/obj
+/excimer/external/freetype/bin
+/excimer/external/freetype/obj
+/excimer/external/msdf-atlas-gen/obj

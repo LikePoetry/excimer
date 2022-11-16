@@ -82,6 +82,7 @@
     <ClInclude Include="src\excimer\events\MouseEvent.h" />
     <ClInclude Include="src\excimer\graphics\Font.h" />
     <ClInclude Include="src\excimer\graphics\MeshFactory.h" />
+    <ClInclude Include="src\excimer\graphics\Model.h" />
     <ClInclude Include="src\excimer\graphics\MSDFData.h" />
     <ClInclude Include="src\excimer\graphics\Material.h" />
     <ClInclude Include="src\excimer\graphics\Mesh.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="src\excimer\graphics\Material.cpp" />
     <ClCompile Include="src\excimer\graphics\Mesh.cpp" />
     <ClCompile Include="src\excimer\graphics\MeshFactory.cpp" />
+    <ClCompile Include="src\excimer\graphics\Model.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\BufferLayout.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\CommandBuffer.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\DescriptorSet.cpp" />
