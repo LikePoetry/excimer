@@ -332,6 +332,12 @@
     </ClInclude>
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
+    <ClInclude Include="src\excimer\graphics\camera\CameraController.h" />
+    <ClInclude Include="src\excimer\graphics\camera\Camera2D.h" />
+    <ClInclude Include="src\excimer\core\os\Input.h" />
+    <ClInclude Include="src\excimer\graphics\camera\EditorCamera.h" />
+    <ClInclude Include="src\excimer\graphics\camera\FPSCamera.h" />
+    <ClInclude Include="src\excimer\graphics\camera\ThirdPersonCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -572,5 +578,10 @@
       <Filter>excimer\utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
+    <ClCompile Include="src\excimer\graphics\camera\Camera2D.cpp" />
+    <ClCompile Include="src\excimer\core\os\Input.cpp" />
+    <ClCompile Include="src\excimer\graphics\camera\EditorCamera.cpp" />
+    <ClCompile Include="src\excimer\graphics\camera\FPSCamera.cpp" />
+    <ClCompile Include="src\excimer\graphics\camera\ThirdPersonCamera.cpp" />
   </ItemGroup>
 </Project>

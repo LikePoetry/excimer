@@ -3,6 +3,7 @@
 #include "GLFWWindow.h"
 
 #include "excimer/core/Application.h"
+#include "excimer/core/os/Input.h"
 #include "excimer/graphics/rhi/GraphicsContext.h"
 #include "excimer/utilities/LoadImage.h"
 #include "excimer/events/ApplicationEvent.h"
@@ -290,6 +291,26 @@ namespace Excimer
 		{
 			glfwWindowHint(GLFW_DECORATED, true);
 		}
+	}
+
+	void GLFWWindow::HideMouse(bool hide)
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		if (hide)
+		{
+			glfwSetInputMode(m_Handle, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+		}
+		else
+		{
+			glfwSetInputMode(m_Handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		}
+	}
+
+	void GLFWWindow::SetMousePosition(const glm::vec2& pos)
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		Input::Get().StoreMousePosition(pos.x, pos.y);
+		glfwSetCursorPos(m_Handle, pos.x, pos.y);
 	}
 
 	void GLFWWindow::ProcessInput()

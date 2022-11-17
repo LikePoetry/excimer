@@ -19,6 +19,8 @@ namespace Excimer
 		~GLFWWindow();
 
 		void SetBorderlessWindow(bool borderless) override;
+		void HideMouse(bool hide) override;
+		void SetMousePosition(const glm::vec2& pos) override;
 		virtual void ProcessInput() override;
 
 		bool Init(const WindowDesc& properties);
@@ -45,6 +47,11 @@ namespace Excimer
 		inline float GetDPIScale() const override
 		{
 			return m_Data.DPIScale;
+		}
+
+		inline float GetScreenRatio() const override
+		{
+			return (float)m_Data.Width / (float)m_Data.Height;
 		}
 
 		void SetIcon(const std::string& file, const std::string& smallIconFilePath = "") override;
