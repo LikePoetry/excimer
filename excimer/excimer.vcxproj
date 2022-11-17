@@ -87,6 +87,8 @@
     <ClInclude Include="src\excimer\graphics\camera\FPSCamera.h" />
     <ClInclude Include="src\excimer\graphics\camera\ThirdPersonCamera.h" />
     <ClInclude Include="src\excimer\graphics\Font.h" />
+    <ClInclude Include="src\excimer\graphics\GBuffer.h" />
+    <ClInclude Include="src\excimer\graphics\Light.h" />
     <ClInclude Include="src\excimer\graphics\MSDFData.h" />
     <ClInclude Include="src\excimer\graphics\Material.h" />
     <ClInclude Include="src\excimer\graphics\Mesh.h" />
@@ -112,6 +114,7 @@
     <ClInclude Include="src\excimer\graphics\rhi\UniformBuffer.h" />
     <ClInclude Include="src\excimer\graphics\rhi\VertexBuffer.h" />
     <ClInclude Include="src\excimer\imgui\ImConfig.h" />
+    <ClInclude Include="src\excimer\imgui\ImGuiUtilities.h" />
     <ClInclude Include="src\excimer\maths\BoundingBox.h" />
     <ClInclude Include="src\excimer\maths\BoundingSphere.h" />
     <ClInclude Include="src\excimer\maths\Frustum.h" />
@@ -177,6 +180,8 @@
     <ClCompile Include="src\excimer\graphics\camera\FPSCamera.cpp" />
     <ClCompile Include="src\excimer\graphics\camera\ThirdPersonCamera.cpp" />
     <ClCompile Include="src\excimer\graphics\Font.cpp" />
+    <ClCompile Include="src\excimer\graphics\GBuffer.cpp" />
+    <ClCompile Include="src\excimer\graphics\Light.cpp" />
     <ClCompile Include="src\excimer\graphics\Material.cpp" />
     <ClCompile Include="src\excimer\graphics\Mesh.cpp" />
     <ClCompile Include="src\excimer\graphics\MeshFactory.cpp" />
@@ -202,6 +207,7 @@
     <ClCompile Include="src\excimer\graphics\rhi\Texture.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\UniformBuffer.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\VertexBuffer.cpp" />
+    <ClCompile Include="src\excimer\imgui\ImGuiUtilities.cpp" />
     <ClCompile Include="src\excimer\maths\BoundingBox.cpp" />
     <ClCompile Include="src\excimer\maths\BoundingSphere.cpp" />
     <ClCompile Include="src\excimer\maths\Frustum.cpp" />

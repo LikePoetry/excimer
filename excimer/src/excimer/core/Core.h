@@ -1,6 +1,9 @@
 #pragma once
 #include <stdint.h>
 
+#define MEM_ALIGNMENT 16
+#define MEM_ALIGN __declspec(align(MEM_ALIGNMENT))
+
 #define EXCIMER_EXPORT
 
 #define BIT(x) (1 << x)
