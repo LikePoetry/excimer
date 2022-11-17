@@ -2,7 +2,7 @@
 #include "VKContext.h"
 
 #include "VKDevice.h"
-
+#include "excimer/core/Version.h"
 #include "excimer/maths/MathsUtilities.h"
 #include "excimer/core/Profiler.h"
 #include "excimer/core/StringUtilities.h"
@@ -86,6 +86,14 @@ namespace Excimer
 			VKDevice::Get().Init();
 
 			SetupDebugCallback();
+		}
+
+		void VKContext::Present()
+		{
+		}
+
+		void VKContext::Unload()
+		{
 		}
 
 		VkBool32 VKContext::DebugCallback(VkDebugReportFlagsEXT flags,
@@ -302,6 +310,12 @@ namespace Excimer
 				return VK_ERROR_EXTENSION_NOT_PRESENT;
 			}
 		}
+
+		size_t VKContext::GetMinUniformBufferOffsetAlignment() const
+		{
+			return Graphics::VKDevice::Get().GetPhysicalDevice()->GetProperties().limits.minUniformBufferOffsetAlignment;
+		}
+
 
 		void VKContext::SetupDebugCallback()
 		{

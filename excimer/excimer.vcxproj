@@ -94,6 +94,8 @@
     <ClInclude Include="src\excimer\graphics\Mesh.h" />
     <ClInclude Include="src\excimer\graphics\MeshFactory.h" />
     <ClInclude Include="src\excimer\graphics\Model.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\GPUProfile.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\IMGUIRenderer.h" />
     <ClInclude Include="src\excimer\graphics\Terrain.h" />
     <ClInclude Include="src\excimer\graphics\camera\Camera.h" />
     <ClInclude Include="src\excimer\graphics\rhi\BufferLayout.h" />
@@ -113,7 +115,9 @@
     <ClInclude Include="src\excimer\graphics\rhi\Texture.h" />
     <ClInclude Include="src\excimer\graphics\rhi\UniformBuffer.h" />
     <ClInclude Include="src\excimer\graphics\rhi\VertexBuffer.h" />
+    <ClInclude Include="src\excimer\imgui\IconsMaterialDesignIcons.h" />
     <ClInclude Include="src\excimer\imgui\ImConfig.h" />
+    <ClInclude Include="src\excimer\imgui\ImGuiManager.h" />
     <ClInclude Include="src\excimer\imgui\ImGuiUtilities.h" />
     <ClInclude Include="src\excimer\maths\BoundingBox.h" />
     <ClInclude Include="src\excimer\maths\BoundingSphere.h" />
@@ -137,6 +141,7 @@
     <ClInclude Include="src\excimer\platform\vulkan\VKFence.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKFramebuffer.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKFunctions.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKIMGUIRenderer.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKIndexBuffer.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKInitialisers.h" />
     <ClInclude Include="src\excimer\platform\vulkan\VKPipeline.h" />
@@ -186,6 +191,7 @@
     <ClCompile Include="src\excimer\graphics\Mesh.cpp" />
     <ClCompile Include="src\excimer\graphics\MeshFactory.cpp" />
     <ClCompile Include="src\excimer\graphics\Model.cpp" />
+    <ClCompile Include="src\excimer\graphics\rhi\IMGUIRenderer.cpp" />
     <ClCompile Include="src\excimer\graphics\Terrain.cpp" />
     <ClCompile Include="src\excimer\graphics\camera\Camera.cpp" />
     <ClCompile Include="src\excimer\graphics\modelloader\FBXLoader.cpp" />
@@ -207,6 +213,7 @@
     <ClCompile Include="src\excimer\graphics\rhi\Texture.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\UniformBuffer.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\VertexBuffer.cpp" />
+    <ClCompile Include="src\excimer\imgui\ImGuiManager.cpp" />
     <ClCompile Include="src\excimer\imgui\ImGuiUtilities.cpp" />
     <ClCompile Include="src\excimer\maths\BoundingBox.cpp" />
     <ClCompile Include="src\excimer\maths\BoundingSphere.cpp" />
@@ -229,6 +236,7 @@
     <ClCompile Include="src\excimer\platform\vulkan\VKFence.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKFramebuffer.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKFunctions.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKIMGUIRenderer.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKIndexBuffer.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKPipeline.cpp" />
     <ClCompile Include="src\excimer\platform\vulkan\VKRenderDevice.cpp" />

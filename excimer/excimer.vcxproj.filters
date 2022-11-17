@@ -341,6 +341,11 @@
     <ClInclude Include="src\excimer\graphics\GBuffer.h" />
     <ClInclude Include="src\excimer\graphics\Light.h" />
     <ClInclude Include="src\excimer\imgui\ImGuiUtilities.h" />
+    <ClInclude Include="src\excimer\imgui\ImGuiManager.h" />
+    <ClInclude Include="src\excimer\imgui\IconsMaterialDesignIcons.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\IMGUIRenderer.h" />
+    <ClInclude Include="src\excimer\platform\vulkan\VKIMGUIRenderer.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\GPUProfile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -589,5 +594,8 @@
     <ClCompile Include="src\excimer\graphics\GBuffer.cpp" />
     <ClCompile Include="src\excimer\graphics\Light.cpp" />
     <ClCompile Include="src\excimer\imgui\ImGuiUtilities.cpp" />
+    <ClCompile Include="src\excimer\imgui\ImGuiManager.cpp" />
+    <ClCompile Include="src\excimer\graphics\rhi\IMGUIRenderer.cpp" />
+    <ClCompile Include="src\excimer\platform\vulkan\VKIMGUIRenderer.cpp" />
   </ItemGroup>
 </Project>

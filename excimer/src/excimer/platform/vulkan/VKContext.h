@@ -21,6 +21,8 @@ namespace Excimer
 			~VKContext();
 
 			void Init() override;
+			void Present() override;
+			void Unload();
 
 			static VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(VkDebugReportFlagsEXT flags,
 				VkDebugReportObjectTypeEXT objType,
@@ -33,7 +35,18 @@ namespace Excimer
 
 			static VkInstance GetVKInstance() { return s_VkInstance; }
 
+			size_t GetMinUniformBufferOffsetAlignment() const override;
+
+			bool FlipImGUITexture() const override { return true; }
 			void WaitIdle() const override;
+			void OnImGui() override {};
+
+
+			float GetGPUMemoryUsed() override { return 0.0f; };
+			float GetTotalGPUMemory() override { return 0.0f; };
+
+			const std::vector<const char*>& GetLayerNames() const { return m_InstanceLayerNames; }
+			const std::vector<const char*>& GetExtensionNames() const { return m_InstanceExtensionNames; }
 
 			static void MakeDefault();
 
