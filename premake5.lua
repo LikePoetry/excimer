@@ -127,6 +127,7 @@ project "excimer"
 		links
 		{
 			"glfw",
+			"meshoptimizer",
 			"msdf-atlas-gen"
 		}
 
@@ -163,11 +164,7 @@ project "editor"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
-		"excimer/external/Tracy/TracyClient.cpp",
-		"excimer/external/vulkan/volk/volk.c"
-
-
+		"%{prj.name}/src/**.cpp"
     }
 
     includedirs
@@ -194,6 +191,7 @@ project "editor"
 		"imgui",
 		"SpirvCross",
 		"freetype",
+		"meshoptimizer",
 		"msdf-atlas-gen"
     }
 

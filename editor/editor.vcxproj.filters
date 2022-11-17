@@ -26,12 +26,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\excimer\external\Tracy\TracyClient.cpp">
-      <Filter>excimer\external\Tracy</Filter>
-    </ClCompile>
-    <ClCompile Include="..\excimer\external\vulkan\volk\volk.c">
-      <Filter>excimer\external\vulkan\volk</Filter>
-    </ClCompile>
     <ClCompile Include="src\editor.cpp">
       <Filter>src</Filter>
     </ClCompile>

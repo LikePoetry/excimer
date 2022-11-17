@@ -56,12 +56,6 @@
     <ClInclude Include="src\Editor.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\excimer\external\Tracy\TracyClient.cpp">
-      <WarningLevel>TurnOffAllWarnings</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\excimer\external\vulkan\volk\volk.c">
-      <WarningLevel>TurnOffAllWarnings</WarningLevel>
-    </ClCompile>
     <ClCompile Include="src\editor.cpp" />
     <ClCompile Include="src\excimereditor.cpp" />
   </ItemGroup>
@@ -80,6 +74,9 @@
     </ProjectReference>
     <ProjectReference Include="..\excimer\external\freetype\freetype.vcxproj">
       <Project>{89895BD8-7556-B6E3-9E6F-A48B8A9BEB71}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\excimer\external\ModelLoaders\meshoptimizer\meshoptimizer.vcxproj">
+      <Project>{75046AD2-E1C4-E508-AAFF-2E86167F2AE5}</Project>
     </ProjectReference>
     <ProjectReference Include="..\excimer\external\msdf-atlas-gen\msdf-atlas-gen.vcxproj">
       <Project>{38BD587B-248B-4C81-0D1F-BDA7F98B28E6}</Project>
