@@ -5,6 +5,9 @@
 #include "excimer/events/ApplicationEvent.h"
 #include "excimer/utilities/Timer.h"
 #include "excimer/utilities/AssetManager.h"
+#include "excimer/scene/SceneManager.h"
+#include "excimer/scene/Scene.h"
+#include "excimer/graphics/renderers/RenderGraph.h"
 
 namespace Excimer
 {
@@ -14,6 +17,12 @@ namespace Excimer
 	class Event;
 	class WindowCloseEvent;
 	class WindowResizeEvent;
+
+	namespace Graphics
+	{
+		class RenderGraph;
+		enum class RenderAPI : uint32_t;
+	}
 
 	enum class AppState
 	{
@@ -46,16 +55,52 @@ namespace Excimer
 		void Run();
 		bool OnFrame();
 
+		void OnExitScene();
+
 		virtual void OnQuit();
 		virtual void Init();
 		virtual void OnEvent(Event& e);
+		virtual void OnNewScene(Scene* scene);
+		virtual void OnImGui();
+
+		Graphics::RenderGraph* GetRenderGraph() const
+		{
+			return m_RenderGraph.get();
+		}
 
 		Window* GetWindow() const
 		{
 			return m_Window.get();
 		}
 
+		AppState GetState() const
+		{
+			return m_CurrentState;
+		}
+
+		EditorState GetEditorState() const
+		{
+			return m_EditorState;
+		}
+
+		void SetSceneActive(bool active)
+		{
+			m_SceneActive = active;
+		}
+
+		bool GetSceneActive() const
+		{
+			return m_SceneActive;
+		}
+
+		Scene* GetCurrentScene() const;
+
+		glm::vec2 GetWindowSize() const;
+		float GetWindowDPI() const;
+
 		SharedPtr<ShaderLibrary>& GetShaderLibrary();
+		SharedPtr<ModelLibrary>& GetModelLibrary();
+		SharedPtr<FontLibrary>& GetFontLibrary();
 
 		static Application& Get()
 		{
@@ -98,11 +143,14 @@ namespace Excimer
 		uint32_t m_Frames = 0;
 		uint32_t m_Updates = 0;
 
+		bool m_SceneActive = true;
+
 		uint32_t m_SceneViewWidth = 0;
 		uint32_t m_SceneViewHeight = 0;
 
 		UniquePtr<Window> m_Window;
-
+		UniquePtr<SceneManager> m_SceneManager;
+		UniquePtr<Graphics::RenderGraph> m_RenderGraph;
 		UniquePtr<Timer> m_Timer;
 
 		SharedPtr<ShaderLibrary> m_ShaderLibrary;

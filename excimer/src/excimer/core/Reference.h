@@ -1,6 +1,7 @@
 #pragma once
 #include "excimer/core/Core.h"
 #include "ReferenceCounter.h"
+#include "excimer/core/os/Memory.h"
 #include "excimer/core/ExLog.h"
 
 namespace Excimer
@@ -182,7 +183,7 @@ namespace Excimer
             }
             else
             {
-                SLIGHT_LOG_ERROR("Failed to cast Reference");
+                EXCIMER_LOG_ERROR("Failed to cast Reference");
             }
 
             return *this;

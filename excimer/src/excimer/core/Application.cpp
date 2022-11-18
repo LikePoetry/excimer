@@ -88,6 +88,12 @@ namespace Excimer {
 
 	}
 
+	void Application::OnNewScene(Scene* scene)
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		m_RenderGraph->OnNewScene(scene);
+	}
+
 	void Application::OnQuit()
 	{
 
@@ -111,9 +117,40 @@ namespace Excimer {
 		//OnQuit();
 	}
 
+	glm::vec2 Application::GetWindowSize() const
+	{
+		if (!m_Window)
+			return glm::vec2(0.0f, 0.0f);
+		return glm::vec2(static_cast<float>(m_Window->GetWidth()), static_cast<float>(m_Window->GetHeight()));
+	}
+
+	Scene* Application::GetCurrentScene() const
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		return m_SceneManager->GetCurrentScene();
+	}
+
+	float Application::GetWindowDPI() const
+	{
+		if (!m_Window)
+			return 1.0f;
+
+		return m_Window->GetDPIScale();
+	}
+
 	SharedPtr<ShaderLibrary>& Application::GetShaderLibrary()
 	{
 		return m_ShaderLibrary;
+	}
+
+	SharedPtr<ModelLibrary>& Application::GetModelLibrary()
+	{
+		return m_ModelLibrary;
+	}
+
+	SharedPtr<FontLibrary>& Application::GetFontLibrary()
+	{
+		return m_FontLibrary;
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e)
@@ -127,5 +164,16 @@ namespace Excimer {
 		return true;
 	}
 
+	void Application::OnImGui()
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		if (!m_SceneManager->GetCurrentScene())
+			return;
 
+		m_SceneManager->GetCurrentScene()->OnImGui();
+	}
+
+	void Application::OnExitScene()
+	{
+	}
 }

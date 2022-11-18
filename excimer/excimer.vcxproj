@@ -39,8 +39,8 @@
       <PrecompiledHeaderFile>hzpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DisableSpecificWarnings>4307;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>GLM_FORCE_INTRINSICS;GLM_FORCE_DEPTH_ZERO_TO_ONE;USE_VMA_ALLOCATOR;IMGUI_USER_CONFIG="../src/excimer/imgui/ImConfig.h";_CRT_SECURE_NO_WARNINGS;_DISABLE_EXTENDED_ALIGNED_STORAGE;TRACY_ENABLE;TRACY_ON_DEMAND;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;external\spdlog\include;external\imgui;external;external\glfw\include;external\stb;external\glm;external\SPIRV-Cross;external\msdf-atlas-gen\msdfgen;external\msdf-atlas-gen\msdf-atlas-gen;external\freetype\include;external\cereal\include;external\vulkan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLM_FORCE_INTRINSICS;GLM_FORCE_DEPTH_ZERO_TO_ONE;USE_VMA_ALLOCATOR;IMGUI_USER_CONFIG="../src/excimer/imgui/ImConfig.h";_CRT_SECURE_NO_WARNINGS;_DISABLE_EXTENDED_ALIGNED_STORAGE;EXCIMER_ENGINE;TRACY_ENABLE;TRACY_ON_DEMAND;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;external\entt\src;external\spdlog\include;external\imgui;external;external\glfw\include;external\lua\src;external\stb;external\glm;external\SPIRV-Cross;external\msdf-atlas-gen\msdfgen;external\msdf-atlas-gen\msdf-atlas-gen;external\freetype\include;external\cereal\include;external\vulkan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -65,7 +65,6 @@
     <ClInclude Include="src\excimer\core\EntryPoint.h" />
     <ClInclude Include="src\excimer\core\ExLog.h" />
     <ClInclude Include="src\excimer\core\JobSystem.h" />
-    <ClInclude Include="src\excimer\core\os\Input.h" />
     <ClInclude Include="src\excimer\core\Profiler.h" />
     <ClInclude Include="src\excimer\core\Reference.h" />
     <ClInclude Include="src\excimer\core\ReferenceCounter.h" />
@@ -74,18 +73,23 @@
     <ClInclude Include="src\excimer\core\VFS.h" />
     <ClInclude Include="src\excimer\core\Version.h" />
     <ClInclude Include="src\excimer\core\os\FileSystem.h" />
+    <ClInclude Include="src\excimer\core\os\Input.h" />
     <ClInclude Include="src\excimer\core\os\KeyCodes.h" />
+    <ClInclude Include="src\excimer\core\os\Memory.h" />
+    <ClInclude Include="src\excimer\core\os\MemoryManager.h" />
     <ClInclude Include="src\excimer\core\os\Window.h" />
+    <ClInclude Include="src\excimer\core\os\allocators\Allocator.h" />
+    <ClInclude Include="src\excimer\core\os\allocators\BinAllocator.h" />
+    <ClInclude Include="src\excimer\core\os\allocators\DefaultAllocator.h" />
+    <ClInclude Include="src\excimer\core\os\allocators\StbAllocator.h" />
     <ClInclude Include="src\excimer\core\os\os.h" />
+    <ClInclude Include="src\excimer\embedded\EmbedAsset.h" />
     <ClInclude Include="src\excimer\events\ApplicationEvent.h" />
     <ClInclude Include="src\excimer\events\Event.h" />
     <ClInclude Include="src\excimer\events\KeyEvent.h" />
     <ClInclude Include="src\excimer\events\MouseEvent.h" />
-    <ClInclude Include="src\excimer\graphics\camera\Camera2D.h" />
-    <ClInclude Include="src\excimer\graphics\camera\CameraController.h" />
-    <ClInclude Include="src\excimer\graphics\camera\EditorCamera.h" />
-    <ClInclude Include="src\excimer\graphics\camera\FPSCamera.h" />
-    <ClInclude Include="src\excimer\graphics\camera\ThirdPersonCamera.h" />
+    <ClInclude Include="src\excimer\graphics\AnimatedSprite.h" />
+    <ClInclude Include="src\excimer\graphics\Environment.h" />
     <ClInclude Include="src\excimer\graphics\Font.h" />
     <ClInclude Include="src\excimer\graphics\GBuffer.h" />
     <ClInclude Include="src\excimer\graphics\Light.h" />
@@ -94,16 +98,27 @@
     <ClInclude Include="src\excimer\graphics\Mesh.h" />
     <ClInclude Include="src\excimer\graphics\MeshFactory.h" />
     <ClInclude Include="src\excimer\graphics\Model.h" />
-    <ClInclude Include="src\excimer\graphics\rhi\GPUProfile.h" />
-    <ClInclude Include="src\excimer\graphics\rhi\IMGUIRenderer.h" />
+    <ClInclude Include="src\excimer\graphics\Renderable2D.h" />
+    <ClInclude Include="src\excimer\graphics\Sprite.h" />
     <ClInclude Include="src\excimer\graphics\Terrain.h" />
     <ClInclude Include="src\excimer\graphics\camera\Camera.h" />
+    <ClInclude Include="src\excimer\graphics\camera\Camera2D.h" />
+    <ClInclude Include="src\excimer\graphics\camera\CameraController.h" />
+    <ClInclude Include="src\excimer\graphics\camera\EditorCamera.h" />
+    <ClInclude Include="src\excimer\graphics\camera\FPSCamera.h" />
+    <ClInclude Include="src\excimer\graphics\camera\ThirdPersonCamera.h" />
+    <ClInclude Include="src\excimer\graphics\renderers\DebugRenderer.h" />
+    <ClInclude Include="src\excimer\graphics\renderers\IRenderer.h" />
+    <ClInclude Include="src\excimer\graphics\renderers\RenderCommand.h" />
+    <ClInclude Include="src\excimer\graphics\renderers\RenderGraph.h" />
     <ClInclude Include="src\excimer\graphics\rhi\BufferLayout.h" />
     <ClInclude Include="src\excimer\graphics\rhi\CommandBuffer.h" />
     <ClInclude Include="src\excimer\graphics\rhi\Defintions.h" />
     <ClInclude Include="src\excimer\graphics\rhi\DescriptorSet.h" />
     <ClInclude Include="src\excimer\graphics\rhi\Framebuffer.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\GPUProfile.h" />
     <ClInclude Include="src\excimer\graphics\rhi\GraphicsContext.h" />
+    <ClInclude Include="src\excimer\graphics\rhi\IMGUIRenderer.h" />
     <ClInclude Include="src\excimer\graphics\rhi\IndexBuffer.h" />
     <ClInclude Include="src\excimer\graphics\rhi\Pipeline.h" />
     <ClInclude Include="src\excimer\graphics\rhi\RenderDevice.h" />
@@ -156,7 +171,15 @@
     <ClInclude Include="src\excimer\platform\vulkan\VKVertexBuffer.h" />
     <ClInclude Include="src\excimer\platform\windows\WindowsOS.h" />
     <ClInclude Include="src\excimer\platform\windows\WindowsUtilities.h" />
+    <ClInclude Include="src\excimer\scene\Entity.h" />
+    <ClInclude Include="src\excimer\scene\EntityManager.h" />
+    <ClInclude Include="src\excimer\scene\Scene.h" />
+    <ClInclude Include="src\excimer\scene\SceneGraph.h" />
+    <ClInclude Include="src\excimer\scene\SceneManager.h" />
     <ClInclude Include="src\excimer\scene\Serialisation.h" />
+    <ClInclude Include="src\excimer\scene\component\Components.h" />
+    <ClInclude Include="src\excimer\scene\component\ModelComponent.h" />
+    <ClInclude Include="src\excimer\scene\component\TextureMatrixComponent.h" />
     <ClInclude Include="src\excimer\utilities\AssetManager.h" />
     <ClInclude Include="src\excimer\utilities\CombineHash.h" />
     <ClInclude Include="src\excimer\utilities\LoadImage.h" />
@@ -172,18 +195,22 @@
     <ClCompile Include="src\excimer\core\Engine.cpp" />
     <ClCompile Include="src\excimer\core\ExLog.cpp" />
     <ClCompile Include="src\excimer\core\JobSystem.cpp" />
-    <ClCompile Include="src\excimer\core\os\Input.cpp" />
     <ClCompile Include="src\excimer\core\Reference.cpp" />
     <ClCompile Include="src\excimer\core\StringUtilities.cpp" />
     <ClCompile Include="src\excimer\core\UUID.cpp" />
     <ClCompile Include="src\excimer\core\VFS.cpp" />
     <ClCompile Include="src\excimer\core\os\FileSystem.cpp" />
+    <ClCompile Include="src\excimer\core\os\Input.cpp" />
+    <ClCompile Include="src\excimer\core\os\Memory.cpp" />
+    <ClCompile Include="src\excimer\core\os\MemoryManager.cpp" />
     <ClCompile Include="src\excimer\core\os\Window.cpp" />
+    <ClCompile Include="src\excimer\core\os\allocators\BinAllocator.cpp" />
+    <ClCompile Include="src\excimer\core\os\allocators\DefaultAllocator.cpp" />
+    <ClCompile Include="src\excimer\core\os\allocators\StbAllocator.cpp" />
     <ClCompile Include="src\excimer\core\os\os.cpp" />
-    <ClCompile Include="src\excimer\graphics\camera\Camera2D.cpp" />
-    <ClCompile Include="src\excimer\graphics\camera\EditorCamera.cpp" />
-    <ClCompile Include="src\excimer\graphics\camera\FPSCamera.cpp" />
-    <ClCompile Include="src\excimer\graphics\camera\ThirdPersonCamera.cpp" />
+    <ClCompile Include="src\excimer\embedded\EmbedAsset.cpp" />
+    <ClCompile Include="src\excimer\graphics\AnimatedSprite.cpp" />
+    <ClCompile Include="src\excimer\graphics\Environment.cpp" />
     <ClCompile Include="src\excimer\graphics\Font.cpp" />
     <ClCompile Include="src\excimer\graphics\GBuffer.cpp" />
     <ClCompile Include="src\excimer\graphics\Light.cpp" />
@@ -191,17 +218,26 @@
     <ClCompile Include="src\excimer\graphics\Mesh.cpp" />
     <ClCompile Include="src\excimer\graphics\MeshFactory.cpp" />
     <ClCompile Include="src\excimer\graphics\Model.cpp" />
-    <ClCompile Include="src\excimer\graphics\rhi\IMGUIRenderer.cpp" />
+    <ClCompile Include="src\excimer\graphics\Renderable2D.cpp" />
+    <ClCompile Include="src\excimer\graphics\Sprite.cpp" />
     <ClCompile Include="src\excimer\graphics\Terrain.cpp" />
     <ClCompile Include="src\excimer\graphics\camera\Camera.cpp" />
+    <ClCompile Include="src\excimer\graphics\camera\Camera2D.cpp" />
+    <ClCompile Include="src\excimer\graphics\camera\EditorCamera.cpp" />
+    <ClCompile Include="src\excimer\graphics\camera\FPSCamera.cpp" />
+    <ClCompile Include="src\excimer\graphics\camera\ThirdPersonCamera.cpp" />
     <ClCompile Include="src\excimer\graphics\modelloader\FBXLoader.cpp" />
     <ClCompile Include="src\excimer\graphics\modelloader\GLTFLoader.cpp" />
     <ClCompile Include="src\excimer\graphics\modelloader\OBJLoader.cpp" />
+    <ClCompile Include="src\excimer\graphics\renderers\DebugRenderer.cpp" />
+    <ClCompile Include="src\excimer\graphics\renderers\IRenderer.cpp" />
+    <ClCompile Include="src\excimer\graphics\renderers\RenderGraph.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\BufferLayout.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\CommandBuffer.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\DescriptorSet.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\Framebuffer.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\GraphicsContext.cpp" />
+    <ClCompile Include="src\excimer\graphics\rhi\IMGUIRenderer.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\IndexBuffer.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\Pipeline.cpp" />
     <ClCompile Include="src\excimer\graphics\rhi\RenderDevice.cpp" />
@@ -253,6 +289,12 @@
     <ClCompile Include="src\excimer\platform\windows\WindowsTimer.cpp" />
     <ClCompile Include="src\excimer\platform\windows\WindowsUtilities.cpp" />
     <ClCompile Include="src\excimer\platform\windows\WindowsVulkan.cpp" />
+    <ClCompile Include="src\excimer\scene\EntityManager.cpp" />
+    <ClCompile Include="src\excimer\scene\Scene.cpp" />
+    <ClCompile Include="src\excimer\scene\SceneGraph.cpp" />
+    <ClCompile Include="src\excimer\scene\SceneManager.cpp" />
+    <ClCompile Include="src\excimer\scene\component\ModelComponent.cpp" />
+    <ClCompile Include="src\excimer\scene\component\TextureMatrixComponent.cpp" />
     <ClCompile Include="src\excimer\utilities\ExternalBuild.cpp" />
     <ClCompile Include="src\excimer\utilities\LoadImage.cpp" />
     <ClCompile Include="src\excimer\utilities\TimeStep.cpp" />
@@ -262,6 +304,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="external\lua\lua.vcxproj">
+      <Project>{C78D880B-3397-887C-BC12-9F7C281B947C}</Project>
+    </ProjectReference>
     <ProjectReference Include="external\SpirvCross.vcxproj">
       <Project>{434A39C2-2F02-7B0F-9809-546B84E01500}</Project>
     </ProjectReference>

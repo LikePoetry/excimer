@@ -5,9 +5,11 @@ function SetRecommendedSettings()
 end
 
 IncludeDir = {}
+IncludeDir["entt"] = "excimer/external/entt/src/"
 IncludeDir["spdlog"] = "excimer/external/spdlog/include"
 IncludeDir["external"] = "excimer/external"
 IncludeDir["GLFW"] = "excimer/external/glfw/include/"
+IncludeDir["lua"] = "excimer/external/lua/src/"
 IncludeDir["stb"] = "excimer/external/stb"
 IncludeDir["glm"] = "excimer/external/glm"
 IncludeDir["vulkan"] = "excimer/external/vulkan/"
@@ -30,6 +32,8 @@ workspace "excimer"
     outputdir="%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group "external"
+	require("excimer/external/lua/premake5")
+		SetRecommendedSettings()
 	require("excimer/external/imguipremake5")
 		SetRecommendedSettings()
 	require("excimer/external/freetype/premake5")
@@ -68,10 +72,12 @@ project "excimer"
 	includedirs
 	{
 		"%{prj.name}/src",
+		"%{IncludeDir.entt}",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.external}",
 		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.lua}",
 		"%{IncludeDir.stb}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.SpirvCross}",
@@ -89,6 +95,7 @@ project "excimer"
 
 	links
 	{
+		"lua",
 		"SpirvCross",
 		"freetype",
 		"imgui",
@@ -122,6 +129,7 @@ project "excimer"
 		"IMGUI_USER_CONFIG=\"../src/excimer/imgui/ImConfig.h\"",
 			"_CRT_SECURE_NO_WARNINGS",
 			"_DISABLE_EXTENDED_ALIGNED_STORAGE",
+			"EXCIMER_ENGINE"
 		}
 		
 		links
@@ -172,6 +180,7 @@ project "editor"
         "excimer/src",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.lua}",
 		"%{IncludeDir.external}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.stb}",
@@ -188,6 +197,7 @@ project "editor"
     {
         "excimer",
 		"glfw",
+		"lua",
 		"imgui",
 		"SpirvCross",
 		"freetype",
@@ -203,7 +213,8 @@ project "editor"
 	{
 		"IMGUI_USER_CONFIG=\"../../excimer/src/excimer/imgui/ImConfig.h\"",
 		"GLM_FORCE_INTRINSICS",
-		"GLM_FORCE_DEPTH_ZERO_TO_ONE"
+		"GLM_FORCE_DEPTH_ZERO_TO_ONE",
+		"EXCIMER_ENGINE"
 	}
 
 	filter { "files:excimer/external/**"}
