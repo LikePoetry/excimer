@@ -34,8 +34,6 @@ namespace Excimer
 			virtual void OnImGui() = 0;
 
 			static GraphicsContext* Create();
-
-			static GraphicsContext* Create();
 		protected:
 			static GraphicsContext* (*CreateFunc)();
 
