@@ -1,0 +1,38 @@
+{
+    "value0": {
+        "Project Version": 8,
+        "RenderAPI": 1,
+        "Fullscreen": true,
+        "VSync": true,
+        "ShowConsole": false,
+        "Title": "Example",
+        "Scenes": [
+            "//Scenes/2D",
+            "//Scenes/Physics",
+            "//Scenes/Terrain",
+            "//Scenes/2DTest",
+            "//Scenes/ElasticTest",
+            "//Scenes/FrictionTest",
+            "//Scenes/Sandbox",
+            "//Scenes/Scenes\\Pong",
+            "//Scenes/Scenes\\Sandbox",
+            "//Scenes/Scenes\\ElasticTest",
+            "//Scenes/Scenes\\Terrain",
+            "//Scenes/Scenes\\2D",
+            "//Scenes/Scenes\\2D",
+            "//Scenes/Scenes\\2D",
+            "//Scenes/Scenes\\2D",
+            "//Scenes/Scenes\\2D",
+            "//Scenes/Scenes\\2D",
+            "//Scenes/Scenes\\2D",
+            "//Scenes/Scenes\\2D",
+            "//Scenes/Scenes\\2D",
+            "//Scenes/Scenes\\2D",
+            "//Scenes/NewScene"
+        ],
+        "SceneIndex": 21,
+        "Borderless": false,
+        "EngineAssetPath": "/Users/jmorton/Dev/Slight/Slight/Assets/",
+        "GPUIndex": -1
+    }
+}

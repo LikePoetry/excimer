@@ -19,9 +19,11 @@ namespace Excimer
 		~GLFWWindow();
 
 		void SetBorderlessWindow(bool borderless) override;
+		void OnUpdate() override;
 		void HideMouse(bool hide) override;
 		void SetMousePosition(const glm::vec2& pos) override;
 		virtual void ProcessInput() override;
+		void Maximise() override;
 
 		bool Init(const WindowDesc& properties);
 

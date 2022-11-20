@@ -293,6 +293,11 @@ namespace Excimer
 		}
 	}
 
+	void GLFWWindow::OnUpdate()
+	{
+		EXCIMER_PROFILE_FUNCTION();
+	}
+
 	void GLFWWindow::HideMouse(bool hide)
 	{
 		EXCIMER_PROFILE_FUNCTION();
@@ -318,6 +323,12 @@ namespace Excimer
 		EXCIMER_PROFILE_SCOPE("GLFW PollEvents");
 		glfwPollEvents();
 
+	}
+
+	void GLFWWindow::Maximise()
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		glfwMaximizeWindow(m_Handle);
 	}
 
 	void GLFWWindow::SetIcon(const std::string& file, const std::string& smallIconFilePath)

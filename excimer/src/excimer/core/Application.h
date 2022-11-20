@@ -7,7 +7,12 @@
 #include "excimer/utilities/AssetManager.h"
 #include "excimer/scene/SceneManager.h"
 #include "excimer/scene/Scene.h"
+#include "excimer/scene/SystemManager.h"
 #include "excimer/graphics/renderers/RenderGraph.h"
+#include "excimer/imgui/ImGuiManager.h"
+
+#include <cereal/types/vector.hpp>
+#include <cereal/cereal.hpp>
 
 namespace Excimer
 {
@@ -116,6 +121,116 @@ namespace Excimer
 
 		bool OnWindowResize(WindowResizeEvent& e);
 
+		virtual void Serialise();
+		virtual void Deserialise();
+
+		template <typename Archive>
+		void save(Archive& archive) const
+
+		{
+			int projectVersion = 8;
+
+			archive(cereal::make_nvp("Project Version", projectVersion));
+
+			// Version 1
+
+			std::string path;
+
+			// Window size and full screen shouldnt be in project
+
+			// Version 8 removed width and height
+			archive(cereal::make_nvp("RenderAPI", m_ProjectSettings.RenderAPI),
+				cereal::make_nvp("Fullscreen", m_ProjectSettings.Fullscreen),
+				cereal::make_nvp("VSync", m_ProjectSettings.VSync),
+				cereal::make_nvp("ShowConsole", m_ProjectSettings.ShowConsole),
+				cereal::make_nvp("Title", m_ProjectSettings.Title));
+			// Version 2
+
+			auto paths = m_SceneManager->GetSceneFilePaths();
+			std::vector<std::string> newPaths;
+			for (auto& path : paths)
+			{
+				std::string newPath;
+				VFS::Get().AbsoulePathToVFS(path, newPath);
+				newPaths.push_back(path);
+			}
+			archive(cereal::make_nvp("Scenes", newPaths));
+			// Version 3
+			archive(cereal::make_nvp("SceneIndex", m_SceneManager->GetCurrentSceneIndex()));
+			// Version 4
+			archive(cereal::make_nvp("Borderless", m_ProjectSettings.Borderless));
+			// Version 5
+			archive(cereal::make_nvp("EngineAssetPath", m_ProjectSettings.m_EngineAssetPath));
+			// Version 6
+			archive(cereal::make_nvp("GPUIndex", m_ProjectSettings.DesiredGPUIndex));
+		}
+
+		template <typename Archive>
+		void load(Archive& archive)
+		{
+			int sceneIndex = 0;
+			archive(cereal::make_nvp("Project Version", m_ProjectSettings.ProjectVersion));
+
+			std::string test;
+			if (m_ProjectSettings.ProjectVersion < 8)
+			{
+				archive(cereal::make_nvp("RenderAPI", m_ProjectSettings.RenderAPI),
+					cereal::make_nvp("Width", m_ProjectSettings.Width),
+					cereal::make_nvp("Height", m_ProjectSettings.Height),
+					cereal::make_nvp("Fullscreen", m_ProjectSettings.Fullscreen),
+					cereal::make_nvp("VSync", m_ProjectSettings.VSync),
+					cereal::make_nvp("ShowConsole", m_ProjectSettings.ShowConsole),
+					cereal::make_nvp("Title", m_ProjectSettings.Title));
+			}
+			else
+			{
+				archive(cereal::make_nvp("RenderAPI", m_ProjectSettings.RenderAPI),
+					cereal::make_nvp("Fullscreen", m_ProjectSettings.Fullscreen),
+					cereal::make_nvp("VSync", m_ProjectSettings.VSync),
+					cereal::make_nvp("ShowConsole", m_ProjectSettings.ShowConsole),
+					cereal::make_nvp("Title", m_ProjectSettings.Title));
+			}
+			if (m_ProjectSettings.ProjectVersion > 2)
+			{
+				std::vector<std::string> sceneFilePaths;
+				archive(cereal::make_nvp("Scenes", sceneFilePaths));
+
+				for (auto& filePath : sceneFilePaths)
+				{
+					m_SceneManager->AddFileToLoadList(filePath);
+				}
+
+				if (m_SceneManager->GetScenes().size() == 0 && sceneFilePaths.size() == sceneIndex)
+				{
+					m_SceneManager->EnqueueScene(new Scene("Empty Scene"));
+					m_SceneManager->SwitchScene(0);
+				}
+			}
+			if (m_ProjectSettings.ProjectVersion > 3)
+			{
+				archive(cereal::make_nvp("SceneIndex", sceneIndex));
+				m_SceneManager->SwitchScene(sceneIndex);
+			}
+			if (m_ProjectSettings.ProjectVersion > 4)
+			{
+				archive(cereal::make_nvp("Borderless", m_ProjectSettings.Borderless));
+			}
+
+			if (m_ProjectSettings.ProjectVersion > 5)
+			{
+				archive(cereal::make_nvp("EngineAssetPath", m_ProjectSettings.m_EngineAssetPath));
+			}
+			else
+				m_ProjectSettings.m_EngineAssetPath = "/Users/jmorton/dev/Excimer/Excimer/Assets/";
+
+			if (m_ProjectSettings.ProjectVersion > 6)
+				archive(cereal::make_nvp("GPUIndex", m_ProjectSettings.DesiredGPUIndex));
+
+			VFS::Get().Mount("CoreShaders", m_ProjectSettings.m_EngineAssetPath + std::string("Shaders"));
+		}
+
+		void MountVFSPaths();
+
 		struct ProjectSettings
 		{
 			std::string m_ProjectRoot;
@@ -150,7 +265,9 @@ namespace Excimer
 
 		UniquePtr<Window> m_Window;
 		UniquePtr<SceneManager> m_SceneManager;
+		UniquePtr<SystemManager> m_SystemManager;
 		UniquePtr<Graphics::RenderGraph> m_RenderGraph;
+		UniquePtr<ImGuiManager> m_ImGuiManager;
 		UniquePtr<Timer> m_Timer;
 
 		SharedPtr<ShaderLibrary> m_ShaderLibrary;

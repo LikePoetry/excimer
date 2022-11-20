@@ -173,6 +173,7 @@
     <ClInclude Include="src\excimer\platform\windows\WindowsUtilities.h" />
     <ClInclude Include="src\excimer\scene\Entity.h" />
     <ClInclude Include="src\excimer\scene\EntityManager.h" />
+    <ClInclude Include="src\excimer\scene\ISystem.h" />
     <ClInclude Include="src\excimer\scene\Scene.h" />
     <ClInclude Include="src\excimer\scene\SceneGraph.h" />
     <ClInclude Include="src\excimer\scene\SceneManager.h" />
@@ -180,6 +181,7 @@
     <ClInclude Include="src\excimer\scene\component\Components.h" />
     <ClInclude Include="src\excimer\scene\component\ModelComponent.h" />
     <ClInclude Include="src\excimer\scene\component\TextureMatrixComponent.h" />
+    <ClInclude Include="src\excimer\scene\SystemManager.h" />
     <ClInclude Include="src\excimer\utilities\AssetManager.h" />
     <ClInclude Include="src\excimer\utilities\CombineHash.h" />
     <ClInclude Include="src\excimer\utilities\LoadImage.h" />

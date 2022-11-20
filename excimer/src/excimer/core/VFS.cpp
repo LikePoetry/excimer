@@ -5,7 +5,7 @@
 
 namespace Excimer
 {
-	void VFS::Mound(const std::string& virtualPath, const std::string& physicalPath)
+	void VFS::Mount(const std::string& virtualPath, const std::string& physicalPath)
 	{
 		EXCIMER_PROFILE_FUNCTION();
 		m_MountPoints[virtualPath].push_back(physicalPath);

@@ -56,6 +56,7 @@ namespace Excimer
 
 		virtual void ProcessInput() {};
 		virtual void SetBorderlessWindow(bool borderless) = 0;
+		virtual void OnUpdate() = 0;
 
 		virtual void* GetHandle()
 		{
@@ -63,7 +64,7 @@ namespace Excimer
 		};
 
 		virtual void SetIcon(const std::string& filePath, const std::string& smallIconFilePath = "") = 0;
-
+		virtual void Maximise() {};
 		virtual float GetScreenRatio() const = 0;
 		virtual void HideMouse(bool hide) {};
 		virtual void SetMousePosition(const glm::vec2& pos) {};

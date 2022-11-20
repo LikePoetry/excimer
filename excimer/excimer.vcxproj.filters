@@ -455,6 +455,8 @@
     </ClInclude>
     <ClInclude Include="src\excimerengine.h" />
     <ClInclude Include="src\hzpch.h" />
+    <ClInclude Include="src\excimer\scene\ISystem.h" />
+    <ClInclude Include="src\excimer\scene\SystemManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">

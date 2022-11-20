@@ -9,7 +9,7 @@ namespace Excimer
 		friend class ThreadSafeSingleton<VFS>;
 
 	public:
-		void Mound(const std::string& virtualPath, const std::string& physicalPath);
+		void Mount(const std::string& virtualPath, const std::string& physicalPath);
 		void Unmount(const std::string& path);
 		bool ResolvePhysicalPath(const std::string& path, std::string& outPhysicalPath, bool folder = false);
         bool AbsoulePathToVFS(const std::string& path, std::string& outVFSPath, bool folder = false);
