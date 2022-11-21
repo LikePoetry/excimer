@@ -24,6 +24,7 @@
     <ClInclude Include="src\editor.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\EditorPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\editor.cpp">

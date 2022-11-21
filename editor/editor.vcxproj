@@ -54,6 +54,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\editor.h" />
+    <ClInclude Include="src\EditorPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\editor.cpp" />
