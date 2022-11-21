@@ -6,7 +6,7 @@
 #include "VKCommandBuffer.h"
 #include "VKDescriptorSet.h"
 #include "VKFramebuffer.h"
-
+#include "VKIMGUIRenderer.h"
 #include "VKShader.h"
 #include "VKRenderDevice.h"
 #include "VKIndexBuffer.h"
@@ -22,7 +22,7 @@ void Excimer::Graphics::Vulkan::MakeDefault()
 	VKContext::MakeDefault();
 	VKDescriptorSet::MakeDefault();
 	VKFramebuffer::MakeDefault();
-
+	VKIMGUIRenderer::MakeDefault();
 	VKIndexBuffer::MakeDefault();
 
 	VKPipeline::MakeDefault();

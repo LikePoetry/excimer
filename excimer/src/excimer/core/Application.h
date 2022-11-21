@@ -66,12 +66,22 @@ namespace Excimer
 		virtual void Init();
 		virtual void OnEvent(Event& e);
 		virtual void OnNewScene(Scene* scene);
+		virtual void OnRender();
+		virtual void OnUpdate(const TimeStep& dt);
 		virtual void OnImGui();
+		virtual void OnDebugDraw();
 
 		Graphics::RenderGraph* GetRenderGraph() const
 		{
 			return m_RenderGraph.get();
 		}
+
+		SceneManager* GetSceneManager() const
+		{
+			return m_SceneManager.get();
+		}
+
+
 
 		Window* GetWindow() const
 		{
@@ -88,17 +98,22 @@ namespace Excimer
 			return m_EditorState;
 		}
 
+		SystemManager* GetSystemManager() const
+		{
+			return m_SystemManager.get();
+		}
+
 		void SetSceneActive(bool active)
 		{
 			m_SceneActive = active;
 		}
 
+		Scene* GetCurrentScene() const;
+
 		bool GetSceneActive() const
 		{
 			return m_SceneActive;
 		}
-
-		Scene* GetCurrentScene() const;
 
 		glm::vec2 GetWindowSize() const;
 		float GetWindowDPI() const;
@@ -255,10 +270,14 @@ namespace Excimer
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
+		static void UpdateSystems();
+
 		uint32_t m_Frames = 0;
 		uint32_t m_Updates = 0;
-
+		float m_SecondTimer = 0.0f;
+		bool m_Minimized = false;
 		bool m_SceneActive = true;
+		bool m_DisableMainRenderGraph = false;
 
 		uint32_t m_SceneViewWidth = 0;
 		uint32_t m_SceneViewHeight = 0;

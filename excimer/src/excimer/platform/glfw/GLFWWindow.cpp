@@ -15,6 +15,9 @@
 
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
+#include <imgui/imgui.h>
+
+static GLFWcursor* g_MouseCursors[ImGuiMouseCursor_COUNT] = { 0 };
 
 namespace Excimer
 {
@@ -316,6 +319,30 @@ namespace Excimer
 		EXCIMER_PROFILE_FUNCTION();
 		Input::Get().StoreMousePosition(pos.x, pos.y);
 		glfwSetCursorPos(m_Handle, pos.x, pos.y);
+	}
+
+	void GLFWWindow::UpdateCursorImGui()
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		ImGuiIO& io = ImGui::GetIO();
+		ImGuiMouseCursor imgui_cursor = ImGui::GetMouseCursor();
+
+		if ((io.ConfigFlags & ImGuiConfigFlags_NoMouseCursorChange) || glfwGetInputMode(m_Handle, GLFW_CURSOR) == GLFW_CURSOR_DISABLED)
+			return;
+
+		if (imgui_cursor == ImGuiMouseCursor_None || io.MouseDrawCursor)
+		{
+			// Hide OS mouse cursor if imgui is drawing it or if it wants no cursor
+
+			// TODO: This was disabled as it would override control of hiding the cursor
+			//       Need to find a solution to support both
+			// glfwSetInputMode(m_Handle, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+		}
+		else
+		{
+			glfwSetCursor(m_Handle, g_MouseCursors[imgui_cursor] ? g_MouseCursors[imgui_cursor] : g_MouseCursors[ImGuiMouseCursor_Arrow]);
+			// glfwSetInputMode(m_Handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		}
 	}
 
 	void GLFWWindow::ProcessInput()

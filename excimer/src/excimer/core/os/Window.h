@@ -69,7 +69,7 @@ namespace Excimer
 		virtual void HideMouse(bool hide) {};
 		virtual void SetMousePosition(const glm::vec2& pos) {};
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
-
+		virtual void UpdateCursorImGui() = 0;
 		virtual uint32_t GetWidth() const = 0;
 		virtual uint32_t GetHeight() const = 0;
 		virtual float GetDPIScale() const { return 1.0f; }

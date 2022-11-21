@@ -29,7 +29,7 @@ namespace Excimer
 			};
 
 			// 添加一个异步执行的作业。任何空闲线程都将执行此作业。
-			void Excute(Context& ctx, const std::function<void(JobDispatchArgs)>& task);
+			void Execute(Context& ctx, const std::function<void(JobDispatchArgs)>& task);
 
 			// 将一个作业划分为多个作业并并行执行
 		   //	jobCount	: how many jobs to generate for this task.
