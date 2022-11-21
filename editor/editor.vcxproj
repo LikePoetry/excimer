@@ -55,9 +55,11 @@
   <ItemGroup>
     <ClInclude Include="src\editor.h" />
     <ClInclude Include="src\EditorPanel.h" />
+    <ClInclude Include="src\EditorSettingsPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\editor.cpp" />
+    <ClCompile Include="src\EditorSettingsPanel.cpp" />
     <ClCompile Include="src\excimereditor.cpp" />
   </ItemGroup>
   <ItemGroup>

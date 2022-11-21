@@ -24,6 +24,8 @@ namespace Excimer
         void BeginDockSpace(bool gameFullScreen);
         void EndDockSpace();
 
+        void SaveEditorSettings();
+
 
         struct EditorSettings
         {
@@ -52,6 +54,9 @@ namespace Excimer
 
             // Camera Settings
         };
+
+        EditorSettings& GetSettings() { return m_Settings; }
+
 
 	protected:
 

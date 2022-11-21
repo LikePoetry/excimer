@@ -25,6 +25,7 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\EditorPanel.h" />
+    <ClInclude Include="src\EditorSettingsPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\editor.cpp">
@@ -33,5 +34,6 @@
     <ClCompile Include="src\excimereditor.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\EditorSettingsPanel.cpp" />
   </ItemGroup>
 </Project>

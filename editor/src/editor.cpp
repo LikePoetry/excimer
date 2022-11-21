@@ -4,6 +4,7 @@
 #include "excimer/core/os/os.h"
 #include "excimer/core/os/FileSystem.h"
 #include "excimer/core/StringUtilities.h"
+#include "EditorSettingsPanel.h"
 
 namespace Excimer
 {
@@ -44,6 +45,12 @@ namespace Excimer
 		Application::Init();
 
 		Application::Get().GetWindow()->SetEventCallback(BIND_EVENT_FN(Editor::OnEvent));
+
+		m_Panels.emplace_back(CreateSharedPtr<EditorSettingsPanel>());
+
+		for (auto& panel : m_Panels)
+			panel->SetEditor(this);
+
 	}
 
 	void Editor::OnEvent(Event& e)
@@ -61,8 +68,13 @@ namespace Excimer
 
 		BeginDockSpace(m_Settings.m_FullScreenOnPlay && Application::Get().GetEditorState() == EditorState::Play);
 
-		bool showDemo = true;
-		ImGui::ShowDemoWindow(&showDemo);
+		for (auto& panel : m_Panels)
+		{
+			if (panel->Active())
+				panel->OnImGui();
+		}
+		//bool showDemo = true;
+		//ImGui::ShowDemoWindow(&showDemo);
 
 		EndDockSpace();
 
@@ -228,5 +240,10 @@ namespace Excimer
 	void Editor::EndDockSpace()
 	{
 		ImGui::End();
+	}
+
+	void Editor::SaveEditorSettings()
+	{
+
 	}
 }
