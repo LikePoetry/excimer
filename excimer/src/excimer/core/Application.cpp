@@ -374,7 +374,7 @@ namespace Excimer {
 		{
 		}
 
-		//OnQuit();
+		OnQuit();
 	}
 
 	glm::vec2 Application::GetWindowSize() const

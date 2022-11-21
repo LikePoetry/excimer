@@ -53,7 +53,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Editor.h" />
+    <ClInclude Include="src\editor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\editor.cpp" />

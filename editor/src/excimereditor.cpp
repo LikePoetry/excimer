@@ -6,6 +6,6 @@
 
 Excimer::Application* Excimer::CreateApplication()
 {
-	EXCIMER_LOG_INFO("Start Clint!");
+	EXCIMER_LOG_INFO("Start Client!");
 	return new Editor();
 }
