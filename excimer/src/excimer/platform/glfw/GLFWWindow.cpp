@@ -283,6 +283,12 @@ namespace Excimer
 		return new GLFWWindow(properties);
 	}
 
+	void GLFWWindow::SetWindowTitle(const std::string& title)
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		glfwSetWindowTitle(m_Handle, title.c_str());
+	}
+
 	void GLFWWindow::SetBorderlessWindow(bool borderless)
 	{
 		EXCIMER_PROFILE_FUNCTION();

@@ -1,5 +1,6 @@
 #pragma once
 #include "EditorPanel.h"
+#include "excimer/graphics/camera/EditorCamera.h"
 
 #include <excimer/core/Application.h>
 #include <excimer/imgui/ImGuiUtilities.h>
@@ -23,6 +24,8 @@ namespace Excimer
 		void DrawMenuBar();
         void BeginDockSpace(bool gameFullScreen);
         void EndDockSpace();
+
+        void OnNewScene(Scene* scene) override;
 
         void SaveEditorSettings();
 
@@ -57,10 +60,31 @@ namespace Excimer
 
         EditorSettings& GetSettings() { return m_Settings; }
 
+        Camera* GetCamera() const
+        {
+            return m_EditorCamera.get();
+        }
+
+        EditorCameraController& GetEditorCameraController()
+        {
+            return m_EditorCameraController;
+        }
+
+        Maths::Transform& GetEditorCameraTransform()
+        {
+            return m_EditorCameraTransform;
+        }
 
 	protected:
 
+        entt::entity m_SelectedEntity;
+
 		EditorSettings m_Settings;
         std::vector<SharedPtr<EditorPanel>> m_Panels;
+
+        Camera* m_CurrentCamera = nullptr;
+        EditorCameraController m_EditorCameraController;
+        Maths::Transform m_EditorCameraTransform;
+        SharedPtr<Camera> m_EditorCamera = nullptr;
 	};
 }

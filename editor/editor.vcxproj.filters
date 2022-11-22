@@ -21,19 +21,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\editor.h">
+    <ClInclude Include="src\Editor.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\EditorPanel.h" />
     <ClInclude Include="src\EditorSettingsPanel.h" />
+    <ClInclude Include="src\SceneViewPanel.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\editor.cpp">
+    <ClCompile Include="src\Editor.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\excimereditor.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\EditorSettingsPanel.cpp" />
+    <ClCompile Include="src\SceneViewPanel.cpp" />
   </ItemGroup>
 </Project>

@@ -53,14 +53,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\editor.h" />
+    <ClInclude Include="src\Editor.h" />
     <ClInclude Include="src\EditorPanel.h" />
     <ClInclude Include="src\EditorSettingsPanel.h" />
+    <ClInclude Include="src\SceneViewPanel.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\editor.cpp" />
+    <ClCompile Include="src\Editor.cpp" />
     <ClCompile Include="src\EditorSettingsPanel.cpp" />
     <ClCompile Include="src\excimereditor.cpp" />
+    <ClCompile Include="src\SceneViewPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\excimer\excimer.vcxproj">

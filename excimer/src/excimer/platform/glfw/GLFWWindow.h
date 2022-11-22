@@ -18,6 +18,7 @@ namespace Excimer
 		GLFWWindow(const WindowDesc& properties);
 		~GLFWWindow();
 
+		void SetWindowTitle(const std::string& title) override;
 		void SetBorderlessWindow(bool borderless) override;
 		void OnUpdate() override;
 		void HideMouse(bool hide) override;

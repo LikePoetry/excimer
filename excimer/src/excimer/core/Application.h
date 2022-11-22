@@ -118,6 +118,11 @@ namespace Excimer
 		glm::vec2 GetWindowSize() const;
 		float GetWindowDPI() const;
 
+		void SetDisableMainRenderGraph(bool disable)
+		{
+			m_DisableMainRenderGraph = disable;
+		}
+
 		SharedPtr<ShaderLibrary>& GetShaderLibrary();
 		SharedPtr<ModelLibrary>& GetModelLibrary();
 		SharedPtr<FontLibrary>& GetFontLibrary();

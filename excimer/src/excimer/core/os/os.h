@@ -1,6 +1,7 @@
 #pragma once
 #include "excimer/core/Core.h"
 
+#include <glm/vec4.hpp>
 #include <string>
 
 namespace Excimer
@@ -33,6 +34,8 @@ namespace Excimer
         {
             return s_Instance;
         }
+
+        virtual void SetTitleBarColour(const glm::vec4& colour, bool dark = true) {};
 
         virtual std::string GetExecutablePath() = 0;
 

@@ -4,7 +4,12 @@
 #include "excimer/core/os/os.h"
 #include "excimer/core/os/FileSystem.h"
 #include "excimer/core/StringUtilities.h"
+
+#include "excimer/scene/Entity.h"
+#include "excimer/scene/component/ModelComponent.h"
+
 #include "EditorSettingsPanel.h"
+#include "SceneViewPanel.h"
 
 namespace Excimer
 {
@@ -46,10 +51,34 @@ namespace Excimer
 
 		Application::Get().GetWindow()->SetEventCallback(BIND_EVENT_FN(Editor::OnEvent));
 
+		//设置场景中的相机
+		m_EditorCamera = CreateSharedPtr<Camera>(-20.0f,
+			-40.0f,
+			glm::vec3(-31.0f, 12.0f, 51.0f),
+			60.0f,
+			0.1f,
+			1000.0f,
+			(float)Application::Get().GetWindowSize().x / (float)Application::Get().GetWindowSize().y);
+
+		m_CurrentCamera = m_EditorCamera.get();
+		glm::mat4 viewMat = glm::inverse(glm::lookAt(glm::vec3(-31.0f, 12.0f, 51.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+		m_EditorCameraTransform.SetLocalTransform(viewMat);
+
+
+
 		m_Panels.emplace_back(CreateSharedPtr<EditorSettingsPanel>());
+		m_Panels.emplace_back(CreateSharedPtr<SceneViewPanel>());
+
 
 		for (auto& panel : m_Panels)
 			panel->SetEditor(this);
+
+		//设置ImGui样式;
+		ImGuiUtilities::SetTheme(m_Settings.m_Theme);
+		OS::Instance()->SetTitleBarColour(ImGui::GetStyle().Colors[ImGuiCol_MenuBarBg]);
+
+		//设置窗体名称
+		Application::Get().GetWindow()->SetWindowTitle("Slight Editor");
 
 	}
 
@@ -99,6 +128,21 @@ namespace Excimer
 				if (ImGui::MenuItem("Open File"))
 				{
 
+				}
+
+
+				ImGui::EndMenu();
+			}
+
+			// 添加实体
+			if (ImGui::BeginMenu("Entity"))
+			{
+				auto scene = Application::Get().GetSceneManager()->GetCurrentScene();
+
+				if (ImGui::MenuItem("Cube"))
+				{
+					auto entity = scene->CreateEntity("Cube");
+					entity.AddComponent<Graphics::ModelComponent>(Graphics::PrimitiveType::Cube);
 				}
 
 				ImGui::EndMenu();
@@ -245,5 +289,20 @@ namespace Excimer
 	void Editor::SaveEditorSettings()
 	{
 
+	}
+
+	void Editor::OnNewScene(Scene* scene)
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		Application::OnNewScene(scene);
+		m_SelectedEntity = entt::null;
+
+		glm::mat4 viewMat = glm::inverse(glm::lookAt(glm::vec3(-31.0f, 12.0f, 51.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+		m_EditorCameraTransform.SetLocalTransform(viewMat);
+
+		for (auto panel : m_Panels)
+		{
+			panel->OnNewScene(scene);
+		}
 	}
 }

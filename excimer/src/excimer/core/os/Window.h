@@ -56,6 +56,7 @@ namespace Excimer
 
 		virtual void ProcessInput() {};
 		virtual void SetBorderlessWindow(bool borderless) = 0;
+		virtual void SetWindowTitle(const std::string& title) = 0;
 		virtual void OnUpdate() = 0;
 
 		virtual void* GetHandle()
