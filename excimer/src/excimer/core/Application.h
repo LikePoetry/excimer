@@ -141,6 +141,21 @@ namespace Excimer
 
 		bool OnWindowResize(WindowResizeEvent& e);
 
+		void SetSceneViewDimensions(uint32_t width, uint32_t height)
+		{
+			if (width != m_SceneViewWidth)
+			{
+				m_SceneViewWidth = width;
+				m_SceneViewSizeUpdated = true;
+			}
+
+			if (height != m_SceneViewHeight)
+			{
+				m_SceneViewHeight = height;
+				m_SceneViewSizeUpdated = true;
+			}
+		}
+
 		virtual void Serialise();
 		virtual void Deserialise();
 
@@ -286,6 +301,7 @@ namespace Excimer
 
 		uint32_t m_SceneViewWidth = 0;
 		uint32_t m_SceneViewHeight = 0;
+		bool m_SceneViewSizeUpdated = false;
 
 		UniquePtr<Window> m_Window;
 		UniquePtr<SceneManager> m_SceneManager;

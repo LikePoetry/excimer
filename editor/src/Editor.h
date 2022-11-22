@@ -29,6 +29,7 @@ namespace Excimer
 
         void SaveEditorSettings();
 
+        glm::vec2 m_SceneViewPanelPosition;
 
         struct EditorSettings
         {

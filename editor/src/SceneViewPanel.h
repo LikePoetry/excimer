@@ -21,7 +21,9 @@ namespace Excimer
 		void OnImGui() override;
 		void OnNewScene(Scene* scene) override;
 
+		void Resize(uint32_t width, uint32_t height);
 	private:
+		SharedPtr<Graphics::Texture2D> m_GameViewTexture = nullptr;
 		Scene* m_CurrentScene = nullptr;
 		uint32_t m_Width, m_Height;
 	};
