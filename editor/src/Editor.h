@@ -46,7 +46,7 @@ namespace Excimer
             float m_ImGuizmoScale = 0.25f;
 
             bool m_FullScreenSceneView = false;
-            ImGuiUtilities::Theme m_Theme = ImGuiUtilities::Theme::Black;
+            ImGuiUtilities::Theme m_Theme = ImGuiUtilities::Theme::Dark;
             bool m_FreeAspect = true;
             float m_FixedAspect = 1.0f;
             bool m_HalfRes = false;

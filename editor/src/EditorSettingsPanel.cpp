@@ -20,7 +20,7 @@ namespace Excimer
 
         ImGui::Begin(m_Name.c_str(), &m_Active, 0);
         auto& version = Excimer::ExcimerVersion;
-        ImGui::Text("Slight Engine Version : %d.%d.%d", version.major, version.minor, version.patch);
+        ImGui::Text("Excimer Engine Version : %d.%d.%d", version.major, version.minor, version.patch);
         ImGui::Separator();
         ImGui::Columns(2);
         Excimer::ImGuiUtilities::ScopedStyle(ImGuiStyleVar_FramePadding, ImVec2(2, 2));

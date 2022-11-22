@@ -42,3 +42,7 @@
 /excimer/external/freetype/bin
 /excimer/external/freetype/obj
 /excimer/external/msdf-atlas-gen/obj
+/excimer/external/lua/bin
+/excimer/external/lua/obj
+/excimer/external/ModelLoaders/meshoptimizer/bin
+/excimer/external/ModelLoaders/meshoptimizer/obj
