@@ -7,6 +7,9 @@
 #include "excimer/core/os/Input.h"
 #include "excimer/scene/Entity.h"
 #include "excimer/scene/component/ModelComponent.h"
+#include "excimer/scene/component/Components.h"
+
+#include "excimer/graphics/Light.h"
 
 #include "EditorSettingsPanel.h"
 #include "SceneViewPanel.h"
@@ -143,6 +146,7 @@ namespace Excimer
 				{
 					auto entity = scene->CreateEntity("Cube");
 					entity.AddComponent<Graphics::ModelComponent>(Graphics::PrimitiveType::Cube);
+					entity.AddComponent<Graphics::Light>();
 				}
 
 				ImGui::EndMenu();
