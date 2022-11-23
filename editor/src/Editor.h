@@ -30,7 +30,27 @@ namespace Excimer
 
         void SaveEditorSettings();
 
+        //根据射线选中物体
+        void SelectObject(const Maths::Ray& ray);
+
         glm::vec2 m_SceneViewPanelPosition;
+        //获取屏幕射线
+        Maths::Ray GetScreenRay(int x, int y, Camera* camera, int width, int height);
+
+        void SetSelected(entt::entity entity)
+        {
+            m_SelectedEntity = entity;
+        }
+        entt::entity GetSelected() const
+        {
+            return m_SelectedEntity;
+        }
+
+        //获取组件的小图标
+        std::unordered_map<size_t, const char*>& GetComponentIconMap()
+        {
+            return m_ComponentIconMap;
+        }
 
         struct EditorSettings
         {
@@ -86,6 +106,8 @@ namespace Excimer
 
 		EditorSettings m_Settings;
         std::vector<SharedPtr<EditorPanel>> m_Panels;
+
+        std::unordered_map<size_t, const char*> m_ComponentIconMap;
 
         Camera* m_CurrentCamera = nullptr;
         EditorCameraController m_EditorCameraController;

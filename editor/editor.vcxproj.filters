@@ -27,6 +27,7 @@
     <ClInclude Include="src\EditorPanel.h" />
     <ClInclude Include="src\EditorSettingsPanel.h" />
     <ClInclude Include="src\SceneViewPanel.h" />
+    <ClInclude Include="src\InspectorPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Editor.cpp">
@@ -37,5 +38,6 @@
     </ClCompile>
     <ClCompile Include="src\EditorSettingsPanel.cpp" />
     <ClCompile Include="src\SceneViewPanel.cpp" />
+    <ClCompile Include="src\InspectorPanel.cpp" />
   </ItemGroup>
 </Project>

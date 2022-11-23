@@ -56,12 +56,14 @@
     <ClInclude Include="src\Editor.h" />
     <ClInclude Include="src\EditorPanel.h" />
     <ClInclude Include="src\EditorSettingsPanel.h" />
+    <ClInclude Include="src\InspectorPanel.h" />
     <ClInclude Include="src\SceneViewPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Editor.cpp" />
     <ClCompile Include="src\EditorSettingsPanel.cpp" />
     <ClCompile Include="src\excimereditor.cpp" />
+    <ClCompile Include="src\InspectorPanel.cpp" />
     <ClCompile Include="src\SceneViewPanel.cpp" />
   </ItemGroup>
   <ItemGroup>

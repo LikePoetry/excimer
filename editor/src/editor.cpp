@@ -9,10 +9,14 @@
 #include "excimer/scene/component/ModelComponent.h"
 #include "excimer/scene/component/Components.h"
 
+#include "excimer/graphics/Sprite.h"
+#include "excimer/graphics/AnimatedSprite.h"
+
 #include "excimer/graphics/Light.h"
 
 #include "EditorSettingsPanel.h"
 #include "SceneViewPanel.h"
+#include "InspectorPanel.h"
 
 namespace Excimer
 {
@@ -67,10 +71,15 @@ namespace Excimer
 		glm::mat4 viewMat = glm::inverse(glm::lookAt(glm::vec3(-31.0f, 12.0f, 51.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 		m_EditorCameraTransform.SetLocalTransform(viewMat);
 
-
+		//设置组件小图标
+		m_ComponentIconMap[typeid(Maths::Transform).hash_code()] = ICON_MDI_VECTOR_LINE;
+		m_ComponentIconMap[typeid(Graphics::Light).hash_code()] = ICON_MDI_LIGHTBULB;
+		m_ComponentIconMap[typeid(Graphics::ModelComponent).hash_code()] = ICON_MDI_SHAPE;
 
 		m_Panels.emplace_back(CreateSharedPtr<EditorSettingsPanel>());
 		m_Panels.emplace_back(CreateSharedPtr<SceneViewPanel>());
+		m_Panels.emplace_back(CreateSharedPtr<InspectorPanel>());
+
 
 
 		for (auto& panel : m_Panels)
@@ -330,5 +339,144 @@ namespace Excimer
 		}
 
 		Application::OnUpdate(ts);
+	}
+
+	Maths::Ray Editor::GetScreenRay(int x, int y, Camera* camera, int width, int height)
+	{
+		//根据点击点和相机视角发射射线
+		EXCIMER_PROFILE_FUNCTION();
+		if (!camera)
+			return Maths::Ray();
+
+		float screenX = (float)x / (float)width;
+		float screenY = (float)y / (float)height;
+
+		bool flipY = true;
+
+		return camera->GetScreenRay(screenX, screenY, glm::inverse(m_EditorCameraTransform.GetWorldMatrix()), flipY);
+	}
+
+	void Editor::SelectObject(const Maths::Ray& ray)
+	{
+		//根据射线选中物体
+		EXCIMER_PROFILE_FUNCTION();
+		auto& registry = Application::Get().GetSceneManager()->GetCurrentScene()->GetRegistry();
+		float closestEntityDist = Maths::M_INFINITY;
+		entt::entity currentClosestEntity = entt::null;
+
+		auto group = registry.group<Graphics::ModelComponent>(entt::get<Maths::Transform>);
+
+		static Timer timer;
+		static float timeSinceLastSelect = 0.0f;
+
+		for (auto entity : group)
+		{
+			const auto& [model, trans] = group.get<Graphics::ModelComponent, Maths::Transform>(entity);
+
+			auto& meshes = model.ModelRef->GetMeshes();
+
+			for (auto mesh : meshes)
+			{
+				if (mesh->GetActive())
+				{
+					auto& worldTransform = trans.GetWorldMatrix();
+
+					auto bbCopy = mesh->GetBoundingBox()->Transformed(worldTransform);
+					float distance;
+					ray.Intersects(bbCopy, distance);
+
+					if (distance < Maths::M_INFINITY)
+					{
+						if (distance < closestEntityDist)
+						{
+							closestEntityDist = distance;
+							currentClosestEntity = entity;
+						}
+					}
+				}
+			}
+		}
+
+		if (m_SelectedEntity != entt::null)
+		{
+			if (m_SelectedEntity == currentClosestEntity)
+			{
+				if (timer.GetElapsedS() - timeSinceLastSelect < 1.0f)
+				{
+					auto& trans = registry.get<Maths::Transform>(m_SelectedEntity);
+					auto& model = registry.get<Graphics::ModelComponent>(m_SelectedEntity);
+					auto bb = model.ModelRef->GetMeshes().front()->GetBoundingBox()->Transformed(trans.GetWorldMatrix());
+
+					//移动相机到物体
+					//FocusCamera(trans.GetWorldPosition(), glm::distance(bb.Max(), bb.Min()));
+				}
+				else
+				{
+					currentClosestEntity = entt::null;
+				}
+			}
+
+			timeSinceLastSelect = timer.GetElapsedS();
+			m_SelectedEntity = currentClosestEntity;
+			return;
+		}
+
+		auto spriteGroup = registry.group<Graphics::Sprite>(entt::get<Maths::Transform>);
+
+		for (auto entity : spriteGroup)
+		{
+			const auto& [sprite, trans] = spriteGroup.get<Graphics::Sprite, Maths::Transform>(entity);
+
+			auto& worldTransform = trans.GetWorldMatrix();
+			auto bb = Maths::BoundingBox(Maths::Rect(sprite.GetPosition(), sprite.GetPosition() + sprite.GetScale()));
+			bb.Transform(trans.GetWorldMatrix());
+
+			float distance;
+			ray.Intersects(bb, distance);
+			if (distance < Maths::M_INFINITY)
+			{
+				if (distance < closestEntityDist)
+				{
+					closestEntityDist = distance;
+					currentClosestEntity = entity;
+				}
+			}
+		}
+
+		auto animSpriteGroup = registry.group<Graphics::AnimatedSprite>(entt::get<Maths::Transform>);
+
+		for (auto entity : animSpriteGroup)
+		{
+			const auto& [sprite, trans] = animSpriteGroup.get<Graphics::AnimatedSprite, Maths::Transform>(entity);
+
+			auto& worldTransform = trans.GetWorldMatrix();
+			auto bb = Maths::BoundingBox(Maths::Rect(sprite.GetPosition(), sprite.GetPosition() + sprite.GetScale()));
+			bb.Transform(trans.GetWorldMatrix());
+			float distance;
+			ray.Intersects(bb, distance);
+			if (distance < Maths::M_INFINITY)
+			{
+				if (distance < closestEntityDist)
+				{
+					closestEntityDist = distance;
+					currentClosestEntity = entity;
+				}
+			}
+		}
+
+		if (m_SelectedEntity != entt::null)
+		{
+			if (m_SelectedEntity == currentClosestEntity)
+			{
+				auto& trans = registry.get<Maths::Transform>(m_SelectedEntity);
+				auto& sprite = registry.get<Graphics::Sprite>(m_SelectedEntity);
+				auto bb = Maths::BoundingBox(Maths::Rect(sprite.GetPosition(), sprite.GetPosition() + sprite.GetScale()));
+
+				//移动相机到物体
+				//FocusCamera(trans.GetWorldPosition(), glm::distance(bb.Max(), bb.Min()));
+			}
+		}
+
+		m_SelectedEntity = currentClosestEntity;
 	}
 }

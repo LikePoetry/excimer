@@ -2,13 +2,14 @@
 
 #include <excimer/imgui/IconsMaterialDesignIcons.h>
 #include <excimer/maths/Maths.h>
+#include <excimer/core/os/Input.h>
 #include <excimer/graphics/camera/Camera.h>
 
 namespace Excimer
 {
 	SceneViewPanel::SceneViewPanel()
 	{
-		m_Name= ICON_MDI_GAMEPAD_VARIANT " Scene###scene";
+		m_Name = ICON_MDI_GAMEPAD_VARIANT " Scene###scene";
 		m_SimpleName = "Scene";
 		m_CurrentScene = nullptr;
 
@@ -94,6 +95,17 @@ namespace Excimer
 
 		m_Editor->SetSceneViewActive(updateCamera);
 
+		if (updateCamera && app.GetSceneActive() && Input::Get().GetMouseClicked(InputCode::MouseKey::ButtonLeft))
+		{
+			//在场景中左键选择物体
+			EXCIMER_PROFILE_SCOPE("Select Object");
+			float dpi = Application::Get().GetWindowDPI();
+			auto clickPos = Input::Get().GetMousePosition() - glm::vec2(sceneViewPosition.x / dpi, sceneViewPosition.y / dpi);
+
+			Maths::Ray ray = m_Editor->GetScreenRay(int(clickPos.x), int(clickPos.y), camera, int(sceneViewSize.x / dpi), int(sceneViewSize.y / dpi));
+			m_Editor->SelectObject(ray);
+		}
+
 		ImGui::End();
 	}
 
@@ -116,7 +128,7 @@ namespace Excimer
 		bool resize = false;
 
 		EXCIMER_ASSERT(width > 0 && height > 0, "Scene View Dimensions 0");
-		
+
 		Application::Get().SetSceneViewDimensions(width, height);
 
 		if (m_Width != width || m_Height != height)
@@ -143,10 +155,10 @@ namespace Excimer
 			renderGraph->SetRenderTarget(m_GameViewTexture.get(), true, false);
 
 			WindowResizeEvent e(width, height);
-            auto& app = Application::Get();
-            app.GetRenderGraph()->OnResize(width, height);
+			auto& app = Application::Get();
+			app.GetRenderGraph()->OnResize(width, height);
 
-            renderGraph->OnEvent(e);
+			renderGraph->OnEvent(e);
 		}
 	}
 }
