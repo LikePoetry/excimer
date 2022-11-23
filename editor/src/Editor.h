@@ -52,6 +52,8 @@ namespace Excimer
             return m_ComponentIconMap;
         }
 
+        static Editor* GetEditor() { return s_Editor; }
+
         struct EditorSettings
         {
             float m_GridSize = 10.0f;
@@ -115,5 +117,7 @@ namespace Excimer
         SharedPtr<Camera> m_EditorCamera = nullptr;
 
         bool m_SceneViewActive = false;
+
+        static Editor* s_Editor;
 	};
 }

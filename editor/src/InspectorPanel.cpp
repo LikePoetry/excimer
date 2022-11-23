@@ -116,6 +116,406 @@ namespace MM
 		ImGui::Separator();
 		ImGui::PopStyleVar();
 	}
+
+	std::string GetPrimativeName(Excimer::Graphics::PrimitiveType type)
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		switch (type)
+		{
+		case Excimer::Graphics::PrimitiveType::Cube:
+			return "Cube";
+		case Excimer::Graphics::PrimitiveType::Plane:
+			return "Plane";
+		case Excimer::Graphics::PrimitiveType::Quad:
+			return "Quad";
+		case Excimer::Graphics::PrimitiveType::Sphere:
+			return "Sphere";
+		case Excimer::Graphics::PrimitiveType::Pyramid:
+			return "Pyramid";
+		case Excimer::Graphics::PrimitiveType::Capsule:
+			return "Capsule";
+		case Excimer::Graphics::PrimitiveType::Cylinder:
+			return "Cylinder";
+		case Excimer::Graphics::PrimitiveType::Terrain:
+			return "Terrain";
+		case Excimer::Graphics::PrimitiveType::File:
+			return "File";
+		case Excimer::Graphics::PrimitiveType::None:
+			return "None";
+		}
+
+		EXCIMER_LOG_ERROR("Primitive not supported");
+		return "";
+	};
+
+	Excimer::Graphics::PrimitiveType GetPrimativeName(const std::string& type)
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		if (type == "Cube")
+		{
+			return Excimer::Graphics::PrimitiveType::Cube;
+		}
+		else if (type == "Quad")
+		{
+			return Excimer::Graphics::PrimitiveType::Quad;
+		}
+		else if (type == "Sphere")
+		{
+			return Excimer::Graphics::PrimitiveType::Sphere;
+		}
+		else if (type == "Pyramid")
+		{
+			return Excimer::Graphics::PrimitiveType::Pyramid;
+		}
+		else if (type == "Capsule")
+		{
+			return Excimer::Graphics::PrimitiveType::Capsule;
+		}
+		else if (type == "Cylinder")
+		{
+			return Excimer::Graphics::PrimitiveType::Cylinder;
+		}
+		else if (type == "Terrain")
+		{
+			return Excimer::Graphics::PrimitiveType::Terrain;
+		}
+
+		EXCIMER_LOG_ERROR("Primitive not supported");
+		return Excimer::Graphics::PrimitiveType::Cube;
+	};
+
+	void TextureWidget(const char* label, Excimer::Graphics::Material* material, Excimer::Graphics::Texture2D* tex, bool flipImage, float& usingMapProperty, glm::vec4& colourProperty, const std::function<void(const std::string&)>& callback, const ImVec2& imageButtonSize = ImVec2(64, 64))
+	{
+		using namespace Excimer;
+		if (ImGui::TreeNodeEx(label, ImGuiTreeNodeFlags_DefaultOpen))
+		{
+			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(2, 2));
+			ImGui::Columns(2);
+			ImGui::Separator();
+
+			ImGui::AlignTextToFramePadding();
+
+			const ImGuiPayload* payload = ImGui::GetDragDropPayload();
+			auto min = ImGui::GetCurrentWindow()->DC.CursorPos;
+			auto max = min + imageButtonSize + ImGui::GetStyle().FramePadding;
+
+			bool hoveringButton = ImGui::IsMouseHoveringRect(min, max, false);
+			bool showTexture = !(hoveringButton && (payload != NULL && payload->IsDataType("AssetFile")));
+			if (tex && showTexture)
+			{
+				if (ImGui::ImageButton(tex->GetHandle(), imageButtonSize, ImVec2(0.0f, flipImage ? 1.0f : 0.0f), ImVec2(1.0f, flipImage ? 0.0f : 1.0f)))
+				{
+					/*Excimer::Editor::GetEditor()->GetFileBrowserPanel().Open();
+					Excimer::Editor::GetEditor()->GetFileBrowserPanel().SetCallback(callback);*/
+				}
+
+				if (ImGui::IsItemHovered() && tex)
+				{
+					ImGui::BeginTooltip();
+					ImGui::Image(tex->GetHandle(), ImVec2(256, 256), ImVec2(0.0f, flipImage ? 1.0f : 0.0f), ImVec2(1.0f, flipImage ? 0.0f : 1.0f));
+					ImGui::EndTooltip();
+				}
+			}
+			else
+			{
+				if (ImGui::Button(tex ? "" : "Empty", imageButtonSize))
+				{
+					/*Excimer::Editor::GetEditor()->GetFileBrowserPanel().Open();
+					Excimer::Editor::GetEditor()->GetFileBrowserPanel().SetCallback(callback);*/
+				}
+			}
+
+			if (payload != NULL && payload->IsDataType("AssetFile"))
+			{
+				auto filePath = std::string(reinterpret_cast<const char*>(payload->Data));
+				//if (Excimer::Editor::GetEditor()->IsTextureFile(filePath))
+				//{
+				//	if (ImGui::BeginDragDropTarget())
+				//	{
+				//		// Drop directly on to node and append to the end of it's children list.
+				//		if (ImGui::AcceptDragDropPayload("AssetFile"))
+				//		{
+				//			callback(filePath);
+				//			ImGui::EndDragDropTarget();
+
+				//			ImGui::Columns(1);
+				//			ImGui::Separator();
+				//			ImGui::PopStyleVar();
+
+				//			ImGui::TreePop();
+				//			return;
+				//		}
+
+				//		ImGui::EndDragDropTarget();
+				//	}
+				//}
+			}
+
+			ImGui::NextColumn();
+			ImGui::PushItemWidth(-1);
+			ImGui::TextUnformatted(tex ? tex->GetFilepath().c_str() : "No Texture");
+			if (tex)
+			{
+				ImGuiUtilities::Tooltip(tex->GetFilepath());
+				ImGui::Text("%u x %u", tex->GetWidth(), tex->GetHeight());
+				ImGui::Text("Mip Levels : %u", tex->GetMipMapLevels());
+			}
+			ImGui::PopItemWidth();
+			ImGui::NextColumn();
+
+			ImGuiUtilities::Property("Use Map", usingMapProperty, 0.0f, 1.0f);
+			ImGuiUtilities::Property("Colour", colourProperty, 0.0f, 1.0f, false, Excimer::ImGuiUtilities::PropertyFlag::ColourProperty);
+
+			ImGui::Columns(1);
+
+			ImGui::Separator();
+			ImGui::PopStyleVar();
+
+			ImGui::TreePop();
+		}
+	}
+
+	void TextureWidget(const char* label, Excimer::Graphics::Material* material, Excimer::Graphics::Texture2D* tex, bool flipImage, float& usingMapProperty, float& amount, const std::function<void(const std::string&)>& callback, const ImVec2& imageButtonSize = ImVec2(64, 64))
+	{
+		using namespace Excimer;
+		if (ImGui::TreeNodeEx(label, ImGuiTreeNodeFlags_DefaultOpen))
+		{
+			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(2, 2));
+			ImGui::Columns(2);
+			ImGui::Separator();
+
+			ImGui::AlignTextToFramePadding();
+
+			const ImGuiPayload* payload = ImGui::GetDragDropPayload();
+			auto min = ImGui::GetCurrentWindow()->DC.CursorPos;
+			auto max = min + imageButtonSize + ImGui::GetStyle().FramePadding;
+
+			bool hoveringButton = ImGui::IsMouseHoveringRect(min, max, false);
+			bool showTexture = !(hoveringButton && (payload != NULL && payload->IsDataType("AssetFile")));
+			if (tex && showTexture)
+			{
+				if (ImGui::ImageButton(tex->GetHandle(), imageButtonSize, ImVec2(0.0f, flipImage ? 1.0f : 0.0f), ImVec2(1.0f, flipImage ? 0.0f : 1.0f)))
+				{
+					/*Excimer::Editor::GetEditor()->GetFileBrowserPanel().Open();
+					Excimer::Editor::GetEditor()->GetFileBrowserPanel().SetCallback(callback);*/
+				}
+
+				if (ImGui::IsItemHovered() && tex)
+				{
+					ImGui::BeginTooltip();
+					ImGui::Image(tex->GetHandle(), ImVec2(256, 256), ImVec2(0.0f, flipImage ? 1.0f : 0.0f), ImVec2(1.0f, flipImage ? 0.0f : 1.0f));
+					ImGui::EndTooltip();
+				}
+			}
+			else
+			{
+				if (ImGui::Button(tex ? "" : "Empty", imageButtonSize))
+				{
+					/*Excimer::Editor::GetEditor()->GetFileBrowserPanel().Open();
+					Excimer::Editor::GetEditor()->GetFileBrowserPanel().SetCallback(callback);*/
+				}
+			}
+
+			if (payload != NULL && payload->IsDataType("AssetFile"))
+			{
+				auto filePath = std::string(reinterpret_cast<const char*>(payload->Data));
+				//if (Excimer::Editor::GetEditor()->IsTextureFile(filePath))
+				//{
+				//	if (ImGui::BeginDragDropTarget())
+				//	{
+				//		// Drop directly on to node and append to the end of it's children list.
+				//		if (ImGui::AcceptDragDropPayload("AssetFile"))
+				//		{
+				//			callback(filePath);
+				//			ImGui::EndDragDropTarget();
+
+				//			ImGui::Columns(1);
+				//			ImGui::Separator();
+				//			ImGui::PopStyleVar();
+
+				//			ImGui::TreePop();
+				//			return;
+				//		}
+
+				//		ImGui::EndDragDropTarget();
+				//	}
+				//}
+			}
+
+			ImGui::NextColumn();
+			ImGui::PushItemWidth(-1);
+			ImGui::TextUnformatted(tex ? tex->GetFilepath().c_str() : "No Texture");
+			if (tex)
+			{
+				ImGuiUtilities::Tooltip(tex->GetFilepath());
+				ImGui::Text("%u x %u", tex->GetWidth(), tex->GetHeight());
+				ImGui::Text("Mip Levels : %u", tex->GetMipMapLevels());
+			}
+			ImGui::PopItemWidth();
+			ImGui::NextColumn();
+
+			ImGuiUtilities::Property("Use Map", usingMapProperty, 0.0f, 1.0f);
+			ImGuiUtilities::Property("Value", amount, 0.0f, 20.0f);
+
+			ImGui::Columns(1);
+
+			ImGui::Separator();
+			ImGui::PopStyleVar();
+
+			ImGui::TreePop();
+		}
+	}
+
+
+	template <>
+	void ComponentEditorWidget<Excimer::Graphics::ModelComponent>(entt::registry& reg, entt::registry::entity_type e)
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		auto& model = *reg.get<Excimer::Graphics::ModelComponent>(e).ModelRef.get();
+
+		auto primitiveType = reg.get<Excimer::Graphics::ModelComponent>(e).ModelRef ? model.GetPrimitiveType() : Excimer::Graphics::PrimitiveType::None;
+
+		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(2, 2));
+		ImGui::Columns(2);
+		ImGui::Separator();
+
+		ImGui::TextUnformatted("Primitive Type");
+
+		ImGui::NextColumn();
+		ImGui::PushItemWidth(-1);
+
+		const char* shapes[] = { "Sphere", "Cube", "Pyramid", "Capsule", "Cylinder", "Terrain", "File", "Quad", "None" };
+		std::string shape_current = GetPrimativeName(primitiveType).c_str();
+		if (ImGui::BeginCombo("", shape_current.c_str(), 0)) // The second parameter is the label previewed before opening the combo.
+		{
+			for (int n = 0; n < 8; n++)
+			{
+				bool is_selected = (shape_current.c_str() == shapes[n]);
+				if (ImGui::Selectable(shapes[n], shape_current.c_str()))
+				{
+					if (reg.get<Excimer::Graphics::ModelComponent>(e).ModelRef)
+						model.GetMeshes().clear();
+
+					if (strcmp(shapes[n], "File") != 0)
+					{
+						if (reg.get<Excimer::Graphics::ModelComponent>(e).ModelRef)
+						{
+							model.GetMeshes().push_back(Excimer::SharedPtr<Excimer::Graphics::Mesh>(Excimer::Graphics::CreatePrimative(GetPrimativeName(shapes[n]))));
+							model.SetPrimitiveType(GetPrimativeName(shapes[n]));
+						}
+						else
+						{
+							reg.get<Excimer::Graphics::ModelComponent>(e).LoadPrimitive(GetPrimativeName(shapes[n]));
+						}
+					}
+					else
+					{
+						if (reg.get<Excimer::Graphics::ModelComponent>(e).ModelRef)
+							model.SetPrimitiveType(Excimer::Graphics::PrimitiveType::File);
+					}
+				}
+				if (is_selected)
+					ImGui::SetItemDefaultFocus();
+			}
+			ImGui::EndCombo();
+		}
+
+		ImGui::PopItemWidth();
+		ImGui::NextColumn();
+
+		if (primitiveType == Excimer::Graphics::PrimitiveType::File)
+		{
+			ImGui::TextUnformatted("FilePath");
+
+			ImGui::NextColumn();
+			ImGui::PushItemWidth(-1);
+			ImGui::TextUnformatted(model.GetFilePath().c_str());
+			Excimer::ImGuiUtilities::Tooltip(model.GetFilePath());
+
+			ImGui::PopItemWidth();
+			ImGui::NextColumn();
+		}
+
+		ImGui::Columns(1);
+		ImGui::Separator();
+		ImGui::PopStyleVar();
+
+		int matIndex = 0;
+
+		if (!reg.get<Excimer::Graphics::ModelComponent>(e).ModelRef)
+			return;
+
+		/*auto& meshes = reg.get<Excimer::Graphics::ModelComponent>(e).ModelRef->GetMeshes();
+		for (auto mesh : meshes)
+		{
+			auto material = mesh->GetMaterial();
+			std::string matName = "Material";
+			matName += std::to_string(matIndex);
+			matIndex++;
+			if (!material)
+			{
+				ImGui::TextUnformatted("Empty Material");
+				if (ImGui::Button("Add Material", ImVec2(ImGui::GetContentRegionAvail().x, 0.0f)))
+					mesh->SetMaterial(Excimer::CreateSharedPtr<Excimer::Graphics::Material>());
+			}
+			else if (ImGui::TreeNodeEx(matName.c_str(), 0))
+			{
+				using namespace Excimer;
+				bool flipImage = Graphics::Renderer::GetGraphicsContext()->FlipImGUITexture();
+
+				bool twoSided = material->GetFlag(Excimer::Graphics::Material::RenderFlags::TWOSIDED);
+				bool depthTested = material->GetFlag(Excimer::Graphics::Material::RenderFlags::DEPTHTEST);
+
+				if (ImGuiUtilities::Property("Two Sided", twoSided))
+					material->SetFlag(Excimer::Graphics::Material::RenderFlags::TWOSIDED, twoSided);
+
+				if (ImGuiUtilities::Property("Depth Tested", depthTested))
+					material->SetFlag(Excimer::Graphics::Material::RenderFlags::DEPTHTEST, depthTested);
+
+				Graphics::MaterialProperties* prop = material->GetProperties();
+				auto colour = glm::vec4();
+				float normal = 0.0f;
+				auto& textures = material->GetTextures();
+				TextureWidget("Albedo", material.get(), textures.albedo.get(), flipImage, prop->albedoMapFactor, prop->albedoColour, std::bind(&Graphics::Material::SetAlbedoTexture, material, std::placeholders::_1), ImVec2(64, 64) * Application::Get().GetWindowDPI());
+				ImGui::Separator();
+
+				TextureWidget("Normal", material.get(), textures.normal.get(), flipImage, prop->normalMapFactor, normal, std::bind(&Graphics::Material::SetNormalTexture, material, std::placeholders::_1), ImVec2(64, 64) * Application::Get().GetWindowDPI());
+				ImGui::Separator();
+
+				TextureWidget("Metallic", material.get(), textures.metallic.get(), flipImage, prop->metallicMapFactor, prop->metallic, std::bind(&Graphics::Material::SetMetallicTexture, material, std::placeholders::_1), ImVec2(64, 64) * Application::Get().GetWindowDPI());
+				ImGui::Separator();
+
+				TextureWidget("Roughness", material.get(), textures.roughness.get(), flipImage, prop->roughnessMapFactor, prop->roughness, std::bind(&Graphics::Material::SetRoughnessTexture, material, std::placeholders::_1), ImVec2(64, 64) * Application::Get().GetWindowDPI());
+				ImGui::Separator();
+
+				TextureWidget("AO", material.get(), textures.ao.get(), flipImage, prop->occlusionMapFactor, normal, std::bind(&Graphics::Material::SetAOTexture, material, std::placeholders::_1), ImVec2(64, 64) * Application::Get().GetWindowDPI());
+				ImGui::Separator();
+
+				TextureWidget("Emissive", material.get(), textures.emissive.get(), flipImage, prop->emissiveMapFactor, prop->emissive, std::bind(&Graphics::Material::SetEmissiveTexture, material, std::placeholders::_1), ImVec2(64, 64) * Application::Get().GetWindowDPI());
+
+				ImGui::Columns(2);
+
+				ImGui::AlignTextToFramePadding();
+				ImGui::TextUnformatted("WorkFlow");
+				ImGui::NextColumn();
+				ImGui::PushItemWidth(-1);
+
+				int workFlow = (int)material->GetProperties()->workflow;
+
+				if (ImGui::DragInt("##WorkFlow", &workFlow, 0.3f, 0, 2))
+				{
+					material->GetProperties()->workflow = (float)workFlow;
+				}
+
+				ImGui::PopItemWidth();
+				ImGui::NextColumn();
+
+				material->SetMaterialProperites(*prop);
+				ImGui::Columns(1);
+				ImGui::TreePop();
+			}
+		}*/
+	}
 }
 
 namespace Excimer

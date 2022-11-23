@@ -20,9 +20,11 @@
 
 namespace Excimer
 {
+	Editor* Editor::s_Editor = nullptr;
+
 	Editor::Editor() :Application()
 	{
-
+		s_Editor = this;
 	}
 
 	Editor::~Editor()
