@@ -14,6 +14,8 @@
 
 #include "excimer/graphics/Light.h"
 
+#include "excimer/graphics/renderers/DebugRenderer.h"
+
 #include "EditorSettingsPanel.h"
 #include "SceneViewPanel.h"
 #include "InspectorPanel.h"
@@ -92,7 +94,7 @@ namespace Excimer
 		OS::Instance()->SetTitleBarColour(ImGui::GetStyle().Colors[ImGuiCol_MenuBarBg]);
 
 		//ÉèÖÃ´°ÌåÃû³Æ
-		Application::Get().GetWindow()->SetWindowTitle("Slight Editor");
+		Application::Get().GetWindow()->SetWindowTitle("Excimer Editor");
 
 	}
 
@@ -164,6 +166,9 @@ namespace Excimer
 			}
 			ImGui::EndMainMenuBar();
 		}
+
+		ImGuiUtilities::Property("Colour", colourProperty, 0.0f, 1.0f, false, Excimer::ImGuiUtilities::PropertyFlag::ColourProperty);
+		ImGuiUtilities::Property("Thickness", thickness, Excimer::ImGuiUtilities::PropertyFlag::None);
 	}
 
 	//===========================
@@ -335,7 +340,7 @@ namespace Excimer
 				m_EditorCameraController.HandleKeyboard(m_EditorCameraTransform, (float)ts.GetSeconds());
 			}
 		}
-		else 
+		else
 		{
 			m_EditorCameraController.StopMovement();
 		}
@@ -480,5 +485,16 @@ namespace Excimer
 		}
 
 		m_SelectedEntity = currentClosestEntity;
+	}
+
+	void Editor::OnRender()
+	{
+		DebugRenderer::DrawPoint(glm::vec3(0.0f, 0.0f, 0.0f), thickness, colourProperty);
+		DebugRenderer::DrawHairLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(100.0f, 0.0f, 0.0f), colourProperty);
+		DebugRenderer::DrawThickLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 100.0f, 0.0f), thickness, colourProperty);
+		DebugRenderer::DrawTriangle(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(30.0f, 0.0f, 0.0f), glm::vec3(0.0f, 30.0f, 0.0f), colourProperty);
+
+
+		Application::OnRender();
 	}
 }

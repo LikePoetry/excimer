@@ -27,6 +27,7 @@ namespace Excimer
 
         void OnNewScene(Scene* scene) override;
         void OnUpdate(const TimeStep& ts) override;
+        void OnRender() override;
 
         void SaveEditorSettings();
 
@@ -119,5 +120,8 @@ namespace Excimer
         bool m_SceneViewActive = false;
 
         static Editor* s_Editor;
+
+        glm::vec4 colourProperty = glm::vec4(1.0f);
+        int thickness = 0;
 	};
 }
