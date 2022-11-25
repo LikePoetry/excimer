@@ -63,16 +63,16 @@ namespace Excimer
 		Application::Get().GetWindow()->SetEventCallback(BIND_EVENT_FN(Editor::OnEvent));
 
 		//设置场景中的相机
-		m_EditorCamera = CreateSharedPtr<Camera>(-20.0f,
-			-40.0f,
-			glm::vec3(-31.0f, 12.0f, 51.0f),
+		m_EditorCamera = CreateSharedPtr<Camera>(0.0f,
+			0.0f,
+			glm::vec3(0.0f, 0.0f, 50.0f),
 			60.0f,
 			0.1f,
 			1000.0f,
 			(float)Application::Get().GetWindowSize().x / (float)Application::Get().GetWindowSize().y);
 
 		m_CurrentCamera = m_EditorCamera.get();
-		glm::mat4 viewMat = glm::inverse(glm::lookAt(glm::vec3(-31.0f, 12.0f, 51.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+		glm::mat4 viewMat = glm::inverse(glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 		m_EditorCameraTransform.SetLocalTransform(viewMat);
 
 		//设置组件小图标
@@ -365,6 +365,9 @@ namespace Excimer
 
 	void Editor::SelectObject(const Maths::Ray& ray)
 	{
+		pointTips = ray.Origin;
+		EXCIMER_LOG_INFO("Point--{0},{1},{2}",pointTips.x, pointTips.y, pointTips.z);
+
 		//根据射线选中物体
 		EXCIMER_PROFILE_FUNCTION();
 		auto& registry = Application::Get().GetSceneManager()->GetCurrentScene()->GetRegistry();
@@ -489,7 +492,11 @@ namespace Excimer
 
 	void Editor::OnRender()
 	{
-		DebugRenderer::DrawPoint(glm::vec3(0.0f, 0.0f, 0.0f), thickness, colourProperty);
+		DebugRenderer::DrawHairLine(glm::vec3(-5000.0f, 0.0f, 0.0f), glm::vec3(5000.0f, 0.0f, 0.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));// X轴
+		DebugRenderer::DrawHairLine(glm::vec3(0.0f, -5000.0f, 0.0f), glm::vec3(0.0f, 5000.0f, 0.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));// Y轴
+		DebugRenderer::DrawHairLine(glm::vec3(0.0f, 0.0f, -5000.0f), glm::vec3(0.0f, 0.0f, 5000.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));// Z轴
+
+		DebugRenderer::DrawPoint(pointTips, thickness, colourProperty);
 		DebugRenderer::DrawHairLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(100.0f, 0.0f, 0.0f), colourProperty);
 		DebugRenderer::DrawThickLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 100.0f, 0.0f), thickness, colourProperty);
 		DebugRenderer::DrawTriangle(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(30.0f, 0.0f, 0.0f), glm::vec3(0.0f, 30.0f, 0.0f), colourProperty);

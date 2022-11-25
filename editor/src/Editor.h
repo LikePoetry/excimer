@@ -123,5 +123,6 @@ namespace Excimer
 
         glm::vec4 colourProperty = glm::vec4(1.0f);
         int thickness = 0;
+        glm::vec3 pointTips;
 	};
 }

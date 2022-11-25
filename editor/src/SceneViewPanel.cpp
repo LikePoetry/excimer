@@ -52,6 +52,8 @@ namespace Excimer
 		{
 			//TODO 绘制Toolbar();
 
+			ToolBar();
+
 			offset = ImGui::GetCursorPos(); // Usually ImVec2(0.0f, 50.0f);
 		}
 
@@ -107,6 +109,22 @@ namespace Excimer
 		}
 
 		ImGui::End();
+	}
+
+	void SceneViewPanel::ToolBar()
+	{
+		EXCIMER_PROFILE_FUNCTION();
+
+		auto& camera = *m_Editor->GetCamera();
+
+		ImGui::Indent();
+		if (ImGui::Button(ICON_MDI_ANGLE_RIGHT "2D"))
+		{
+			//正视视角
+			//camera.SetIsOrthographic(true);
+			m_Editor->GetEditorCameraTransform().SetLocalOrientation(glm::quat(glm::vec3(0.0f, 0.0f, 0.0f)));
+		}
+		ImGui::Unindent();
 	}
 
 
