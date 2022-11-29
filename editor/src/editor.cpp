@@ -162,6 +162,17 @@ namespace Excimer
 					entity.AddComponent<Graphics::Light>();
 				}
 
+				if (ImGui::MenuItem("Sphere"))
+				{
+					auto entity = scene->CreateEntity("Sphere");
+					entity.AddComponent<Graphics::ModelComponent>(Graphics::PrimitiveType::Sphere);
+					entity.GetComponent<Graphics::ModelComponent>().ModelRef.get()->GetMeshes().clear();
+					entity.GetComponent<Graphics::ModelComponent>().ModelRef.get()->GetMeshes()
+						.push_back(Excimer::SharedPtr<Excimer::Graphics::Mesh>(Excimer::Graphics::CreateSphere(64, 64)));
+
+					entity.AddComponent<Graphics::Light>();
+				}
+
 				ImGui::EndMenu();
 			}
 			ImGui::EndMainMenuBar();
@@ -169,6 +180,10 @@ namespace Excimer
 
 		ImGuiUtilities::Property("Colour", colourProperty, 0.0f, 1.0f, false, Excimer::ImGuiUtilities::PropertyFlag::ColourProperty);
 		ImGuiUtilities::Property("Thickness", thickness, Excimer::ImGuiUtilities::PropertyFlag::None);
+
+		glm::vec3 test = m_EditorCameraTransform.GetWorldPosition();
+
+		ImGuiUtilities::Property("CameraWorldPosition", test, Excimer::ImGuiUtilities::PropertyFlag::None);
 	}
 
 	//===========================
@@ -365,9 +380,6 @@ namespace Excimer
 
 	void Editor::SelectObject(const Maths::Ray& ray)
 	{
-		pointTips = ray.Origin;
-		EXCIMER_LOG_INFO("Point--{0},{1},{2}",pointTips.x, pointTips.y, pointTips.z);
-
 		//根据射线选中物体
 		EXCIMER_PROFILE_FUNCTION();
 		auto& registry = Application::Get().GetSceneManager()->GetCurrentScene()->GetRegistry();
@@ -500,8 +512,6 @@ namespace Excimer
 		DebugRenderer::DrawHairLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(100.0f, 0.0f, 0.0f), colourProperty);
 		DebugRenderer::DrawThickLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 100.0f, 0.0f), thickness, colourProperty);
 		DebugRenderer::DrawTriangle(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(30.0f, 0.0f, 0.0f), glm::vec3(0.0f, 30.0f, 0.0f), colourProperty);
-
-
 		Application::OnRender();
 	}
 }

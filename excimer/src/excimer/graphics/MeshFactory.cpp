@@ -312,7 +312,7 @@ namespace Excimer
 			float stackCount = static_cast<float>(ySegments);
 			float sectorStep = 2 * Maths::M_PI / sectorCount;
 			float stackStep = Maths::M_PI / stackCount;
-			float radius = 0.5f;
+			float radius = 0.2f;
 
 			for (int i = 0; i <= stackCount; ++i)
 			{

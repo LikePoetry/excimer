@@ -924,10 +924,12 @@ namespace Excimer::Graphics
 
         if (m_Settings.ShadowPass && sceneRenderSettings.ShadowsEnabled)
             ShadowPass();
+
         if (m_Settings.GeomPass && sceneRenderSettings.Renderer3DEnabled)
             ForwardPass();
-        if (m_Settings.SkyboxPass && sceneRenderSettings.SkyboxRenderEnabled)
-            SkyboxPass();
+        // 天空盒
+        //if (m_Settings.SkyboxPass && sceneRenderSettings.SkyboxRenderEnabled)
+        //    SkyboxPass();
         if (m_Settings.GeomPass && sceneRenderSettings.Renderer2DEnabled)
             Render2DPass();
 
@@ -941,11 +943,14 @@ namespace Excimer::Graphics
         if (sceneRenderSettings.BloomEnabled)
             BloomPass();
 
+        // 改变对比度，颜色更加明亮
         ToneMappingPass();
 
+        //一般用随机噪声 cover 色带，在色带处给一个随机像素点，减轻图像的色带
         if (sceneRenderSettings.DebandingEnabled)
             DebandingPass();
 
+        //Fast Approximate Anti-Aliasing 快速近似抗锯齿
         if (sceneRenderSettings.FXAAEnabled)
             FXAAPass();
 

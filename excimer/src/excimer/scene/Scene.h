@@ -115,7 +115,7 @@ namespace Excimer
             bool Renderer3DEnabled = true;
             bool DebugRenderEnabled = true;
             bool SkyboxRenderEnabled = true;
-            bool ShadowsEnabled = true;
+            bool ShadowsEnabled = false;
             bool FXAAEnabled = true;
             bool DebandingEnabled = true;
             bool ChromaticAberationEnabled = false;
