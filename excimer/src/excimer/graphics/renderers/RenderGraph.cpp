@@ -913,17 +913,19 @@ namespace Excimer::Graphics
             Renderer::GetRenderer()->ClearRenderTarget(reinterpret_cast<Texture*>(m_ForwardData.m_DepthTexture), Renderer::GetMainSwapChain()->GetCurrentCommandBuffer());
         }
 
+        // 用于计算镜面反射
         GenerateBRDFLUTPass();
 
         DepthPrePass();
 
         if (/* DISABLES CODE */ (0) && sceneRenderSettings.SSAOEnabled)
         {
+            // 空间环境光遮蔽，主要用于漫反射的计算
             SSAOPass();
         }
 
         if (m_Settings.ShadowPass && sceneRenderSettings.ShadowsEnabled)
-            ShadowPass();
+            ShadowPass();//
 
         if (m_Settings.GeomPass && sceneRenderSettings.Renderer3DEnabled)
             ForwardPass();
@@ -940,6 +942,7 @@ namespace Excimer::Graphics
         // if (sceneRenderSettings.EyeAdaptation)
         //	EyeAdaptationPass();
 
+        // 发光效果
         if (sceneRenderSettings.BloomEnabled)
             BloomPass();
 
