@@ -925,7 +925,7 @@ namespace Excimer::Graphics
         }
 
         if (m_Settings.ShadowPass && sceneRenderSettings.ShadowsEnabled)
-            ShadowPass();//
+            ShadowPass();//阴影渲染
 
         if (m_Settings.GeomPass && sceneRenderSettings.Renderer3DEnabled)
             ForwardPass();
@@ -935,6 +935,7 @@ namespace Excimer::Graphics
         if (m_Settings.GeomPass && sceneRenderSettings.Renderer2DEnabled)
             Render2DPass();
 
+        // 文本渲染
         TextPass();
 
         m_LastRenderTarget = m_MainTexture;
@@ -957,9 +958,11 @@ namespace Excimer::Graphics
         if (sceneRenderSettings.FXAAEnabled)
             FXAAPass();
 
+        // 色彩校正
         if (sceneRenderSettings.ChromaticAberationEnabled)
             ChromaticAberationPass();
-
+        
+        //电影颗粒
         if (sceneRenderSettings.FilmicGrainEnabled)
             FilmicGrainPass();
         // if(sceneRenderSettings.OutlineEnabled

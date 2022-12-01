@@ -380,6 +380,15 @@ namespace Excimer
 
 	void Editor::SelectObject(const Maths::Ray& ray)
 	{
+		EXCIMER_LOG_INFO("X:{0}", ray.Origin.x + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.r);
+		EXCIMER_LOG_INFO("Y:{0}", ray.Origin.y + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.g);
+		EXCIMER_LOG_INFO("Z:{0}", ray.Origin.z + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.b);
+
+		pointTips.r = ray.Origin.x + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.r;
+		pointTips.g = ray.Origin.y + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.g;
+		pointTips.b = ray.Origin.z + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.b;
+
+
 		//根据射线选中物体
 		EXCIMER_PROFILE_FUNCTION();
 		auto& registry = Application::Get().GetSceneManager()->GetCurrentScene()->GetRegistry();
