@@ -139,6 +139,8 @@ namespace Excimer
 
 			m_CameraSpeed = multiplier * dt;
 
+
+
 			if (Input::Get().GetMouseHeld(InputCode::MouseKey::ButtonRight))
 			{
 				if (Input::Get().GetKeyHeld(InputCode::Key::W))

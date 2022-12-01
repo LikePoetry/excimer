@@ -181,9 +181,9 @@ namespace Excimer
 		ImGuiUtilities::Property("Colour", colourProperty, 0.0f, 1.0f, false, Excimer::ImGuiUtilities::PropertyFlag::ColourProperty);
 		ImGuiUtilities::Property("Thickness", thickness, Excimer::ImGuiUtilities::PropertyFlag::None);
 
-		glm::vec3 test = m_EditorCameraTransform.GetWorldPosition();
+		
 
-		ImGuiUtilities::Property("CameraWorldPosition", test, Excimer::ImGuiUtilities::PropertyFlag::None);
+		ImGuiUtilities::Property("CameraWorldPosition",camera_position, Excimer::ImGuiUtilities::PropertyFlag::None);
 	}
 
 	//===========================
@@ -332,7 +332,7 @@ namespace Excimer
 		Application::OnNewScene(scene);
 		m_SelectedEntity = entt::null;
 
-		glm::mat4 viewMat = glm::inverse(glm::lookAt(glm::vec3(-31.0f, 12.0f, 51.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+		glm::mat4 viewMat = glm::inverse(glm::lookAt(glm::vec3(1.0f, 100.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 		m_EditorCameraTransform.SetLocalTransform(viewMat);
 
 		for (auto panel : m_Panels)
@@ -380,6 +380,9 @@ namespace Excimer
 
 	void Editor::SelectObject(const Maths::Ray& ray)
 	{
+
+		
+
 		EXCIMER_LOG_INFO("X:{0}", ray.Origin.x + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.r);
 		EXCIMER_LOG_INFO("Y:{0}", ray.Origin.y + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.g);
 		EXCIMER_LOG_INFO("Z:{0}", ray.Origin.z + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.b);
@@ -513,6 +516,7 @@ namespace Excimer
 
 	void Editor::OnRender()
 	{
+		m_EditorCameraTransform.SetLocalPosition(camera_position);
 		DebugRenderer::DrawHairLine(glm::vec3(-5000.0f, 0.0f, 0.0f), glm::vec3(5000.0f, 0.0f, 0.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));// X÷·
 		DebugRenderer::DrawHairLine(glm::vec3(0.0f, -5000.0f, 0.0f), glm::vec3(0.0f, 5000.0f, 0.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));// Y÷·
 		DebugRenderer::DrawHairLine(glm::vec3(0.0f, 0.0f, -5000.0f), glm::vec3(0.0f, 0.0f, 5000.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));// Z÷·
