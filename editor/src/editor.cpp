@@ -332,7 +332,7 @@ namespace Excimer
 		Application::OnNewScene(scene);
 		m_SelectedEntity = entt::null;
 
-		glm::mat4 viewMat = glm::inverse(glm::lookAt(glm::vec3(1.0f, 100.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+		glm::mat4 viewMat = glm::inverse(glm::lookAt(glm::vec3(-31.0f, 12.0f, 51.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 		m_EditorCameraTransform.SetLocalTransform(viewMat);
 
 		for (auto panel : m_Panels)
@@ -380,9 +380,6 @@ namespace Excimer
 
 	void Editor::SelectObject(const Maths::Ray& ray)
 	{
-
-		
-
 		EXCIMER_LOG_INFO("X:{0}", ray.Origin.x + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.r);
 		EXCIMER_LOG_INFO("Y:{0}", ray.Origin.y + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.g);
 		EXCIMER_LOG_INFO("Z:{0}", ray.Origin.z + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.b);
@@ -391,6 +388,9 @@ namespace Excimer
 		pointTips.g = ray.Origin.y + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.g;
 		pointTips.b = ray.Origin.z + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.b;
 
+		glm::vec3 tempTips = glm::vec3(pointTips.r, pointTips.g, pointTips.b);
+
+		pointVector.emplace_back(tempTips);
 
 		//根据射线选中物体
 		EXCIMER_PROFILE_FUNCTION();
@@ -516,7 +516,12 @@ namespace Excimer
 
 	void Editor::OnRender()
 	{
-		m_EditorCameraTransform.SetLocalPosition(camera_position);
+		for (int i = 1; i < pointVector.size(); i++)
+		{
+			DebugRenderer::DrawHairLine(pointVector[i-1], pointVector[i], colourProperty);// X轴
+		}
+
+		/*m_EditorCameraTransform.SetLocalPosition(camera_position);*/
 		DebugRenderer::DrawHairLine(glm::vec3(-5000.0f, 0.0f, 0.0f), glm::vec3(5000.0f, 0.0f, 0.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));// X轴
 		DebugRenderer::DrawHairLine(glm::vec3(0.0f, -5000.0f, 0.0f), glm::vec3(0.0f, 5000.0f, 0.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));// Y轴
 		DebugRenderer::DrawHairLine(glm::vec3(0.0f, 0.0f, -5000.0f), glm::vec3(0.0f, 0.0f, 5000.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));// Z轴

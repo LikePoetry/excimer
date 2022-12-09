@@ -126,5 +126,7 @@ namespace Excimer
         glm::vec3 pointTips;
         glm::vec3 camera_position;
 
+        std::vector<glm::vec3> pointVector;
+
 	};
 }
