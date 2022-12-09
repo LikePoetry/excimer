@@ -384,9 +384,11 @@ namespace Excimer
 		EXCIMER_LOG_INFO("Y:{0}", ray.Origin.y + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.g);
 		EXCIMER_LOG_INFO("Z:{0}", ray.Origin.z + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.b);
 
-		pointTips.r = ray.Origin.x + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.r;
-		pointTips.g = ray.Origin.y + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.g;
-		pointTips.b = ray.Origin.z + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.b;
+		double depth = -ray.Origin.z / ray.Direction.b;
+
+		pointTips.r = ray.Origin.x + depth * ray.Direction.r;
+		pointTips.g = ray.Origin.y + depth * ray.Direction.g;
+		pointTips.b = ray.Origin.z + depth * ray.Direction.b;
 
 		glm::vec3 tempTips = glm::vec3(pointTips.r, pointTips.g, pointTips.b);
 
