@@ -392,6 +392,16 @@ namespace Excimer
 
 		pointVector.emplace_back(tempTips);
 
+		auto scene = Application::Get().GetSceneManager()->GetCurrentScene();
+
+		auto entity = scene->CreateEntity("Point");
+		entity.AddComponent<Graphics::ModelComponent>(Graphics::PrimitiveType::Sphere);
+		entity.GetComponent<Graphics::ModelComponent>().ModelRef.get()->GetMeshes().clear();
+		entity.GetComponent<Graphics::ModelComponent>().ModelRef.get()->GetMeshes()
+			.push_back(Excimer::SharedPtr<Excimer::Graphics::Mesh>(Excimer::Graphics::CreateSphere(64, 64)));
+		entity.GetTransform().SetLocalPosition(tempTips);
+		//entity.AddComponent<Graphics::Light>();
+
 		//根据射线选中物体
 		EXCIMER_PROFILE_FUNCTION();
 		auto& registry = Application::Get().GetSceneManager()->GetCurrentScene()->GetRegistry();
