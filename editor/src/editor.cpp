@@ -20,6 +20,9 @@
 #include "SceneViewPanel.h"
 #include "InspectorPanel.h"
 
+
+#include <imgui/Plugins/ImGuizmo.h>
+
 namespace Excimer
 {
 	Editor* Editor::s_Editor = nullptr;
@@ -62,17 +65,29 @@ namespace Excimer
 
 		Application::Get().GetWindow()->SetEventCallback(BIND_EVENT_FN(Editor::OnEvent));
 
-		//设置场景中的相机
-		m_EditorCamera = CreateSharedPtr<Camera>(0.0f,
-			0.0f,
-			glm::vec3(0.0f, 0.0f, 50.0f),
+		////设置场景中的相机
+		//m_EditorCamera = CreateSharedPtr<Camera>(0.0f,
+		//	0.0f,
+		//	glm::vec3(0.0f, 0.0f, 50.0f),
+		//	60.0f,
+		//	0.1f,
+		//	1000.0f,
+		//	(float)Application::Get().GetWindowSize().x / (float)Application::Get().GetWindowSize().y);
+
+		//m_CurrentCamera = m_EditorCamera.get();
+		//glm::mat4 viewMat = glm::inverse(glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+		//m_EditorCameraTransform.SetLocalTransform(viewMat);
+
+		m_EditorCamera = CreateSharedPtr<Camera>(-20.0f,
+			-40.0f,
+			glm::vec3(-31.0f, 12.0f, 51.0f),
 			60.0f,
 			0.1f,
 			1000.0f,
 			(float)Application::Get().GetWindowSize().x / (float)Application::Get().GetWindowSize().y);
-
 		m_CurrentCamera = m_EditorCamera.get();
-		glm::mat4 viewMat = glm::inverse(glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+
+		glm::mat4 viewMat = glm::inverse(glm::lookAt(glm::vec3(-31.0f, 12.0f, 51.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
 		m_EditorCameraTransform.SetLocalTransform(viewMat);
 
 		//设置组件小图标
@@ -341,6 +356,55 @@ namespace Excimer
 		}
 	}
 
+	void Editor::OnImGuizmo() 
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		glm::mat4 view = glm::inverse(m_EditorCameraTransform.GetWorldMatrix());
+		glm::mat4 proj = m_CurrentCamera->GetProjectionMatrix();
+
+		if (m_SelectedEntity == entt::null || m_ImGuizmoOperation == 4)
+			return;
+
+		if (m_Settings.m_ShowGizmos)
+		{
+			ImGuizmo::SetDrawlist();
+			ImGuizmo::SetOrthographic(m_CurrentCamera->IsOrthographic());
+
+			auto& registry = Application::Get().GetSceneManager()->GetCurrentScene()->GetRegistry();
+			auto transform = registry.try_get<Maths::Transform>(m_SelectedEntity);
+			if (transform != nullptr)
+			{
+				glm::mat4 model = transform->GetWorldMatrix();
+
+				float snapAmount[3] = { m_Settings.m_SnapAmount, m_Settings.m_SnapAmount, m_Settings.m_SnapAmount };
+				float delta[16];
+
+				ImGuizmo::Manipulate(glm::value_ptr(view),
+					glm::value_ptr(proj),
+					static_cast<ImGuizmo::OPERATION>(m_ImGuizmoOperation),
+					ImGuizmo::LOCAL,
+					glm::value_ptr(model),
+					delta,
+					m_Settings.m_SnapQuizmo ? snapAmount : nullptr);
+
+				if (ImGuizmo::IsUsing())
+				{
+					if (static_cast<ImGuizmo::OPERATION>(m_ImGuizmoOperation) == ImGuizmo::OPERATION::SCALE)
+					{
+						model = glm::inverse(transform->GetParentMatrix()) * model;
+
+						transform->SetLocalScale(Excimer::Maths::GetScale(model));
+					}
+					else
+					{
+						model = glm::inverse(transform->GetParentMatrix()) * model;
+						transform->SetLocalTransform(model);
+					}
+				}
+			}
+		}
+	}
+
 	void Editor::OnUpdate(const TimeStep& ts)
 	{
 		EXCIMER_PROFILE_FUNCTION();
@@ -380,28 +444,28 @@ namespace Excimer
 
 	void Editor::SelectObject(const Maths::Ray& ray)
 	{
-		EXCIMER_LOG_INFO("X:{0}", ray.Origin.x + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.r);
-		EXCIMER_LOG_INFO("Y:{0}", ray.Origin.y + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.g);
-		EXCIMER_LOG_INFO("Z:{0}", ray.Origin.z + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.b);
+		//EXCIMER_LOG_INFO("X:{0}", ray.Origin.x + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.r);
+		//EXCIMER_LOG_INFO("Y:{0}", ray.Origin.y + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.g);
+		//EXCIMER_LOG_INFO("Z:{0}", ray.Origin.z + m_EditorCameraTransform.GetWorldPosition().b * ray.Direction.b);
 
-		double depth = -ray.Origin.z / ray.Direction.b;
+		//double depth = -ray.Origin.z / ray.Direction.b;
 
-		pointTips.r = ray.Origin.x + depth * ray.Direction.r;
-		pointTips.g = ray.Origin.y + depth * ray.Direction.g;
-		pointTips.b = ray.Origin.z + depth * ray.Direction.b;
+		//pointTips.r = ray.Origin.x + depth * ray.Direction.r;
+		//pointTips.g = ray.Origin.y + depth * ray.Direction.g;
+		//pointTips.b = ray.Origin.z + depth * ray.Direction.b;
 
-		glm::vec3 tempTips = glm::vec3(pointTips.r, pointTips.g, pointTips.b);
+		//glm::vec3 tempTips = glm::vec3(pointTips.r, pointTips.g, pointTips.b);
 
-		pointVector.emplace_back(tempTips);
+		//pointVector.emplace_back(tempTips);
 
-		auto scene = Application::Get().GetSceneManager()->GetCurrentScene();
+		//auto scene = Application::Get().GetSceneManager()->GetCurrentScene();
 
-		auto entity = scene->CreateEntity("Point");
-		entity.AddComponent<Graphics::ModelComponent>(Graphics::PrimitiveType::Sphere);
-		entity.GetComponent<Graphics::ModelComponent>().ModelRef.get()->GetMeshes().clear();
-		entity.GetComponent<Graphics::ModelComponent>().ModelRef.get()->GetMeshes()
-			.push_back(Excimer::SharedPtr<Excimer::Graphics::Mesh>(Excimer::Graphics::CreateSphere(64, 64)));
-		entity.GetTransform().SetLocalPosition(tempTips);
+		//auto entity = scene->CreateEntity("Point");
+		//entity.AddComponent<Graphics::ModelComponent>(Graphics::PrimitiveType::Sphere);
+		//entity.GetComponent<Graphics::ModelComponent>().ModelRef.get()->GetMeshes().clear();
+		//entity.GetComponent<Graphics::ModelComponent>().ModelRef.get()->GetMeshes()
+		//	.push_back(Excimer::SharedPtr<Excimer::Graphics::Mesh>(Excimer::Graphics::CreateSphere(64, 64)));
+		//entity.GetTransform().SetLocalPosition(tempTips);
 		//entity.AddComponent<Graphics::Light>();
 
 		//根据射线选中物体
@@ -528,20 +592,20 @@ namespace Excimer
 
 	void Editor::OnRender()
 	{
-		for (int i = 1; i < pointVector.size(); i++)
-		{
-			DebugRenderer::DrawHairLine(pointVector[i-1], pointVector[i], colourProperty);// X轴
-		}
+		//for (int i = 1; i < pointVector.size(); i++)
+		//{
+		//	DebugRenderer::DrawHairLine(pointVector[i-1], pointVector[i], colourProperty);// X轴
+		//}
 
-		/*m_EditorCameraTransform.SetLocalPosition(camera_position);*/
-		DebugRenderer::DrawHairLine(glm::vec3(-5000.0f, 0.0f, 0.0f), glm::vec3(5000.0f, 0.0f, 0.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));// X轴
-		DebugRenderer::DrawHairLine(glm::vec3(0.0f, -5000.0f, 0.0f), glm::vec3(0.0f, 5000.0f, 0.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));// Y轴
-		DebugRenderer::DrawHairLine(glm::vec3(0.0f, 0.0f, -5000.0f), glm::vec3(0.0f, 0.0f, 5000.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));// Z轴
+		///*m_EditorCameraTransform.SetLocalPosition(camera_position);*/
+		//DebugRenderer::DrawHairLine(glm::vec3(-5000.0f, 0.0f, 0.0f), glm::vec3(5000.0f, 0.0f, 0.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));// X轴
+		//DebugRenderer::DrawHairLine(glm::vec3(0.0f, -5000.0f, 0.0f), glm::vec3(0.0f, 5000.0f, 0.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));// Y轴
+		//DebugRenderer::DrawHairLine(glm::vec3(0.0f, 0.0f, -5000.0f), glm::vec3(0.0f, 0.0f, 5000.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));// Z轴
 
-		DebugRenderer::DrawPoint(pointTips, thickness, colourProperty);
-		DebugRenderer::DrawHairLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(100.0f, 0.0f, 0.0f), colourProperty);
-		DebugRenderer::DrawThickLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 100.0f, 0.0f), thickness, colourProperty);
-		DebugRenderer::DrawTriangle(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(30.0f, 0.0f, 0.0f), glm::vec3(0.0f, 30.0f, 0.0f), colourProperty);
+		//DebugRenderer::DrawPoint(pointTips, thickness, colourProperty);
+		//DebugRenderer::DrawHairLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(100.0f, 0.0f, 0.0f), colourProperty);
+		//DebugRenderer::DrawThickLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 100.0f, 0.0f), thickness, colourProperty);
+		//DebugRenderer::DrawTriangle(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(30.0f, 0.0f, 0.0f), glm::vec3(0.0f, 30.0f, 0.0f), colourProperty);
 		Application::OnRender();
 	}
 }

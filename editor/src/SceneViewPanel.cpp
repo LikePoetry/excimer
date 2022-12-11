@@ -4,6 +4,9 @@
 #include <excimer/maths/Maths.h>
 #include <excimer/core/os/Input.h>
 #include <excimer/graphics/camera/Camera.h>
+#include <excimer/graphics/Light.h>
+
+#include <imgui/Plugins/ImGuizmo.h>
 
 namespace Excimer
 {
@@ -12,6 +15,9 @@ namespace Excimer
 		m_Name = ICON_MDI_GAMEPAD_VARIANT " Scene###scene";
 		m_SimpleName = "Scene";
 		m_CurrentScene = nullptr;
+
+		m_ShowComponentGizmoMap[typeid(Graphics::Light).hash_code()] = true;
+		m_ShowComponentGizmoMap[typeid(Camera).hash_code()] = true;
 
 		m_Width = 1280;
 		m_Height = 800;
@@ -64,6 +70,7 @@ namespace Excimer
 			return;
 		}
 
+		ImGuizmo::SetDrawlist();
 		auto sceneViewSize = ImGui::GetWindowContentRegionMax() - ImGui::GetWindowContentRegionMin() - offset * 0.5f; // - offset * 0.5f;
 		auto sceneViewPosition = ImGui::GetWindowPos() + offset;
 
@@ -95,9 +102,14 @@ namespace Excimer
 		ImVec2 maxBound = { minBound.x + windowSize.x, minBound.y + windowSize.y };
 		bool updateCamera = ImGui::IsMouseHoveringRect(minBound, maxBound); // || Input::Get().GetMouseMode() == MouseMode::Captured;
 
+		ImGuizmo::SetRect(sceneViewPosition.x, sceneViewPosition.y, sceneViewSize.x, sceneViewSize.y);
+
 		m_Editor->SetSceneViewActive(updateCamera);
 
-		if (updateCamera && app.GetSceneActive() && Input::Get().GetMouseClicked(InputCode::MouseKey::ButtonLeft))
+		m_Editor->OnImGuizmo();
+
+		//选中移动状态时，拒绝选择物体
+		if (updateCamera && app.GetSceneActive() && !ImGuizmo::IsUsing() && Input::Get().GetMouseClicked(InputCode::MouseKey::ButtonLeft))
 		{
 			//在场景中左键选择物体
 			EXCIMER_PROFILE_SCOPE("Select Object");
@@ -108,22 +120,110 @@ namespace Excimer
 			m_Editor->SelectObject(ray);
 		}
 
+		if (app.GetSceneManager()->GetCurrentScene())
+			DrawGizmos(sceneViewSize.x, sceneViewSize.y, offset.x, offset.y, app.GetSceneManager()->GetCurrentScene());
+
 		ImGui::End();
 	}
+
+	void SceneViewPanel::DrawGizmos(float width, float height, float xpos, float ypos, Scene* scene)
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		Camera* camera = m_Editor->GetCamera();
+		Maths::Transform& cameraTransform = m_Editor->GetEditorCameraTransform();
+		auto& registry = scene->GetRegistry();
+		glm::mat4 view = glm::inverse(cameraTransform.GetWorldMatrix());
+		glm::mat4 proj = camera->GetProjectionMatrix();
+		glm::mat4 viewProj = proj * view;
+		const Maths::Frustum& f = camera->GetFrustum(view);
+
+		ShowComponentGizmo<Graphics::Light>(width, height, xpos, ypos, viewProj, f, registry);
+		ShowComponentGizmo<Camera>(width, height, xpos, ypos, viewProj, f, registry);
+		/*ShowComponentGizmo<SoundComponent>(width, height, xpos, ypos, viewProj, f, registry);*/
+	}
+
 
 	void SceneViewPanel::ToolBar()
 	{
 		EXCIMER_PROFILE_FUNCTION();
-
-		auto& camera = *m_Editor->GetCamera();
-
 		ImGui::Indent();
-		if (ImGui::Button(ICON_MDI_ANGLE_RIGHT "2D"))
+		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.0f, 0.0f, 0.0f, 0.0f));
+
+		bool selected = false;
+
 		{
-			//正视视角
-			//camera.SetIsOrthographic(true);
-			m_Editor->GetEditorCameraTransform().SetLocalOrientation(glm::quat(glm::vec3(0.0f, 0.0f, 0.0f)));
+			selected = m_Editor->GetImGuizmoOperation() == 4;
+			if (selected)
+				ImGui::PushStyleColor(ImGuiCol_Text, ImGuiUtilities::GetSelectedColour());
+			ImGui::SameLine();
+			/*if(ImGui::Button(ICON_MDI_CURSOR_DEFAULT))
+				m_Editor->SetImGuizmoOperation(4);*/
+
+			if (selected)
+				ImGui::PopStyleColor();
+			ImGuiUtilities::Tooltip("Select");
 		}
+
+		ImGui::SameLine();
+		ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+		ImGui::SameLine();
+
+		{
+			selected = m_Editor->GetImGuizmoOperation() == ImGuizmo::TRANSLATE;
+			if (selected)
+				ImGui::PushStyleColor(ImGuiCol_Text, ImGuiUtilities::GetSelectedColour());
+			ImGui::SameLine();
+			if (ImGui::Button(ICON_MDI_ARROW_ALL))
+				m_Editor->SetImGuizmoOperation(ImGuizmo::TRANSLATE);
+
+			if (selected)
+				ImGui::PopStyleColor();
+			ImGuiUtilities::Tooltip("Translate");
+		}
+
+		{
+			selected = m_Editor->GetImGuizmoOperation() == ImGuizmo::ROTATE;
+			if (selected)
+				ImGui::PushStyleColor(ImGuiCol_Text, ImGuiUtilities::GetSelectedColour());
+
+			ImGui::SameLine();
+			if (ImGui::Button(ICON_MDI_ROTATE_ORBIT))
+				m_Editor->SetImGuizmoOperation(ImGuizmo::ROTATE);
+
+			if (selected)
+				ImGui::PopStyleColor();
+			ImGuiUtilities::Tooltip("Rotate");
+		}
+
+		{
+			selected = m_Editor->GetImGuizmoOperation() == ImGuizmo::SCALE;
+			if (selected)
+				ImGui::PushStyleColor(ImGuiCol_Text, ImGuiUtilities::GetSelectedColour());
+
+			ImGui::SameLine();
+			if (ImGui::Button(ICON_MDI_ARROW_EXPAND_ALL))
+				m_Editor->SetImGuizmoOperation(ImGuizmo::SCALE);
+
+			if (selected)
+				ImGui::PopStyleColor();
+			ImGuiUtilities::Tooltip("Scale");
+		}
+
+		//ImGui::SameLine();
+		//ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+		//ImGui::SameLine();
+
+		//auto& camera = *m_Editor->GetCamera();
+
+
+		//if (ImGui::Button(ICON_MDI_ANGLE_RIGHT "2D"))
+		//{
+		//	//正视视角
+		//	//camera.SetIsOrthographic(true);
+		//	m_Editor->GetEditorCameraTransform().SetLocalOrientation(glm::quat(glm::vec3(0.0f, 0.0f, 0.0f)));
+		//}
+
+		ImGui::PopStyleColor();
 		ImGui::Unindent();
 	}
 

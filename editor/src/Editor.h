@@ -25,7 +25,18 @@ namespace Excimer
         void BeginDockSpace(bool gameFullScreen);
         void EndDockSpace();
 
+        void SetImGuizmoOperation(uint32_t operation)
+        {
+            m_ImGuizmoOperation = operation;
+        }
+        uint32_t GetImGuizmoOperation() const
+        {
+            return m_ImGuizmoOperation;
+        }
+
         void OnNewScene(Scene* scene) override;
+        void OnImGuizmo();
+
         void OnUpdate(const TimeStep& ts) override;
         void OnRender() override;
 
@@ -105,6 +116,7 @@ namespace Excimer
 
 	protected:
 
+        uint32_t m_ImGuizmoOperation = 14463;
         entt::entity m_SelectedEntity;
 
 		EditorSettings m_Settings;
