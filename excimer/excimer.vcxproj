@@ -99,6 +99,7 @@
     <ClInclude Include="src\excimer\graphics\MeshFactory.h" />
     <ClInclude Include="src\excimer\graphics\Model.h" />
     <ClInclude Include="src\excimer\graphics\Renderable2D.h" />
+    <ClInclude Include="src\excimer\graphics\renderers\GridRenderer.h" />
     <ClInclude Include="src\excimer\graphics\Sprite.h" />
     <ClInclude Include="src\excimer\graphics\Terrain.h" />
     <ClInclude Include="src\excimer\graphics\camera\Camera.h" />
@@ -221,6 +222,7 @@
     <ClCompile Include="src\excimer\graphics\MeshFactory.cpp" />
     <ClCompile Include="src\excimer\graphics\Model.cpp" />
     <ClCompile Include="src\excimer\graphics\Renderable2D.cpp" />
+    <ClCompile Include="src\excimer\graphics\renderers\GridRenderer.cpp" />
     <ClCompile Include="src\excimer\graphics\Sprite.cpp" />
     <ClCompile Include="src\excimer\graphics\Terrain.cpp" />
     <ClCompile Include="src\excimer\graphics\camera\Camera.cpp" />

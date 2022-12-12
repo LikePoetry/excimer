@@ -607,5 +607,26 @@ namespace Excimer
 		//DebugRenderer::DrawThickLine(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 100.0f, 0.0f), thickness, colourProperty);
 		//DebugRenderer::DrawTriangle(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(30.0f, 0.0f, 0.0f), glm::vec3(0.0f, 30.0f, 0.0f), colourProperty);
 		Application::OnRender();
+
+		for (int i = 0; i < int(m_Panels.size()); i++)
+		{
+			m_Panels[i]->OnRender();
+		}
+		//Íø¸ñÏß»æÖÆ
+		if (m_Settings.m_ShowGrid && !m_EditorCamera->IsOrthographic())
+			Draw3DGrid();
+
+	}
+
+	void Editor::Draw3DGrid()
+	{
+		EXCIMER_PROFILE_FUNCTION();
+
+		if (!m_GridRenderer || !Application::Get().GetSceneManager()->GetCurrentScene())
+		{
+			return;
+		}
+
+
 	}
 }

@@ -457,6 +457,7 @@
     <ClInclude Include="src\hzpch.h" />
     <ClInclude Include="src\excimer\scene\ISystem.h" />
     <ClInclude Include="src\excimer\scene\SystemManager.h" />
+    <ClInclude Include="src\excimer\graphics\renderers\GridRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\excimer\core\Application.cpp">
@@ -787,5 +788,6 @@
       <Filter>excimer\utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\hzpch.cpp" />
+    <ClCompile Include="src\excimer\graphics\renderers\GridRenderer.cpp" />
   </ItemGroup>
 </Project>

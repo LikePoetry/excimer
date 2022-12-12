@@ -1,6 +1,7 @@
 #pragma once
 #include "EditorPanel.h"
 #include "excimer/graphics/camera/EditorCamera.h"
+#include "excimer/graphics/renderers/"
 
 #include <excimer/core/Application.h>
 #include <excimer/imgui/ImGuiUtilities.h>
@@ -38,6 +39,9 @@ namespace Excimer
         void OnImGuizmo();
 
         void OnUpdate(const TimeStep& ts) override;
+
+        void Draw3DGrid();
+
         void OnRender() override;
 
         void SaveEditorSettings();
@@ -128,6 +132,7 @@ namespace Excimer
         EditorCameraController m_EditorCameraController;
         Maths::Transform m_EditorCameraTransform;
         SharedPtr<Camera> m_EditorCamera = nullptr;
+        SharedPtr<Graphics::GridRenderer> m_GridRenderer;
 
         bool m_SceneViewActive = false;
 
