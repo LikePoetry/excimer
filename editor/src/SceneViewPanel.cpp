@@ -5,6 +5,7 @@
 #include <excimer/core/os/Input.h>
 #include <excimer/graphics/camera/Camera.h>
 #include <excimer/graphics/Light.h>
+#include <excimer/graphics/renderers/GridRenderer.h>
 
 #include <imgui/Plugins/ImGuizmo.h>
 
@@ -238,6 +239,8 @@ namespace Excimer
 		renderGraph->SetRenderTarget(m_GameViewTexture.get(), true);
 		renderGraph->SetOverrideCamera(m_Editor->GetCamera(), &m_Editor->GetEditorCameraTransform());
 
+		m_Editor->GetGridRenderer()->SetRenderTarget(m_GameViewTexture.get(), true);
+		m_Editor->GetGridRenderer()->SetDepthTarget(renderGraph->GetForwardData().m_DepthTexture);
 	}
 
 	void SceneViewPanel::Resize(uint32_t width, uint32_t height)
@@ -272,11 +275,20 @@ namespace Excimer
 			auto renderGraph = Application::Get().GetRenderGraph();
 			renderGraph->SetRenderTarget(m_GameViewTexture.get(), true, false);
 
+			//处理绘制网格
+			if (!m_Editor->GetGridRenderer())
+				m_Editor->CreateGridRenderer();
+			m_Editor->GetGridRenderer()->SetRenderTarget(m_GameViewTexture.get(), false);
+			m_Editor->GetGridRenderer()->SetDepthTarget(renderGraph->GetForwardData().m_DepthTexture);
+			
 			WindowResizeEvent e(width, height);
 			auto& app = Application::Get();
 			app.GetRenderGraph()->OnResize(width, height);
 
 			renderGraph->OnEvent(e);
+
+			//改变窗体大小时改变网格!
+			m_Editor->GetGridRenderer()->OnResize(m_Width, m_Height);
 		}
 	}
 }

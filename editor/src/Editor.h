@@ -1,13 +1,26 @@
 #pragma once
 #include "EditorPanel.h"
 #include "excimer/graphics/camera/EditorCamera.h"
-#include "excimer/graphics/renderers/"
 
 #include <excimer/core/Application.h>
 #include <excimer/imgui/ImGuiUtilities.h>
 #include <imgui/imgui.h>
 namespace Excimer
 {
+    class Scene;
+    class Event;
+    class WindowCloseEvent;
+    class WindowResizeEvent;
+    class WindowFileEvent;
+    class TimeStep;
+
+    namespace Graphics
+    {
+        class Texture2D;
+        class GridRenderer;
+        class Mesh;
+    }
+
 	class Editor : public Application
 	{
 		friend class Application;
@@ -108,6 +121,9 @@ namespace Excimer
             return m_EditorCamera.get();
         }
 
+        void CreateGridRenderer();
+        const SharedPtr<Graphics::GridRenderer>& GetGridRenderer();
+
         EditorCameraController& GetEditorCameraController()
         {
             return m_EditorCameraController;
@@ -146,4 +162,6 @@ namespace Excimer
         std::vector<glm::vec3> pointVector;
 
 	};
+
+
 }

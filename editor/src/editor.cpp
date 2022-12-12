@@ -13,7 +13,7 @@
 #include "excimer/graphics/AnimatedSprite.h"
 
 #include "excimer/graphics/Light.h"
-
+#include "excimer/graphics/renderers/GridRenderer.h"
 #include "excimer/graphics/renderers/DebugRenderer.h"
 
 #include "EditorSettingsPanel.h"
@@ -103,6 +103,10 @@ namespace Excimer
 
 		for (auto& panel : m_Panels)
 			panel->SetEditor(this);
+
+		CreateGridRenderer();
+
+		m_SelectedEntity = entt::null;
 
 		//ÉèÖÃImGuiÑùÊ½;
 		ImGuiUtilities::SetTheme(m_Settings.m_Theme);
@@ -627,6 +631,29 @@ namespace Excimer
 			return;
 		}
 
+		DebugRenderer::DrawHairLine(glm::vec3(-5000.0f, 0.0f, 0.0f), glm::vec3(5000.0f, 0.0f, 0.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+		DebugRenderer::DrawHairLine(glm::vec3(0.0f, -5000.0f, 0.0f), glm::vec3(0.0f, 5000.0f, 0.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+		DebugRenderer::DrawHairLine(glm::vec3(0.0f, 0.0f, -5000.0f), glm::vec3(0.0f, 0.0f, 5000.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
 
+		m_GridRenderer->OnImGui();
+
+		m_GridRenderer->BeginScene(Application::Get().GetSceneManager()->GetCurrentScene(), m_EditorCamera.get(), &m_EditorCameraTransform);
+		m_GridRenderer->RenderScene();
+
+	}
+
+	void Editor::CreateGridRenderer()
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		if (!m_GridRenderer)
+			m_GridRenderer = CreateSharedPtr<Graphics::GridRenderer>(uint32_t(Application::Get().m_SceneViewWidth), uint32_t(Application::Get().m_SceneViewHeight));
+	}
+
+	const SharedPtr<Graphics::GridRenderer>& Editor::GetGridRenderer()
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		if (!m_GridRenderer)
+			m_GridRenderer = CreateSharedPtr<Graphics::GridRenderer>(uint32_t(Application::Get().m_SceneViewWidth), uint32_t(Application::Get().m_SceneViewHeight));
+		return m_GridRenderer;
 	}
 }
