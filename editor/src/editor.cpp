@@ -15,7 +15,7 @@
 #include "excimer/graphics/Light.h"
 #include "excimer/graphics/renderers/GridRenderer.h"
 #include "excimer/graphics/renderers/DebugRenderer.h"
-
+#include "excimer/graphics/Environment.h"
 #include "EditorSettingsPanel.h"
 #include "SceneViewPanel.h"
 #include "InspectorPanel.h"
@@ -358,6 +358,15 @@ namespace Excimer
 		{
 			panel->OnNewScene(scene);
 		}
+
+		//加载天空盒数据
+		//Graphics::Environment environment = Graphics::Environment();
+		//environment.SetFilePath("//Textures/cubemap/noga");
+		//environment.SetFileType(".tga");
+		//environment.SetWidth(3072);
+		//environment.SetHeight(4096);
+		//environment.SetNumMips(11);
+		//environment.Load();
 	}
 
 	void Editor::OnImGuizmo() 

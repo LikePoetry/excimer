@@ -930,8 +930,8 @@ namespace Excimer::Graphics
         if (m_Settings.GeomPass && sceneRenderSettings.Renderer3DEnabled)
             ForwardPass();
         // Ìì¿ÕºÐ
-        //if (m_Settings.SkyboxPass && sceneRenderSettings.SkyboxRenderEnabled)
-        //    SkyboxPass();
+        if (m_Settings.SkyboxPass && sceneRenderSettings.SkyboxRenderEnabled)
+            SkyboxPass();
         if (m_Settings.GeomPass && sceneRenderSettings.Renderer2DEnabled)
             Render2DPass();
 
@@ -1440,7 +1440,7 @@ namespace Excimer::Graphics
         EXCIMER_PROFILE_GPU("SkyBox Pass");
 
         if (!m_CubeMap)
-            return;
+             return;
 
         if (!m_Camera || !m_CameraTransform)
             return;
