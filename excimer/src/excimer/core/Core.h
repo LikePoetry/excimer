@@ -12,6 +12,8 @@
 
 #define BIT(x) (1 << x)
 
+#define INPUT_BUF_SIZE 128
+
 #define EXCIMER_BREAK() __debugbreak();
 
 #define EXCIMER_ASSERT_NO_MESSAGE(condition)        \

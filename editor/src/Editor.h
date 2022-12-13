@@ -75,11 +75,29 @@ namespace Excimer
             return m_SelectedEntity;
         }
 
+        void SetCopiedEntity(entt::entity entity, bool cut = false)
+        {
+            m_CopiedEntity = entity;
+            m_CutCopyEntity = cut;
+        }
+
+        entt::entity GetCopiedEntity() const
+        {
+            return m_CopiedEntity;
+        }
+
+        bool GetCutCopyEntity()
+        {
+            return m_CutCopyEntity;
+        }
+
         //获取组件的小图标
         std::unordered_map<size_t, const char*>& GetComponentIconMap()
         {
             return m_ComponentIconMap;
         }
+
+        void FocusCamera(const glm::vec3& point, float distance, float speed = 1.0f);
 
         static Editor* GetEditor() { return s_Editor; }
 
@@ -138,6 +156,14 @@ namespace Excimer
 
         uint32_t m_ImGuizmoOperation = 14463;
         entt::entity m_SelectedEntity;
+        entt::entity m_CopiedEntity;
+        bool m_CutCopyEntity = false;
+
+        float m_CameraTransitionStartTime = 0.0f;
+        float m_CameraTransitionSpeed = 0.0f;
+        bool m_TransitioningCamera = false;
+        glm::vec3 m_CameraDestination;
+        glm::vec3 m_CameraStartPosition;
 
 		EditorSettings m_Settings;
         std::vector<SharedPtr<EditorPanel>> m_Panels;

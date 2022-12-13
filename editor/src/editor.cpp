@@ -19,6 +19,7 @@
 #include "EditorSettingsPanel.h"
 #include "SceneViewPanel.h"
 #include "InspectorPanel.h"
+#include "HierarchyPanel.h"
 
 
 #include <imgui/Plugins/ImGuizmo.h>
@@ -94,10 +95,15 @@ namespace Excimer
 		m_ComponentIconMap[typeid(Maths::Transform).hash_code()] = ICON_MDI_VECTOR_LINE;
 		m_ComponentIconMap[typeid(Graphics::Light).hash_code()] = ICON_MDI_LIGHTBULB;
 		m_ComponentIconMap[typeid(Graphics::ModelComponent).hash_code()] = ICON_MDI_SHAPE;
+		m_ComponentIconMap[typeid(Graphics::Environment).hash_code()] = ICON_MDI_EARTH;
 
-		m_Panels.emplace_back(CreateSharedPtr<EditorSettingsPanel>());
+
 		m_Panels.emplace_back(CreateSharedPtr<SceneViewPanel>());
 		m_Panels.emplace_back(CreateSharedPtr<InspectorPanel>());
+		m_Panels.emplace_back(CreateSharedPtr<HierarchyPanel>());
+		m_Panels.emplace_back(CreateSharedPtr<EditorSettingsPanel>());
+
+
 
 
 
@@ -664,5 +670,24 @@ namespace Excimer
 		if (!m_GridRenderer)
 			m_GridRenderer = CreateSharedPtr<Graphics::GridRenderer>(uint32_t(Application::Get().m_SceneViewWidth), uint32_t(Application::Get().m_SceneViewHeight));
 		return m_GridRenderer;
+	}
+
+	void Editor::FocusCamera(const glm::vec3& point, float distance, float speed)
+	{
+		EXCIMER_PROFILE_FUNCTION();
+		if (m_CurrentCamera->IsOrthographic())
+		{
+			m_EditorCameraTransform.SetLocalPosition(point);
+			// m_CurrentCamera->SetScale(distance * 0.5f);
+		}
+		else
+		{
+			m_TransitioningCamera = true;
+
+			m_CameraDestination = point + m_EditorCameraTransform.GetForwardDirection() * distance;
+			m_CameraTransitionStartTime = -1.0f;
+			m_CameraTransitionSpeed = 1.0f / speed;
+			m_CameraStartPosition = m_EditorCameraTransform.GetLocalPosition();
+		}
 	}
 }
