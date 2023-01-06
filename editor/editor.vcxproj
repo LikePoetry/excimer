@@ -56,6 +56,7 @@
     <ClInclude Include="src\Editor.h" />
     <ClInclude Include="src\EditorPanel.h" />
     <ClInclude Include="src\EditorSettingsPanel.h" />
+    <ClInclude Include="src\FileBrowserPanel.h" />
     <ClInclude Include="src\HierarchyPanel.h" />
     <ClInclude Include="src\InspectorPanel.h" />
     <ClInclude Include="src\SceneViewPanel.h" />
@@ -64,6 +65,7 @@
     <ClCompile Include="src\Editor.cpp" />
     <ClCompile Include="src\EditorSettingsPanel.cpp" />
     <ClCompile Include="src\excimereditor.cpp" />
+    <ClCompile Include="src\FileBrowserPanel.cpp" />
     <ClCompile Include="src\HierarchyPanel.cpp" />
     <ClCompile Include="src\InspectorPanel.cpp" />
     <ClCompile Include="src\SceneViewPanel.cpp" />

@@ -1,5 +1,6 @@
 #pragma once
 #include "EditorPanel.h"
+#include "FileBrowserPanel.h"
 #include "excimer/graphics/camera/EditorCamera.h"
 
 #include <excimer/core/Application.h>
@@ -152,6 +153,11 @@ namespace Excimer
             return m_EditorCameraTransform;
         }
 
+        FileBrowserPanel& GetFileBrowserPanel()
+        {
+            return m_FileBrowserPanel;
+        }
+
 	protected:
 
         uint32_t m_ImGuizmoOperation = 14463;
@@ -170,6 +176,7 @@ namespace Excimer
 
         std::unordered_map<size_t, const char*> m_ComponentIconMap;
 
+        FileBrowserPanel m_FileBrowserPanel;
         Camera* m_CurrentCamera = nullptr;
         EditorCameraController m_EditorCameraController;
         Maths::Transform m_EditorCameraTransform;

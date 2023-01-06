@@ -298,8 +298,8 @@ namespace MM
 			{
 				if (ImGui::ImageButton(tex->GetHandle(), imageButtonSize, ImVec2(0.0f, flipImage ? 1.0f : 0.0f), ImVec2(1.0f, flipImage ? 0.0f : 1.0f)))
 				{
-					/*Excimer::Editor::GetEditor()->GetFileBrowserPanel().Open();
-					Excimer::Editor::GetEditor()->GetFileBrowserPanel().SetCallback(callback);*/
+					Excimer::Editor::GetEditor()->GetFileBrowserPanel().Open();
+					Excimer::Editor::GetEditor()->GetFileBrowserPanel().SetCallback(callback);
 				}
 
 				if (ImGui::IsItemHovered() && tex)
@@ -313,8 +313,8 @@ namespace MM
 			{
 				if (ImGui::Button(tex ? "" : "Empty", imageButtonSize))
 				{
-					/*Excimer::Editor::GetEditor()->GetFileBrowserPanel().Open();
-					Excimer::Editor::GetEditor()->GetFileBrowserPanel().SetCallback(callback);*/
+					Excimer::Editor::GetEditor()->GetFileBrowserPanel().Open();
+					Excimer::Editor::GetEditor()->GetFileBrowserPanel().SetCallback(callback);
 				}
 			}
 
@@ -447,7 +447,7 @@ namespace MM
 		if (!reg.get<Excimer::Graphics::ModelComponent>(e).ModelRef)
 			return;
 
-		/*auto& meshes = reg.get<Excimer::Graphics::ModelComponent>(e).ModelRef->GetMeshes();
+		auto& meshes = reg.get<Excimer::Graphics::ModelComponent>(e).ModelRef->GetMeshes();
 		for (auto mesh : meshes)
 		{
 			auto material = mesh->GetMaterial();
@@ -516,7 +516,7 @@ namespace MM
 				ImGui::Columns(1);
 				ImGui::TreePop();
 			}
-		}*/
+		}
 	}
 
 	template <>

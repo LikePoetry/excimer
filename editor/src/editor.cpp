@@ -146,6 +146,8 @@ namespace Excimer
 		//bool showDemo = true;
 		//ImGui::ShowDemoWindow(&showDemo);
 
+		m_FileBrowserPanel.OnImGui();
+
 		EndDockSpace();
 
 		Application::OnImGui();
